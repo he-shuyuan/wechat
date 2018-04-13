@@ -1,0 +1,6 @@
+*.class
+*.dtd
+*.classpath
+*/target/*
+target
+log
