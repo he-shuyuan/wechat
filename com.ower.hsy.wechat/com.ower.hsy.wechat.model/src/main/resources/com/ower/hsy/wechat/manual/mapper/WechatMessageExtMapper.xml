@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ower.hsy.wechat.manual.dao.WechatMessageExtMapper">
+	<sql id="Base_Column_List">
+		id,
+		app_id appId,
+		title,
+		event_type eventType,
+		mess_type
+		messType,
+		url,
+		img_url imgUrl,
+		description,
+		mess_order messOrder,
+		parent_id
+		parentId,
+		is_valid isValid,
+		remark,
+		create_date createDate,
+		update_date
+		updateDate
+	</sql>
+	<select id="pageQueryWechatAppList" parameterType="com.ower.hsy.wechat.manual.dto.WechatMessageDTO"
+		resultType="com.ower.hsy.wechat.manual.dto.WechatMessageDTO">
+		select
+		(select count(*) from t_wechat_message t1 where t1.parent_id = t2.id) as
+		hasChild,
+		<include refid="Base_Column_List" />
+		from t_wechat_message t2
+		where 1 = 1
+		<if test="appId !=null and appId !=''">
+			and t2.app_id = #{appId,jdbcType=VARCHAR}
+		</if>
+		<if test="parentId !=null and parentId !=''">
+			and t2.parent_id = #{parentId,jdbcType=VARCHAR}
+		</if>
+		<if test=" eventType!=null and eventType !=''">
+			and t2.event_type = #{eventType,jdbcType=VARCHAR}
+		</if>
+		<if test=" messType!=null and messType !=''">
+			and t2.mess_type = #{messType,jdbcType=VARCHAR}
+		</if>
+		<if test=" isValid !=null and isValid !=''">
+			and t2.is_valid = #{isValid,jdbcType=VARCHAR}
+		</if>
+		order by t2.mess_order
+	</select>
+	<select id="selectWechatMessageList" parameterType="com.ower.hsy.wechat.manual.dto.WechatMessageDTO"
+		resultType="com.ower.hsy.wechat.manual.dto.WechatMessageDTO">
+		select
+		(select count(*) from t_wechat_message t1 where t1.parent_id = t2.id) as
+		hasChild,
+		<include refid="Base_Column_List" />
+		from t_wechat_message t2
+		where 1 = 1
+		<if test="appId !=null and appId !=''">
+			and t2.app_id = #{appId,jdbcType=VARCHAR}
+		</if>
+		<if test="parentId !=null and parentId !=''">
+			and t2.parent_id = #{parentId,jdbcType=VARCHAR}
+		</if>
+		<if test=" eventType!=null and eventType !=''">
+			and t2.event_type = #{eventType,jdbcType=VARCHAR}
+		</if>
+		<if test=" messType!=null and messType !=''">
+			and t2.mess_type = #{messType,jdbcType=VARCHAR}
+		</if>
+		<if test=" isValid !=null and isValid !=''">
+			and t2.is_valid = #{isValid,jdbcType=VARCHAR}
+		</if>
+		order by t2.mess_order
+	</select>
+</mapper>

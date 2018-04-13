@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>com.ower.hsy.common</artifactId>
+	<packaging>pom</packaging>
+	<name>com.ower.hsy.common</name>
+	<description>通用pom</description>
+	<parent>
+		<groupId>tree</groupId>
+		<artifactId>com.ower.hsy</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+    <dependencies>
+         <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+            <version>4.1.1</version>
+        </dependency>
+    </dependencies>
+	<modules>
+	<module>com.ower.hsy.common.util</module>
+     <module>com.ower.hsy.common.mybatis.generator</module>
+    <module>com.ower.hsy.common.mybatis.database</module>
+    <module>com.ower.hsy.common.core</module>
+  </modules>
+	<url>http://maven.apache.org</url>
+</project>
