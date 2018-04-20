@@ -23,7 +23,7 @@ import com.ower.hsy.wechat.util.ContextUtil;
  *    修改后版本:     修改人：  修改日期:     修改内容:
  *          </pre>
  */
-@EnableEurekaClient
+//@EnableEurekaClient
 //@EableRedisListener(channels="/dict/notify")
 @SpringBootApplication(scanBasePackages = { "com.ower.hsy.*.*" })
 @Import(value={ContextUtil.class})
