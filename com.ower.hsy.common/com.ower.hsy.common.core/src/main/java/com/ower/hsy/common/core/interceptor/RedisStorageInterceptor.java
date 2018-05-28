@@ -3,11 +3,7 @@
  */
 package com.ower.hsy.common.core.interceptor;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
-import org.apache.commons.lang.StringUtils;
+import java.io.Serializable;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -44,8 +40,6 @@ public class RedisStorageInterceptor {
     @Autowired
     private IRedisService       redisService;
 
-    private  ConcurrentMap<String, Object> cacheMap = new ConcurrentHashMap<>();
-    
     private int cleanNum = 0;
     
     private static final Logger logger       = LoggerFactory.getLogger(RedisStorageInterceptor.class);
@@ -62,21 +56,10 @@ public class RedisStorageInterceptor {
         RedisStorage redisStorage = (RedisStorage) signature.getMethod().getAnnotation(RedisStorage.class);
         Object[] args = pjp.getArgs();
         String key = this.buildRedisKey(methodName, args);
-        Object cacheOb = cacheMap.get(key);
-        if(cacheOb!=null){
-            logger.info("【1】key=[{}],存在本地缓存=[{}]", key, cacheOb);
-            return cacheOb;
-        }
-        Class<?> returnType = signature.getReturnType();
-        String json = redisService.get(key);
-        if (StringUtils.isNotBlank(json)) {
-            logger.info("【1】key=[{}],存在redis缓存=[{}]", key, json);
-            if(returnType.equals(List.class) || returnType.equals(ArrayList.class)){
-                return Jackson.fromJsonArray(json, redisStorage.arrayType());
-            }
-           Object redisOb = Jackson.fromJson(json, returnType);
-           logger.info("【1】key=[{}],刷新本地缓存=[{}]", key, redisOb);
-           return redisOb;
+        Object jsonOb = redisService.getObject(key);
+        if (jsonOb!=null) {
+            logger.info("key=[{}],存在redis缓存=[{}]", key, Jackson.toJson(jsonOb));
+           return jsonOb;
         }
         Object result = null;
         try {
@@ -85,11 +68,10 @@ public class RedisStorageInterceptor {
             logger.error("业务代码出错，{}", e);
             return null;
         }
-        json = Jackson.toJson(result);
-        redisService.set(key, json, redisStorage.cacheTime() * 60);
-        logger.info("【2】key=[{}],刷新redis缓存=[{}]", key, json);
-        cacheMap.putIfAbsent(key, result);
-        logger.info("【2】key=[{}],刷新本地缓存=[{}]", key, result);
+        if(result instanceof Serializable){
+        redisService.setObject(key, (Serializable) result, redisStorage.cacheTime() * 60);
+        logger.info("key=[{}],添加redis缓存=[{}]", key, Jackson.toJson(result));
+        }
         return result;
     }
 
@@ -116,8 +98,7 @@ public class RedisStorageInterceptor {
      * TODO。 void
      */
     public void cleanCache(){
-        cacheMap.clear();
-        redisService.deleteBatch(CACHE_PREFIX+"*");
+        redisService.cleanBatchStorage(CACHE_PREFIX+"*");
         logger.info("第{}清除本缓存", ++this.cleanNum);
     }
 }

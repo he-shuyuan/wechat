@@ -7,7 +7,6 @@ import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-import java.util.Map;
 import java.lang.annotation.ElementType;
 
 /**
@@ -33,11 +32,6 @@ public @interface RedisStorage {
      * 缓存时间默认半小时，单位min
      * @return int
      */
-    public int cacheTime() default 30;
+    public int cacheTime() default 5;
     
-    /**
-     * 返回值为list时的处理
-     * @return Class<? extends Object>
-     */
-    public Class<? extends Object> arrayType() default Map.class;
 }
