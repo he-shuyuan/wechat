@@ -35,21 +35,10 @@ public class RedisServiceImpl implements IRedisService {
 	 * (non-Javadoc)
 	 * 
 	 * @see com.foresee.base.redis.IRedisService#setString(java.lang.String,
-	 * java.lang.String)
-	 */
-	@Override
-	public void setString(String key, String value) {
-		setString(key, value, IRedisService.TTL_HALF_HOUR);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.foresee.base.redis.IRedisService#setString(java.lang.String,
 	 * java.lang.String, int)
 	 */
 	@Override
-	public void setString(String key, String value, final int expiredSeconds) {
+	public void setString(String key, String value, final Long expiredSeconds) {
 		final String keyf = (String) key;
 		final String valuef = value;
 
@@ -70,21 +59,10 @@ public class RedisServiceImpl implements IRedisService {
 	 * (non-Javadoc)
 	 * 
 	 * @see com.foresee.base.redis.IRedisService#setObject(java.lang.String,
-	 * java.lang.Object)
-	 */
-	@Override
-	public void setObject(String key, Serializable value) {
-		setObject(key, value, IRedisService.TTL_HALF_HOUR);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.foresee.base.redis.IRedisService#setObject(java.lang.String,
 	 * java.lang.Object, int)
 	 */
 	@Override
-	public void setObject(String key, Serializable value, final int expiredSeconds) {
+	public void setObject(String key, Serializable value, final Long expiredSeconds) {
 		final String keyf = (String) key;
 		final Object valuef = value;
 
@@ -108,7 +86,7 @@ public class RedisServiceImpl implements IRedisService {
 	 */
 	@Override
 	public String getString(String key) {
-		return this.getString(key, 0);
+		return this.getString(key, 0L);
 	}
 
 	/*
@@ -118,7 +96,7 @@ public class RedisServiceImpl implements IRedisService {
 	 */
 	@Override
 	public Object getObject(String key) {
-		return this.getObject(key, 0);
+		return this.getObject(key, 0L);
 	}
 
 	/**
@@ -192,7 +170,7 @@ public class RedisServiceImpl implements IRedisService {
 	}
 
 	@Override
-	public String getString(String key, final int expiredSeconds) {
+	public String getString(String key, final Long expiredSeconds) {
 		final String keyf = (String) key;
 		String object = null;
 		object = (String) redisTemplate.execute(new RedisCallback<String>() {
@@ -214,7 +192,7 @@ public class RedisServiceImpl implements IRedisService {
 	}
 
 	@Override
-	public Object getObject(String key, final int expiredSeconds) {
+	public Object getObject(String key, final Long expiredSeconds) {
 		final String keyf = (String) key;
 		Object object = null;
 		object = redisTemplate.execute(new RedisCallback<Object>() {
@@ -248,7 +226,7 @@ public class RedisServiceImpl implements IRedisService {
 	}
 
 	@Override
-	public void expire(String key, final int expiredSeconds) {
+	public void expire(String key, final Long expiredSeconds) {
 		final String keyf = (String) key;
 		redisTemplate.execute(new RedisCallback<Object>() {
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
@@ -268,19 +246,6 @@ public class RedisServiceImpl implements IRedisService {
 			}
 		});
 		return rediseSize / 2;
-	}
-
-	@Override
-	public boolean setNx(String key) {
-		final String lock_key = key;
-		Boolean isUnLock = redisTemplate.execute(new RedisCallback<Boolean>() {
-			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
-				boolean isUnLock = connection.setNX(lock_key.getBytes(), "lock".getBytes());
-				connection.expire(lock_key.getBytes(), 5);
-				return isUnLock;
-			}
-		});
-		return isUnLock;
 	}
 
 	@Override

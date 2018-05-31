@@ -27,7 +27,7 @@ public class WxMpRedisStorage extends WxMpInMemoryConfigStorage {
 	private static final String ACCESS_TOKEN_KEY = "wx:common:token:";
 	private static final String JSAPI_TICKET_KEY = "wx:common:jsdk:ticket:";
 	private static final String CARDAPI_TICKET_KEY = "wx:common:jsdk:cardTicket";
-	private static final int delay = 200;
+	private static final Long delay = 200L;
 
 	protected volatile String smrzSrc;//微信实名认证 src参数
 	protected volatile String smrzKey;//微信实名认证 key参数
@@ -50,7 +50,7 @@ public class WxMpRedisStorage extends WxMpInMemoryConfigStorage {
 
 	@Override
 	public String getAccessToken() {
-		return redisService.get(ACCESS_TOKEN_KEY.concat(appId));
+		return redisService.getString(ACCESS_TOKEN_KEY.concat(appId));
 	}
 
 	@Override
@@ -66,17 +66,17 @@ public class WxMpRedisStorage extends WxMpInMemoryConfigStorage {
 	
 	@Override
 	public synchronized void updateAccessToken(String accessToken, int expiresInSeconds) {
-		redisService.set(ACCESS_TOKEN_KEY.concat(appId), accessToken, expiresInSeconds - delay);
+		redisService.setString(ACCESS_TOKEN_KEY.concat(appId), accessToken, expiresInSeconds - delay);
 	}
 
 	@Override
 	public void expireAccessToken() {
-		redisService.expire(ACCESS_TOKEN_KEY.concat(appId), 0);
+		redisService.expire(ACCESS_TOKEN_KEY.concat(appId), 0L);
 	}
 
 	@Override
 	public String getJsapiTicket() {
-		return redisService.get(JSAPI_TICKET_KEY.concat(appId));
+		return redisService.getString(JSAPI_TICKET_KEY.concat(appId));
 	}
 
 	@Override
@@ -86,12 +86,12 @@ public class WxMpRedisStorage extends WxMpInMemoryConfigStorage {
 
 	@Override
 	public synchronized void updateJsapiTicket(String jsapiTicket, int expiresInSeconds) {
-		redisService.set(JSAPI_TICKET_KEY.concat(appId), jsapiTicket, expiresInSeconds - delay);
+		redisService.setString(JSAPI_TICKET_KEY.concat(appId), jsapiTicket, expiresInSeconds - delay);
 	}
 
 	@Override
 	public void expireJsapiTicket() {
-		redisService.expire(JSAPI_TICKET_KEY.concat(appId), 0);
+		redisService.expire(JSAPI_TICKET_KEY.concat(appId), 0L);
 	}
 
 	/**
@@ -99,7 +99,7 @@ public class WxMpRedisStorage extends WxMpInMemoryConfigStorage {
 	 */
 	@Override
 	public String getCardApiTicket() {
-		return redisService.get(CARDAPI_TICKET_KEY.concat(appId));
+		return redisService.getString(CARDAPI_TICKET_KEY.concat(appId));
 	}
 
 	@Override
@@ -109,11 +109,11 @@ public class WxMpRedisStorage extends WxMpInMemoryConfigStorage {
 
 	@Override
 	public synchronized void updateCardApiTicket(String cardApiTicket, int expiresInSeconds) {
-		redisService.set(CARDAPI_TICKET_KEY.concat(appId), cardApiTicket, expiresInSeconds - delay);
+		redisService.setString(CARDAPI_TICKET_KEY.concat(appId), cardApiTicket, expiresInSeconds - delay);
 	}
 
 	@Override
 	public void expireCardApiTicket() {
-		redisService.expire(CARDAPI_TICKET_KEY.concat(appId), 0);
+		redisService.expire(CARDAPI_TICKET_KEY.concat(appId), 0L);
 	}
 }

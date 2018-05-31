@@ -69,7 +69,7 @@ public class RedisStorageInterceptor {
             return null;
         }
         if(result instanceof Serializable){
-        redisService.setObject(key, (Serializable) result, redisStorage.cacheTime() * 60);
+        redisService.setObject(key, (Serializable) result, redisStorage.cacheTime() * 60L);
         logger.info("key=[{}],添加redis缓存=[{}]", key, Jackson.toJson(result));
         }
         return result;

@@ -69,7 +69,7 @@ public class WechatAppServiceImpl implements IWechatAppService {
     }
 
     @Override
-    @RedisStorage(arrayType = WechatAppDTO.class)
+    @RedisStorage
     public List<WechatAppDTO> selectWechatAppList(WechatAppDTO wechatAppDTO) {
 
         return wechatAppExtMapper.selectWechatAppList(wechatAppDTO);

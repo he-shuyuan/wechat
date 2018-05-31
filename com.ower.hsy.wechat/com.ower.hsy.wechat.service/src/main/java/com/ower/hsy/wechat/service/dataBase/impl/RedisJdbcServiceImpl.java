@@ -55,12 +55,12 @@ public class RedisJdbcServiceImpl implements IRedisJdbcStorageService {
 
     @Override
     public void cleanBatchStorage(String reg) {
-        redisService.deleteBatch(SECOND_STROGE_PREFIX + reg);
+       // redisService.deleteBatch(SECOND_STROGE_PREFIX + reg);
     }
 
     @Override
     public void cleanSecondStorage() {
-        redisService.deleteBatch(SECOND_STROGE_PREFIX);
+        //redisService.deleteBatch(SECOND_STROGE_PREFIX);
     }
 
     @Override
@@ -70,7 +70,7 @@ public class RedisJdbcServiceImpl implements IRedisJdbcStorageService {
         }
         WechatAppDTO wechatAppDTO = new WechatAppDTO();
         wechatAppDTO.setAppId(appId);
-        String json = redisService.get(SECOND_STROGE_PREFIX + APP_CONFIG + appId);
+        String json = redisService.getString(SECOND_STROGE_PREFIX + APP_CONFIG + appId);
         if (StringUtils.isEmpty(json)) {
             log.info("appId={}的配置信息不在缓存中,从数据库中获取",appId);
             List<WechatAppDTO> list = wechatAppService.selectWechatAppList(wechatAppDTO);
@@ -78,7 +78,7 @@ public class RedisJdbcServiceImpl implements IRedisJdbcStorageService {
                 throw new CustomRunTimeException("通过[appId=" + appId + "]只能找到一条配置信息，但现在找到了(" + list.size() + ")条配置");
             }
             json = Jackson.toJson(list.get(0));
-            redisService.set(SECOND_STROGE_PREFIX + APP_CONFIG + appId, json, RedisExpires.WEEK);
+            redisService.setString(SECOND_STROGE_PREFIX + APP_CONFIG + appId, json, RedisExpires.WEEK);
             log.info("appId={}的配置信息{}写入缓存{}",appId,list.get(0),RedisExpires.WEEK);
         }
         wechatAppDTO = Jackson.fromJson(json, WechatAppDTO.class);
@@ -88,7 +88,7 @@ public class RedisJdbcServiceImpl implements IRedisJdbcStorageService {
     @Override
     public List<WechatMessageDTO> getWechatMessageDTOByAppIdAndEventType(String appId, String eventType) {
         List<WechatMessageDTO> list = null;
-        String json = redisService.get(SECOND_STROGE_PREFIX + MESS_CONFIG + appId+"-"+eventType);
+        String json = redisService.getString(SECOND_STROGE_PREFIX + MESS_CONFIG + appId+"-"+eventType);
         if(StringUtils.isEmpty(json)){
             log.info("[appId={},eventType={}]的配置信息不在缓存中,从数据库中获取",appId,eventType);
             WechatMessageDTO wechatMessageDTO = new WechatMessageDTO();
@@ -107,7 +107,7 @@ public class RedisJdbcServiceImpl implements IRedisJdbcStorageService {
                 }
             }
             json = Jackson.toJson(list);
-            redisService.set(SECOND_STROGE_PREFIX + MESS_CONFIG + appId+"-"+eventType, json, RedisExpires.WEEK);
+            redisService.setString(SECOND_STROGE_PREFIX + MESS_CONFIG + appId+"-"+eventType, json, RedisExpires.WEEK);
             log.info("[appId={},eventType={}]的配置信息{}写入缓存{}",appId,eventType,list,RedisExpires.WEEK);
         }
         list = Jackson.fromJsonArray(json, WechatMessageDTO.class);
