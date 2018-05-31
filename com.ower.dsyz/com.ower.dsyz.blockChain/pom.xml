@@ -1,0 +1,23 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>tree</groupId>
+    <artifactId>com.ower.dsyz</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>com.ower.dsyz.blockChain</artifactId>
+  <packaging>pom</packaging>
+  <name>BLOCKCHAIN</name>
+  <dependencies>
+  		<dependency>
+			<groupId>tree</groupId>
+			<artifactId>com.ower.dsyz.common.core</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+  </dependencies>
+  <modules>
+  	<module>com.ower.dsyz.blockChain.rest</module>
+  	<module>com.ower.dsyz.blockChain.service</module>
+  	<module>com.ower.dsyz.blockChain.model</module>
+  </modules>
+</project>
