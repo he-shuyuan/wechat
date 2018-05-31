@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ower.hsy.wechat.manual.dao.WechatAppExtMapper">
+	<sql id="Base_Column_List">
+		id,
+		app_name appName,
+		app_id appId,
+		secret,
+		token,
+		domain,
+		code,
+		mess_secret messSecret,
+		is_valid isValid,
+		remark,
+		create_date createDate,
+		update_date updateDate
+	</sql>
+	<select id="pageQueryWechatAppList" parameterType="com.ower.hsy.wechat.manual.dto.WechatAppDTO"
+		resultType="com.ower.hsy.wechat.manual.dto.WechatAppDTO">
+		select
+		<include refid="Base_Column_List" />
+		from t_wechat_app
+		where 1 = 1
+		<if test="id!=null and id !=''">
+			and id = #{id,jdbcType=VARCHAR}
+		</if>
+		<if test="appName!=null and appName !=''">
+			and app_name like
+			concat('%s',#{appName,jdbcType=VARCHAR},'%s')
+		</if>
+		<if test="appId!=null and appId !=''">
+			and app_id = #{appId,jdbcType=VARCHAR}
+		</if>
+		<if test="code!=null and code !=''">
+			and code = #{code,jdbcType=VARCHAR}
+		</if>
+		<if test="isValid!=null and isValid !=''">
+			and is_valid = #{isValid,jdbcType=VARCHAR}
+		</if>
+	</select>
+
+	<select id="selectWechatAppList" parameterType="com.ower.hsy.wechat.manual.dto.WechatAppDTO"
+		resultType="com.ower.hsy.wechat.manual.dto.WechatAppDTO">
+		select
+		<include refid="Base_Column_List" />
+		from t_wechat_app
+		where 1 = 1
+		<if test="id!=null and id !=''">
+			and id = #{id,jdbcType=VARCHAR}
+		</if>
+		<if test="appName!=null and appName !=''">
+			and app_name like
+			concat('%s',#{appName,jdbcType=VARCHAR},'%s')
+		</if>
+		<if test="appId!=null and appId !=''">
+			and app_id = #{appId,jdbcType=VARCHAR}
+		</if>
+		<if test="code!=null and code !=''">
+			and code = #{code,jdbcType=VARCHAR}
+		</if>
+		<if test="isValid!=null and isValid !=''">
+			and is_valid = #{isValid,jdbcType=VARCHAR}
+		</if>
+	</select>
+
+	<select id="selectIsExitWechatAppList" parameterType="com.ower.hsy.wechat.auto.model.WechatApp"
+		resultType="com.ower.hsy.wechat.auto.model.WechatApp">
+		select
+		<include refid="Base_Column_List" />
+		from t_wechat_app
+		<trim prefix="where " prefixOverrides="or">
+			<if test="appName!=null and appName !=''">
+				or app_name = #{appName,jdbcType=VARCHAR}
+			</if>
+			<if test="appId!=null and appId !=''">
+				or app_id = #{appId,jdbcType=VARCHAR}
+			</if>
+			<if test="code!=null and code !=''">
+				or code = #{code,jdbcType=VARCHAR}
+			</if>
+		</trim>
+	</select>
+</mapper>
