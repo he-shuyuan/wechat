@@ -89,7 +89,8 @@ public class WxMpMsgRouterFactory {
             return;
         }
         try {
-            @SuppressWarnings("unchecked") Map<String, String> handlerConf = new ObjectMapper().readValue(wxGxhHandler, Map.class);
+            @SuppressWarnings("unchecked") 
+            Map<String, String> handlerConf = new ObjectMapper().readValue(wxGxhHandler, Map.class);
             for (String handlerName : handlerConf.keySet()) {
                 for (Field field : this.getClass().getDeclaredFields()) {
                     if (WxMpMessageHandler.class.isAssignableFrom(field.getType())
