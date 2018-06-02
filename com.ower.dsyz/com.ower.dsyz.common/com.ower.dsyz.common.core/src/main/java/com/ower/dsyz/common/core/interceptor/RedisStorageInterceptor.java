@@ -45,7 +45,7 @@ public class RedisStorageInterceptor {
     private static final Logger logger       = LoggerFactory.getLogger(RedisStorageInterceptor.class);
 
 
-    @Pointcut("@annotation(com.ower.hsy.common.core.annotation.RedisStorage)")
+    @Pointcut("@annotation(com.ower.dsyz.common.core.annotation.RedisStorage)")
     protected void startCacheAspect() {}
 
     @Around("startCacheAspect()")

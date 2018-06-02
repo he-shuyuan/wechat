@@ -1,4 +1,4 @@
-package com.ower.hsy.blockChain.rest;
+package com.ower.dsyz.blockChain.rest;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -20,7 +20,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *          </pre>
  */
 //@EnableEurekaClient
-@SpringBootApplication(scanBasePackages = { "com.ower.hsy.*.*" })
+@SpringBootApplication(scanBasePackages = { "com.ower.dsyz.*.*" })
 public class BlockChainApplication  implements CommandLineRunner
 {
   //  @Resource

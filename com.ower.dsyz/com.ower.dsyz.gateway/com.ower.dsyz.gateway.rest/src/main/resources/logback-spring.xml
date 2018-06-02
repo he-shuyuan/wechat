@@ -7,9 +7,9 @@
 	<springProperty scope="context" name="devLogLevel" source="dev.logging.level"/>
 	<appender name="fileLog"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<File>${log.rootPath}/eurekaServer/eurekaServer.log</File>
+		<File>${log.rootPath}/gatewayServer/gatewayServer.log</File>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${log.rootPath}/eurekaServer/eurekaServer.%d{yyyy-MM-dd}.log
+			<fileNamePattern>${log.rootPath}/gatewayServer/gatewayServer.%d{yyyy-MM-dd}.log
 			</fileNamePattern>
 			<maxHistory>365</maxHistory>
 		</rollingPolicy>

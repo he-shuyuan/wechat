@@ -38,7 +38,7 @@ import com.ower.dsyz.common.mybatis.database.page.CustomSqlSessionTemplate;
  */
 @Configuration
 @EnableTransactionManagement
-@MapperScan(basePackages={"com.ower.hsy.*.*.dao"}, sqlSessionTemplateRef="customSqlSessionTemplate")
+@MapperScan(basePackages={"com.ower.dsyz.*.*.dao"}, sqlSessionTemplateRef="customSqlSessionTemplate")
 public class MyBatisConfig{
     
     @Resource
@@ -49,7 +49,7 @@ public class MyBatisConfig{
             DruidDataSource dataSource) {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(dataSource);
-        bean.setTypeAliasesPackage("com.ower.hsy.*.*");
+        bean.setTypeAliasesPackage("com.ower.dsyz.*.*");
 
         //PageHelper pageHelper = createPageHelper();
         PageHelper pageHelper = new PageHelper();
@@ -66,7 +66,7 @@ public class MyBatisConfig{
         //添加XML目录
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         try {
-            bean.setMapperLocations(resolver.getResources("classpath*:com/ower/hsy/**/mapper/*.xml"));
+            bean.setMapperLocations(resolver.getResources("classpath*:com/ower/dsyz/**/mapper/*.xml"));
             return bean.getObject();
         } catch (Exception e) {
             e.printStackTrace();

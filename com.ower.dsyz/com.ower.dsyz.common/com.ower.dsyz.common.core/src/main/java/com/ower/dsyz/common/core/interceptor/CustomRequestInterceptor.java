@@ -55,7 +55,7 @@ public class CustomRequestInterceptor {
     private ICustomValidService customValidService;
 
     
-    @Pointcut("execution(* com.ower.hsy..rest..*.*(..)) && @annotation(org.springframework.web.bind.annotation.RequestMapping)")
+    @Pointcut("execution(* com.ower.dsyz..rest..*.*(..)) && @annotation(org.springframework.web.bind.annotation.RequestMapping)")
     public void controllerAspect() {}
 
     @Around("controllerAspect()")

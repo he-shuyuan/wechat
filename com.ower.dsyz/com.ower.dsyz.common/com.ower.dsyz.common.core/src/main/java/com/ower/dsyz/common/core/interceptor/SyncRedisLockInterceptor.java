@@ -41,7 +41,7 @@ public class SyncRedisLockInterceptor {
     private SyncLockUtil        syncLockUtil;
 
 
-    @Pointcut("@annotation(com.ower.hsy.common.core.annotation.SyncRedisLock)")
+    @Pointcut("@annotation(com.ower.dsyz.common.core.annotation.SyncRedisLock)")
     public void distributedLockAspect() {}
 
     @Around("distributedLockAspect()")

@@ -25,7 +25,7 @@ import com.ower.dsyz.wechat.util.ContextUtil;
  */
 //@EnableEurekaClient
 //@EableRedisListener(channels="/dict/notify")
-@SpringBootApplication(scanBasePackages = { "com.ower.hsy.*.*" })
+@SpringBootApplication(scanBasePackages = { "com.ower.dsyz.*.*" })
 @Import(value={ContextUtil.class})
 public class WechatApplication  implements CommandLineRunner
 {

@@ -1,7 +1,7 @@
 /**
  * Copyright(c) Foresee Science & Technology Ltd. 
  */
-package com.ower.hsy.blockChain.rest.inner;
+package com.ower.dsyz.blockChain.rest.inner;
 
 import javax.annotation.Resource;
 import org.slf4j.Logger;

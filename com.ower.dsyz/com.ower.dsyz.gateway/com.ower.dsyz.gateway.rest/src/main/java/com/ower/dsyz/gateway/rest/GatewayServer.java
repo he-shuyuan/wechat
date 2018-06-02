@@ -10,11 +10,11 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
  */
 @EnableEurekaClient
 @SpringBootApplication(scanBasePackages = { "com.ower.dsyz.*.*" })
-public class GatewayService 
+public class GatewayServer 
 {
     public static void main( String[] args )
     {
-        SpringApplication application=new SpringApplication(GatewayService.class);
+        SpringApplication application=new SpringApplication(GatewayServer.class);
         application.run(args);
     }
 }

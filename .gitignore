@@ -1,8 +1,8 @@
 *.class
 *.dtd
 *.classpath
-*/target/*
 target
 log
 .settings
 node_modules
+log.rootPath_IS_UNDEFINED

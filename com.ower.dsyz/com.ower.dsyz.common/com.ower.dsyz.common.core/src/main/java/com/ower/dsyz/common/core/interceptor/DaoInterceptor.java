@@ -18,7 +18,7 @@ public class DaoInterceptor {
     private static final Logger logger = LoggerFactory.getLogger(DaoInterceptor.class);
 
 
-    @Before("execution(* com.ower.hsy..dao..*.insert*(..))")
+    @Before("execution(* com.ower.dsyz..dao..*.insert*(..))")
     public void beforeInsert(JoinPoint jp) {
         for (Object obj : jp.getArgs()) {
             if (obj.getClass().isAssignableFrom(Map.class)) {
@@ -40,7 +40,7 @@ public class DaoInterceptor {
         }
     }
 
-    @Before("execution(* com.ower.hsy..dao..*.update*(..))")
+    @Before("execution(* com.ower.dsyz..dao..*.update*(..))")
     public void beforeUpdate(JoinPoint jp) {
         for (Object obj : jp.getArgs()) {
             if (obj.getClass().isAssignableFrom(Map.class)) {
