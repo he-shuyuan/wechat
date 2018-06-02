@@ -10,6 +10,8 @@
   <name>网关</name>
   <description>网关</description>
   <modules>
-  	<module>com.ower.dsyz.gateway.server</module>
+  	<module>com.ower.dsyz.gateway.service</module>
+  	<module>com.ower.dsyz.gateway.model</module>
+  	<module>com.ower.dsyz.gateway.rest</module>
   </modules>
 </project>

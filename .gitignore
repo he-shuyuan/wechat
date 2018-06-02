@@ -5,3 +5,4 @@
 target
 log
 .settings
+node_modules
