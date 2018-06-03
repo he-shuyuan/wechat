@@ -5,7 +5,11 @@ package com.ower.dsyz.common.core.rest;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
+
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
@@ -15,6 +19,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
+
+import com.ower.dsyz.common.core.holder.CustomLoginUserIdHolder;
+import com.ower.dsyz.common.core.holder.CustomUrlParamHolder;
 import com.ower.dsyz.common.core.response.CustomResponse;
 import com.ower.dsyz.common.core.rest.impl.ICustomRestClient;
 import com.ower.dsyz.common.core.util.Jackson;
@@ -36,63 +43,86 @@ import com.ower.dsyz.common.core.util.Jackson;
 @Service
 public class CustomRestClient implements ICustomRestClient {
 
-    @Resource
-    private RestTemplate restTemplate; 
-    
-    private Logger log=LoggerFactory.getLogger(CustomRestClient.class);
-    
-    private static final String APPLICATION_JSON = "application/json;charset=UTF-8";
-    
-    @Override
-    public <T> CustomResponse<T> postInner(String url, Object data, String contentType,Class<T> responseClass) {
+	@Resource
+	private RestTemplate restTemplate;
 
-        return this.postInner(url, Jackson.toJson(data),contentType,responseClass);
-    }
+	private Logger log = LoggerFactory.getLogger(CustomRestClient.class);
 
-    @Override
-    public <T> CustomResponse<T> postInner(String url, Object data,Class<T> responseClass) {
+	private static final String APPLICATION_JSON = "application/json;charset=UTF-8";
 
-        return this.postInner(url, Jackson.toJson(data),responseClass);
-    }
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
+	public <T> CustomResponse<T> postInner(String url, Object data, String contentType, Class<T> responseClass,
+			Map<String, String> extHeader) {
+		if (!url.startsWith("http://")) {
+			url = "http://" + url;
+		}
+		String requestJson = null;
+		if (data instanceof String) {
+			requestJson = (String) data;
+		} else {
+			requestJson = Jackson.toJson(data);
+		}
+		MultiValueMap<String, String> header = new HttpHeaders();
+		header.add("Content-Type", contentType);
+		header.add("Accept", contentType);
+		header.add("Accept-Charset", "UTF-8");
+		if (StringUtils.isNotBlank(CustomLoginUserIdHolder.get())) {
+			header.add("userId", CustomLoginUserIdHolder.get());
+		}
+		if (extHeader != null && !extHeader.isEmpty()) {
+			this.mergeHeader(extHeader, header);
+		}
+		HttpEntity<String> httpEnty = new HttpEntity<String>(requestJson, header);
+		log.info("\n【内部请求】=》url=>>>{}\n" + "【内部请求】=》header=>>>{}\n" + "【内部请求】=》param=>>>{}\n", url, header, data);
+		ResponseEntity<CustomResponse> res = restTemplate.exchange(url, HttpMethod.POST, httpEnty, CustomResponse.class,
+				CustomUrlParamHolder.get());
+		if (res.getStatusCodeValue() == 200) {
+			log.info("\n【内部请求】=》response=>>>{}\n" + "【内部请求】=》body=>>>{}\n", res, res.getBody());
+			Object ob = res.getBody().getBody();
+			String json = Jackson.toJson(ob);
+			if (ob instanceof ArrayList) {
+				List<T> t = Jackson.fromJsonArray(json, responseClass);
+				res.getBody().setBody(t);
+			} else {
+				T t = Jackson.fromJson(json, responseClass);
+				res.getBody().setBody(t);
+			}
+			return (CustomResponse<T>) res.getBody();
+		}
+		return CustomResponse.error(res.getStatusCodeValue() + "", "url=[" + url + "]请求错误");
+	}
 
-    @Override
-    public <T> CustomResponse<T> postInner(String url, String data,Class<T> responseClass) {
+	@Override
+	public <T> CustomResponse<T> postInner(String url, Object data, Class<T> responseClass,
+			Map<String, String> extHeader) {
+		return this.postInner(url, data, APPLICATION_JSON, responseClass, extHeader);
+	}
 
-        return this.postInner(url, data,APPLICATION_JSON,responseClass);
-    }
+	@Override
+	public <T> CustomResponse<T> postInner(String url, Object data, Class<T> responseClass) {
+		return this.postInner(url, data, APPLICATION_JSON, responseClass);
+	}
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
-    @Override
-    public <T> CustomResponse<T> postInner(String url, String data, String contentType,Class<T> responseClass) {
-        if(!url.startsWith("http://")){
-           url = "http://" + url;  
-        }
-        MultiValueMap<String, String> header = new HttpHeaders();
-        header.add("Content-Type", APPLICATION_JSON);
-        header.add("Accept", APPLICATION_JSON);
-        header.add("Accept-Charset", "UTF-8");
+	@Override
+	public <T> CustomResponse<T> postInner(String url, Object data, String contentType, Class<T> responseClass) {
+		return this.postInner(url, data, contentType, responseClass, null);
+	}
 
-        HttpEntity<String> httpEnty = new HttpEntity<String>(data,header);
-        log.debug("\n【内部请求】=》url=>>>{}\n"
-                + "【内部请求】=》header=>>>{}\n"
-                + "【内部请求】=》param=>>>{}\n"
-                ,url,httpEnty,data);
-        ResponseEntity<CustomResponse> res = restTemplate
-                .exchange(url, HttpMethod.POST, httpEnty, CustomResponse.class, "");
-        if(res.getStatusCodeValue() == 200){
-            log.debug("\n【内部请求】=》response=>>>{}\n"
-                    + "【内部请求】=》body=>>>{}\n",res,res.getBody());
-            Object ob = res.getBody().getBody();
-            String json = Jackson.toJson(ob);
-            if(ob instanceof ArrayList){
-                List<T> t = Jackson.fromJsonArray(json, responseClass);
-                res.getBody().setBody(t);
-            }else{
-                T t =Jackson.fromJson(json, responseClass);
-                res.getBody().setBody(t);
-            }
-            return (CustomResponse<T>)res.getBody();
-        }
-        return CustomResponse.error(res.getStatusCodeValue()+"","url=["+url+"]请求错误");
-    }
+	/**
+	 * 合并头部
+	 * 
+	 * @param extHeader
+	 * @param header
+	 */
+	private void mergeHeader(Map<String, String> extHeader, MultiValueMap<String, String> header) {
+		for (Map.Entry<String, String> entry : extHeader.entrySet()) {
+			if (header.get(entry.getKey()) != null && header.get(entry.getKey()).indexOf(entry.getValue()) > -1) {
+				header.remove(entry.getKey());
+			}
+			header.add(entry.getKey(), entry.getValue());
+		}
+
+	}
+
 }

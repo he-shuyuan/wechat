@@ -3,6 +3,8 @@
  */
 package com.ower.dsyz.common.core.response;
 
+import com.ower.dsyz.common.core.constant.ErrorCodeConstants;
+
 /**
  * <pre>
  * 回参头部
@@ -20,25 +22,46 @@ package com.ower.dsyz.common.core.response;
 
 public class CustomResponseHead {
 
+	/**
+	 * 错误码
+	 */
     private String errorCode;
-    
+    /**
+     * 错误消息
+     */
     private Object errorMsg;
     
+    /**
+     * 处理线程
+     */
     private String threadId;
     
+    /**
+     * 请求id
+     */
+    private String requestId;
+    
+    /**
+     * 响应时间
+     */
     private String responseTime;
+    
+    /**
+     * 请求时间戳
+     */
+    private String requestTimeStamp;
     
     
     public CustomResponseHead(){
-        
+      
     }
     
     public CustomResponseHead(Boolean success){
         if(success){
-            this.errorCode = "0";
+            this.errorCode = ErrorCodeConstants.SUCCESS;
             this.errorMsg = "请求成功";
         }else{
-            this.errorCode = "1";
+            this.errorCode = ErrorCodeConstants.DEFAULT_ERROR;
             this.errorMsg = "请求失败";
         }
     }
@@ -82,11 +105,30 @@ public class CustomResponseHead {
     }
 
 
-    @Override
-    public String toString() {
-        return "CustomResponseHead [errorCode=" + errorCode + ", errorMsg=" + errorMsg + ", threadId=" + threadId + ", responseTime="
-                + responseTime + "]";
-    }
+    public String getRequestId() {
+		return requestId;
+	}
+
+	public void setRequestId(String requestId) {
+		this.requestId = requestId;
+	}
+
+	public String getRequestTimeStamp() {
+		return requestTimeStamp;
+	}
+
+	public void setRequestTimeStamp(String requestTimeStamp) {
+		this.requestTimeStamp = requestTimeStamp;
+	}
+
+	@Override
+	public String toString() {
+		return "CustomResponseHead [errorCode=" + errorCode + ", errorMsg=" + errorMsg + ", threadId=" + threadId
+				+ ", requestId=" + requestId + ", responseTime=" + responseTime + ", requestTimeStamp="
+				+ requestTimeStamp + "]";
+	}
+
+	
     
     
 }

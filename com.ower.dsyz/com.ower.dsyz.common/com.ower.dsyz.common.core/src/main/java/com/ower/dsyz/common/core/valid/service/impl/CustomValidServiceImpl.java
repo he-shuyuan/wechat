@@ -3,14 +3,15 @@
  */
 package com.ower.dsyz.common.core.valid.service.impl;
 
-import java.util.Arrays;
 import java.util.Set;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import org.springframework.stereotype.Service;
-import com.ower.dsyz.common.core.model.ResultMsg;
+
+import com.ower.dsyz.common.core.constant.ErrorCodeConstants;
+import com.ower.dsyz.common.core.exception.CustomRunTimeException;
 import com.ower.dsyz.common.core.valid.service.ICustomValidService;
 
 /**
@@ -39,28 +40,16 @@ public class CustomValidServiceImpl implements ICustomValidService {
     }
 
     @Override
-    public <T> ResultMsg validator(T t) {
+    public <T> void validator(T t) {
 
         Set<ConstraintViolation<T>> violations = validator.validate(t);
         int errSize = violations.size();
-
-        String[] errMsg = new String[errSize];
-        boolean result = true;
         if (errSize > 0) {
-            int i = 0;
             for (ConstraintViolation<T> violation : violations) {
-                errMsg[i] = violation.getMessage();
-                i++;
+               throw new CustomRunTimeException(ErrorCodeConstants.PARAM_ERROR, violation.getMessage());
             }
-            result = false;
         }
-        if (result) {
-            return ResultMsg.success();
-        } else {
-           String errorM =  Arrays.toString(errMsg);
-           errorM = errorM.substring(1,errorM.length()-1);
-            return ResultMsg.error(errorM);
-        }
+      
 
     }
 

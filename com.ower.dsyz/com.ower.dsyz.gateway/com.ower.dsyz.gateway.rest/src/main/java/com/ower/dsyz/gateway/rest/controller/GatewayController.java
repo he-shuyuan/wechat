@@ -3,21 +3,19 @@
  */
 package com.ower.dsyz.gateway.rest.controller;
 
-import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.ower.dsyz.common.core.request.CustomRequestParam;
-import com.ower.dsyz.common.core.response.CustomResponse;
-import com.ower.dsyz.common.core.rest.impl.ICustomRestClient;
+import com.ower.dsyz.gateway.model.GatewayRequest;
+import com.ower.dsyz.gateway.service.IGatewayRequestFactory;
 
 /**
  * <pre>
@@ -39,9 +37,7 @@ import com.ower.dsyz.common.core.rest.impl.ICustomRestClient;
 public class GatewayController {
 
     @Resource
-    private ICustomRestClient  customRestClient;
-    
-    private Logger               logger = LoggerFactory.getLogger(GatewayController.class);
+    IGatewayRequestFactory gatewayRequestFactory;
     
     @RequestMapping(value={"/{appName}/{serviceLevel}/{serviceName}/{serviceMethod}"}, method={RequestMethod.POST})
     @ResponseBody
@@ -51,10 +47,26 @@ public class GatewayController {
             @PathVariable("serviceLevel") String serviceLevel,
             @PathVariable("serviceName") String serviceName, 
             @PathVariable("serviceMethod") String serviceMethod,
+            @RequestParam(value="token",required = false) String token,
+            @RequestParam(value="appId",required = false) String appId,
+            @RequestParam(value="requestId",required = false) String requestId,
+            @RequestParam(value="sign",required = false) String sign,
             @RequestBody CustomRequestParam param)
     {
-      String url = request.getRequestURI().substring(1);
-      return this.service(url,param);
+    	GatewayRequest gatewayRequest= new GatewayRequest();
+    	String url = request.getRequestURI().substring(1);
+    	gatewayRequest.setAppId(appId);
+    	gatewayRequest.setAppName(appName);
+    	gatewayRequest.setParam(param);
+    	gatewayRequest.setRequestId(requestId);
+    	gatewayRequest.setServiceLevel(serviceLevel);
+    	gatewayRequest.setServiceMethod(serviceMethod);
+    	gatewayRequest.setServiceName(serviceName);
+    	gatewayRequest.setSign(sign);
+    	gatewayRequest.setToken(token);
+    	gatewayRequest.setUrl(url);
+      
+      return gatewayRequestFactory.handleRequest(gatewayRequest);
     }
     
     
@@ -66,20 +78,28 @@ public class GatewayController {
             @PathVariable("serviceLevel") String serviceLevel,
             @PathVariable("serviceName") String serviceName, 
             @PathVariable("serviceMethod") String serviceMethod,
-            @PathVariable("serviceMethod") String extMenthod,
+            @PathVariable("extMenthod") String extMenthod,
+            @RequestParam(value="token",required = false) String token,
+            @RequestParam(value="appId",required = false) String appId,
+            @RequestParam(value="requestId",required = false) String requestId,
+            @RequestParam(value="sign",required = false) String sign,
             @RequestBody CustomRequestParam param)
     {
-        String url = request.getRequestURI().substring(1);
-        return this.service(url,param);
+    	GatewayRequest gatewayRequest= new GatewayRequest();
+    	String url = request.getRequestURI().substring(1);
+    	gatewayRequest.setAppId(appId);
+    	gatewayRequest.setAppName(appName);
+    	gatewayRequest.setParam(param);
+    	gatewayRequest.setRequestId(requestId);
+    	gatewayRequest.setServiceLevel(serviceLevel);
+    	gatewayRequest.setServiceMethod(serviceMethod);
+    	gatewayRequest.setExtMenthod(extMenthod);
+    	gatewayRequest.setServiceName(serviceName);
+    	gatewayRequest.setSign(sign);
+    	gatewayRequest.setToken(token);
+    	gatewayRequest.setUrl(url);
+      
+      return gatewayRequestFactory.handleRequest(gatewayRequest);
     }
     
-    
-    
-    private Object service(String url,Object data){
-        logger.debug("网关请求=》{}，{}",url,data);
-        @SuppressWarnings("rawtypes") 
-        CustomResponse<Map> result = customRestClient.postInner(url,data,Map.class);
-       
-        return result;
-    }
 }

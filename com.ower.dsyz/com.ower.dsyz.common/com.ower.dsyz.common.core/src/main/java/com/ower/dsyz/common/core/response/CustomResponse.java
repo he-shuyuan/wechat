@@ -3,7 +3,9 @@
  */
 package com.ower.dsyz.common.core.response;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.ower.dsyz.common.core.constant.ErrorCodeConstants;
 
 /**
  * <pre>
@@ -78,7 +80,11 @@ public class CustomResponse<T> {
     public void setBody(T body) {
         this.body = body;
     }
-
+    @JsonIgnore
+    public Boolean isSuccess(){
+    	return ErrorCodeConstants.SUCCESS.equals(this.head.getErrorCode());
+    }
+    
     @Override
     public String toString() {
         return "CustomResponse [head=" + head + ", body=" + body + "]";

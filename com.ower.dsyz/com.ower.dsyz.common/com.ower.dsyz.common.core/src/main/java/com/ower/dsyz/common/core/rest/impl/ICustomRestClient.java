@@ -3,6 +3,8 @@
  */
 package com.ower.dsyz.common.core.rest.impl;
 
+import java.util.Map;
+
 import com.ower.dsyz.common.core.response.CustomResponse;
 
 /**
@@ -22,12 +24,42 @@ import com.ower.dsyz.common.core.response.CustomResponse;
 
 public interface ICustomRestClient {
 
-   <T> CustomResponse<T> postInner(String url,String data,String contentType,Class<T> responseClass);
-   
+	/**
+	 * 
+	 * @param url
+	 * @param data
+	 * @param contentType
+	 * @param responseClass
+	 * @return
+	 */
    <T> CustomResponse<T> postInner(String url,Object data,String contentType,Class<T> responseClass);
-   
+   /**
+    * 
+    * @param url
+    * @param data
+    * @param responseClass
+    * @return
+    */
    <T> CustomResponse<T> postInner(String url,Object data,Class<T> responseClass);
+  
+   /**
+    * 
+    * @param url
+    * @param data
+    * @param responseClass 
+    * @param extHeader 头部拓展
+    * @return
+    */
+   <T> CustomResponse<T> postInner(String url,Object data,Class<T> responseClass,Map<String,String> extHeader);
    
-   <T> CustomResponse<T> postInner(String url,String data,Class<T> responseClass);
-   
+  /**
+   * 
+   * @param url
+   * @param data
+   * @param contentType
+   * @param responseClass
+   * @param extHeader
+   * @return
+   */
+  <T> CustomResponse<T> postInner(String url,Object data,String contentType,Class<T> responseClass,Map<String,String> extHeader);
 }

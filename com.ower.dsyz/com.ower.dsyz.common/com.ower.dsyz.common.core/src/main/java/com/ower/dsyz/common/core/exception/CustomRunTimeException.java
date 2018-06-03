@@ -3,6 +3,8 @@
  */
 package com.ower.dsyz.common.core.exception;
 
+import com.ower.dsyz.common.core.constant.ErrorCodeConstants;
+
 /**
  * 
  * <pre>
@@ -37,7 +39,7 @@ public class CustomRunTimeException
   
   public CustomRunTimeException(String errorMsg)
   {
-    this("1", errorMsg, null);
+    this(ErrorCodeConstants.DEFAULT_ERROR, errorMsg, null);
   }
   
   public CustomRunTimeException(String errorCode, String errorMsg)
@@ -47,8 +49,8 @@ public class CustomRunTimeException
   
   public CustomRunTimeException(String errorCode, String errorMsg, Throwable t)
   {
-    super(errorCode + ":" + errorMsg, t);
-    this.errorCode = errorCode;
+    super(errorMsg, t);
+	this.errorCode = errorCode;
     this.errorMsg = errorMsg;
   }
   

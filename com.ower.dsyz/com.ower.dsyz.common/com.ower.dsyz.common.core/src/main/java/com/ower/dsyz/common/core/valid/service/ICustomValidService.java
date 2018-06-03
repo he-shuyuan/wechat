@@ -3,7 +3,6 @@
  */
 package com.ower.dsyz.common.core.valid.service;
 
-import com.ower.dsyz.common.core.model.ResultMsg;
 
 /**
  * <pre>
@@ -27,5 +26,5 @@ public interface ICustomValidService {
      * @param t
      * @return ResultMsg
      */
-    <T> ResultMsg validator(T t);
+    <T> void validator(T t);
 }

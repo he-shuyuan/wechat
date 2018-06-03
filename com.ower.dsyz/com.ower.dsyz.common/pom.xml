@@ -18,7 +18,6 @@
         </dependency>
     </dependencies>
 	<modules>
-	<module>com.ower.dsyz.common.util</module>
      <module>com.ower.dsyz.common.mybatis.generator</module>
     <module>com.ower.dsyz.common.mybatis.database</module>
     <module>com.ower.dsyz.common.core</module>

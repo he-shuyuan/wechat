@@ -3,12 +3,16 @@ package com.ower.dsyz.common.core.interceptor;
 import java.lang.reflect.Method;
 import java.util.Date;
 import java.util.Map;
+
+import org.apache.commons.lang.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+
+import com.ower.dsyz.common.core.holder.CustomLoginUserIdHolder;
 
 @Aspect
 @Component
@@ -24,9 +28,11 @@ public class DaoInterceptor {
             if (obj.getClass().isAssignableFrom(Map.class)) {
                 Map map = (Map) obj;
                 trySetMap(map, "createDate", new Date());
+                trySetMap(map,"createUser",this.getUserId());
                 trySetMap(map, "isValid", "Y");
             } else {
                 trySetProperty(obj, "IsValid","Y");
+                trySetProperty(obj, "CreateUser",this.getUserId());
                 trySetProperty(obj, "CreateDate", new Date());
             }
         }
@@ -46,8 +52,10 @@ public class DaoInterceptor {
             if (obj.getClass().isAssignableFrom(Map.class)) {
                 Map map = (Map) obj;
                 trySetMap(map, "updateDate", new Date());
+                trySetMap(map,"updateUser",this.getUserId());
             } else {
                 trySetProperty(obj, "UpdateDate", new Date());
+                trySetProperty(obj, "UpdateUser",this.getUserId());
             }
         }
     }
@@ -77,5 +85,13 @@ public class DaoInterceptor {
                     String.format("Error set %s to %s for %s.", new Object[] { propertyValue, propertyName, obj.getClass().getName() }),
                     e);
         }
+    }
+    
+    /**
+     * 获取userId
+     * @return
+     */
+    private String getUserId(){
+    	return StringUtils.isNotBlank(CustomLoginUserIdHolder.get())?CustomLoginUserIdHolder.get():"not login or not need login";
     }
 }
