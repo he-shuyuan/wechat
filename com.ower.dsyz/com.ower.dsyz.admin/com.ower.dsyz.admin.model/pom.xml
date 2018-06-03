@@ -4,18 +4,22 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>tree</groupId>
-    <artifactId>com.ower.dsyz.wechat</artifactId>
+    <artifactId>com.ower.dsyz.admin</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>com.ower.dsyz.wechat.model</artifactId>
-  <name>com.ower.dsyz.wechat.model</name>
+  <artifactId>com.ower.dsyz.admin.model</artifactId>
+  <name>com.ower.dsyz.admin.model</name>
   <url>http://maven.apache.org</url>
   <properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version> 
 	</properties>
   <dependencies>
-
+     <dependency>
+			<groupId>tree</groupId>
+			<artifactId>com.ower.dsyz.common.mybatis.database</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
   </dependencies>
   <build>
   <plugins>

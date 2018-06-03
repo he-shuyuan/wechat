@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+ <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>tree</groupId>
+    <artifactId>com.ower.dsyz</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>com.ower.dsyz.admin</artifactId>
+  <packaging>pom</packaging>
+  <name>com.ower.dsyz.admin</name>
+  <description>com.ower.dsyz.admin</description>
+  <modules>
+    <module>com.ower.dsyz.admin.model</module>
+    <module>com.ower.dsyz.admin.rest</module>
+    <module>com.ower.dsyz.admin.service</module>
+  </modules>
+</project>

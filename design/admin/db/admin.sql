@@ -1,57 +1,3 @@
-if exists(select 1 from sys.sysforeignkey where role='FK_T_ADMIN__REFERENCE_T_ADMIN_') then
-    alter table t_admin_dep_user
-       delete foreign key FK_T_ADMIN__REFERENCE_T_ADMIN_
-end if;
-
-if exists(select 1 from sys.sysforeignkey where role='FK_T_ADMIN__REFERENCE_T_ADMIN_') then
-    alter table t_admin_dep_user
-       delete foreign key FK_T_ADMIN__REFERENCE_T_ADMIN_
-end if;
-
-if exists(select 1 from sys.sysforeignkey where role='FK_T_ADMIN__REFERENCE_T_ADMIN_') then
-    alter table t_admin_department
-       delete foreign key FK_T_ADMIN__REFERENCE_T_ADMIN_
-end if;
-
-if exists(select 1 from sys.sysforeignkey where role='FK_T_ADMIN__REFERENCE_T_SEC_BU') then
-    alter table t_admin_function
-       delete foreign key FK_T_ADMIN__REFERENCE_T_SEC_BU
-end if;
-
-if exists(select 1 from sys.sysforeignkey where role='FK_T_ADMIN__REFERENCE_T_ADMIN_') then
-    alter table t_admin_institution
-       delete foreign key FK_T_ADMIN__REFERENCE_T_ADMIN_
-end if;
-
-if exists(select 1 from sys.sysforeignkey where role='FK_T_ADMIN__REFERENCE_T_SEC_BU') then
-    alter table t_admin_institution
-       delete foreign key FK_T_ADMIN__REFERENCE_T_SEC_BU
-end if;
-
-if exists(select 1 from sys.sysforeignkey where role='FK_T_ADMIN__REFERENCE_T_SEC_BU') then
-    alter table t_admin_role
-       delete foreign key FK_T_ADMIN__REFERENCE_T_SEC_BU
-end if;
-
-if exists(select 1 from sys.sysforeignkey where role='FK_T_ADMIN__REFERENCE_T_ADMIN_') then
-    alter table t_admin_role_fun
-       delete foreign key FK_T_ADMIN__REFERENCE_T_ADMIN_
-end if;
-
-if exists(select 1 from sys.sysforeignkey where role='FK_T_ADMIN__REFERENCE_T_ADMIN_') then
-    alter table t_admin_role_fun
-       delete foreign key FK_T_ADMIN__REFERENCE_T_ADMIN_
-end if;
-
-if exists(select 1 from sys.sysforeignkey where role='FK_T_ADMIN__REFERENCE_T_ADMIN_') then
-    alter table t_admin_user_role
-       delete foreign key FK_T_ADMIN__REFERENCE_T_ADMIN_
-end if;
-
-if exists(select 1 from sys.sysforeignkey where role='FK_T_ADMIN__REFERENCE_T_ADMIN_') then
-    alter table t_admin_user_role
-       delete foreign key FK_T_ADMIN__REFERENCE_T_ADMIN_
-end if;
 
 drop table if exists t_admin_dep_user;
 
@@ -86,14 +32,14 @@ create table t_admin_dep_user
    is_valid             char(1)                        not null default 'Y',
    remark               VARCHAR(100)                   null,
    create_user          varchar(32)                    null,
-   create_date          datetime                       null default 'CURRENT_TIMESTAMP',
+   create_date          datetime                       null,
    update_user          varchar(32)                    null,
    update_date          datetime                       null,
    constraint PK_T_ADMIN_DEP_USER primary key (dep_user_id)
 );
 
 comment on table t_admin_dep_user is 
-'部门人员关系（一个人属多个部门）';
+'部门人员关系 一个人属多个部门';
 
 comment on column t_admin_dep_user.is_valid is 
 '是否有效，取值N/Y，缺省值是Y';
@@ -131,7 +77,7 @@ create table t_admin_department
    Is_valid             varchar(1)                     not null default 'Y',
    REMARK               VARCHAR(4000)                  null,
    create_user          varchar(32)                    null,
-   create_date          datetime                       null default 'CURRENT_TIMESTAMP',
+   create_date          datetime                       null,
    update_user          varchar(32)                    null,
    update_date          datetime                       null,
    constraint PK_T_ADMIN_DEPARTMENT primary key (dep_id)
@@ -189,7 +135,7 @@ create table t_admin_function
    is_valid             char(1)                        not null default 'Y',
    remark               VARCHAR(100)                   null,
    create_user          varchar(32)                    null,
-   create_date          datetime                       null default 'CURRENT_TIMESTAMP',
+   create_date          datetime                       null,
    update_user          varchar(32)                    null,
    update_date          datetime                       null,
    constraint PK_T_ADMIN_FUNCTION primary key (function_id)
@@ -267,7 +213,7 @@ create table t_admin_institution
    remark               VARCHAR(100)                   null,
    is_valid             char                           null default 'Y',
    create_user          varchar(32)                    null,
-   create_date          datetime                       null default 'CURRENT_TIMESTAMP',
+   create_date          datetime                       null,
    update_user          varchar(32)                    null,
    update_date          datetime                       null,
    constraint PK_T_ADMIN_INSTITUTION primary key (ins_id)
@@ -277,7 +223,7 @@ comment on column t_admin_institution.ins_id is
 '机构id';
 
 comment on column t_admin_institution.ins_name is 
-'机构的名称（金财互联、服务商、普通客户的名称）';
+'机构的名称  金财互联、服务商、普通客户的名称';
 
 comment on column t_admin_institution.ins_short_name is 
 '机构简称';
@@ -342,7 +288,7 @@ create table t_admin_institution_type
    name                 varchar(20)                    null,
    remark               VARCHAR(100)                   null,
    create_user          varchar(32)                    null,
-   create_date          datetime                       null default 'CURRENT_TIMESTAMP',
+   create_date          datetime                       null,
    update_user          varchar(32)                    null,
    update_date          datetime                       null,
    constraint PK_T_ADMIN_INSTITUTION_TYPE primary key (id)
@@ -382,7 +328,7 @@ create table t_admin_role
    is_valid             char(1)                        not null default 'Y',
    remark               VARCHAR(100)                   null,
    create_user          varchar(32)                    null,
-   create_date          datetime                       null default 'CURRENT_TIMESTAMP',
+   create_date          datetime                       null,
    update_user          varchar(32)                    null,
    update_date          datetime                       null,
    constraint PK_T_ADMIN_ROLE primary key (role_id)
@@ -419,7 +365,7 @@ create table t_admin_role_fun
    function_id          varchar(32)                    not null,
    remark               VARCHAR(100)                   null,
    create_user          varchar(32)                    null,
-   create_date          datetime                       null default 'CURRENT_TIMESTAMP',
+   create_date          datetime                       null,
    update_user          varchar(32)                    null,
    update_date          datetime                       null,
    constraint PK_T_ADMIN_ROLE_FUN primary key (id)
@@ -541,7 +487,7 @@ create table t_admin_user_role
    role_id              varchar(32)                    not null,
    remake               VARCHAR(100)                   null,
    create_user          varchar(32)                    null,
-   create_date          datetime                       null default 'CURRENT_TIMESTAMP',
+   create_date          datetime                       null,
    update_user          varchar(32)                    null,
    update_date          datetime                       null,
    constraint PK_T_ADMIN_USER_ROLE primary key (id)
@@ -577,7 +523,7 @@ create table t_sec_business
    bus_type_name        varchar(20)                    not null,
    remark               VARCHAR(100)                   null,
    create_user          varchar(32)                    null,
-   create_date          datetime                       null default 'CURRENT_TIMESTAMP',
+   create_date          datetime                       null,
    update_user          varchar(32)                    null,
    update_date          datetime                       null,
    constraint PK_T_SEC_BUSINESS primary key (bus_type_id)
