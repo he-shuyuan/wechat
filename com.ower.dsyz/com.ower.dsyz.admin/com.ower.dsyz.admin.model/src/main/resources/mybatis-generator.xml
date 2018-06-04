@@ -33,7 +33,7 @@
 
 
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://192.168.1.104:3306/test" userId="root"
+			connectionURL="jdbc:mysql://192.168.1.104:3306/admin" userId="root"
 			password="123456">
 		</jdbcConnection>
 
@@ -58,7 +58,19 @@
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
-		<table schema="" tableName="t_admin_user" domainObjectName="AdminUser"
+		<table schema="" tableName="t_admin_institution" domainObjectName="AdminInstitution"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false"></table>
+		<table schema="" tableName="t_admin_institution_type" domainObjectName="AdminInstitutionType"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false"></table>
+		<table schema="" tableName="t_admin_business" domainObjectName="AdminBusiness"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false"></table>
+		<table schema="" tableName="t_admin_department" domainObjectName="AdminDepartment"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false"></table>

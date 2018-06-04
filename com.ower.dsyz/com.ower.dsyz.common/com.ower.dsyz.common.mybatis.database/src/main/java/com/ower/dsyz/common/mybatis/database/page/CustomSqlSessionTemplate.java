@@ -63,8 +63,8 @@ public <T> T selectOne(String statement, Object parameter)
 {
   if ((parameter instanceof PageRequestParam))
   {
-    PageRequestParam pageRequestParam = (PageRequestParam)parameter;
-    PageHelper.startPage(pageRequestParam.getCurrentPage(), pageRequestParam.getPageSize());
+	  PageRequestParam pageRequestParam = (PageRequestParam)parameter;
+    PageHelper.startPage(pageRequestParam.getPageIndex(), pageRequestParam.getPageSize());
     
     Object result = this.superSqlSessionProxy.selectList(statement, parameter);
     if ((result instanceof Page))

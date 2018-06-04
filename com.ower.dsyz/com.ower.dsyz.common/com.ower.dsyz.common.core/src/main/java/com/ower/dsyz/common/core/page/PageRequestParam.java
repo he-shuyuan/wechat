@@ -27,29 +27,52 @@ public class PageRequestParam extends CustomRequestParam{
      */
     private static final long serialVersionUID = -7364605008252414290L;
 
-    private int currentPage = 1;
+    private int pageIndex = 1;
     
     private int pageSize = 10;
 
-    
-    public int getCurrentPage() {
-        return currentPage;
+    public PageRequestParam(){
+    	super();
+    	super.put("pageIndex", 1);
+    	super.put("pageSize", 10);
     }
-
     
     public int getPageSize() {
         return pageSize;
     }
 
     
-    public void setCurrentPage(int currentPage) {
-        this.currentPage = currentPage;
-    }
 
     
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
     }
+
+
+
+
+	public int getPageIndex() {
+		return pageIndex;
+	}
+
+
+
+
+	public void setPageIndex(int pageIndex) {
+		this.pageIndex = pageIndex;
+	}
+
+    @Override
+    public Object put(String key, Object value) {
+        if (key.equals("pageIndex")) {
+            this.setPageIndex(Integer.parseInt(String.valueOf(value)));
+        } else if (key.equals("pageSize")) {
+            this.setPageSize(Integer.parseInt(String.valueOf(value)));
+        } 
+          return super.put(key, value);
+       
+    }
+	
     
     
 }

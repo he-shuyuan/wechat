@@ -6,6 +6,7 @@ package com.ower.dsyz.common.core.rest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.annotation.Resource;
 
@@ -54,9 +55,7 @@ public class CustomRestClient implements ICustomRestClient {
 	@Override
 	public <T> CustomResponse<T> postInner(String url, Object data, String contentType, Class<T> responseClass,
 			Map<String, String> extHeader) {
-		if (!url.startsWith("http://")) {
-			url = "http://" + url;
-		}
+		url = buildUrl(url);
 		String requestJson = null;
 		if (data instanceof String) {
 			requestJson = (String) data;
@@ -77,8 +76,9 @@ public class CustomRestClient implements ICustomRestClient {
 		log.info("\n【内部请求】=》url=>>>{}\n" + "【内部请求】=》header=>>>{}\n" + "【内部请求】=》param=>>>{}\n", url, header, data);
 		ResponseEntity<CustomResponse> res = restTemplate.exchange(url, HttpMethod.POST, httpEnty, CustomResponse.class,
 				CustomUrlParamHolder.get());
+		//System.err.println(CustomUrlParamHolder.get());
 		if (res.getStatusCodeValue() == 200) {
-			log.info("\n【内部请求】=》response=>>>{}\n" + "【内部请求】=》body=>>>{}\n", res, res.getBody());
+			log.info("\n【内部请求】=》response=>>>{}\n" + "【内部请求】=》body=>>>{}", res, res.getBody());
 			Object ob = res.getBody().getBody();
 			String json = Jackson.toJson(ob);
 			if (ob instanceof ArrayList) {
@@ -92,6 +92,8 @@ public class CustomRestClient implements ICustomRestClient {
 		}
 		return CustomResponse.error(res.getStatusCodeValue() + "", "url=[" + url + "]请求错误");
 	}
+
+
 
 	@Override
 	public <T> CustomResponse<T> postInner(String url, Object data, Class<T> responseClass,
@@ -125,4 +127,33 @@ public class CustomRestClient implements ICustomRestClient {
 
 	}
 
+	/**
+	 * url rebuild
+	 * @param url
+	 * @return
+	 */
+	private String buildUrl(String url) {
+		StringBuilder sb = new StringBuilder();
+		if (!url.startsWith("http://")) {
+			if(url.startsWith("/")){
+				sb.append("http:/");
+			}else{
+				sb.append("http://");
+			}
+		}
+		sb.append(url);
+		if(!CustomUrlParamHolder.get().isEmpty()){
+			for (Entry<String, String> entry : CustomUrlParamHolder.get().entrySet()) {  
+               if(sb.indexOf("?") == -1){
+            	   sb.append("?");
+               }else{
+            	   sb.append("&");
+               }
+               sb.append(entry.getKey());
+               sb.append("=");
+               sb.append(entry.getValue());
+			}  
+		}
+		return sb.toString();
+	}
 }
