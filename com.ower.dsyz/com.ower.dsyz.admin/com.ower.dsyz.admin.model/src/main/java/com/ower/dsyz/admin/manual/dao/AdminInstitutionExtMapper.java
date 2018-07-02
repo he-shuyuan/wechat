@@ -1,5 +1,6 @@
 package com.ower.dsyz.admin.manual.dao;
 
+import java.util.List;
 import com.ower.dsyz.admin.manual.dto.AdminInstitutionDTO;
 import com.ower.dsyz.common.core.page.PageQueryResult;
 import com.ower.dsyz.common.core.page.PageRequestParam;
@@ -11,4 +12,12 @@ public interface AdminInstitutionExtMapper {
 	 * @return
 	 */
 	PageQueryResult<AdminInstitutionDTO> pageQueryAdminInstitutionDTOList(PageRequestParam param);
+	
+	 /**
+     * 条件查询企业
+     * TODO。
+     * @param addInstitutionDTO
+     * @return List<AdminInstitutionDTO>
+     */
+    List<AdminInstitutionDTO> queryAdminInstitutionDTOList(AdminInstitutionDTO addInstitutionDTO);
 }

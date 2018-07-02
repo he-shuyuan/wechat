@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ower.dsyz.admin.manual.dao.AdminDepartmentExtMapper" >
+<select id="queryDepartmentList" 
+parameterType="com.ower.dsyz.admin.manual.dto.AdminDepartmentDTO" 
+resultType="com.ower.dsyz.admin.manual.dto.AdminDepartmentDTO">
+	SELECT
+		t.dep_id AS depId,
+		t.dep_name AS depName,
+		t.ins_id AS insId,
+		t2.ins_name AS insName,
+		t.path_code AS pathCode,
+		t.Phone AS phone,
+		t.address AS address,
+		t.area AS area,
+		t.contactor AS contactor,
+		t.email
+		AS email,
+		t.fax AS fax,
+		t.Is_Valid AS isValid,
+		t.REMARK AS remark,
+		FROM
+		t_admin_department t
+		LEFT JOIN
+		t_admin_institution
+		t2 ON t.ins_id = t2.ins_id
+		where 1=1
+		<if test="depId !=null and depId !=''">
+			and t.dep_id = #{depId,jdbcType=VARCHAR}
+		</if>
+		<if test="insId !=null and insId !=''">
+			and t.ins_id = #{insId,jdbcType=VARCHAR}
+		</if>
+		<if test="depName !=null and depName !=''">
+			and t.dep_name like
+			concat('%',#{depName,jdbcType=VARCHAR},'%')
+		</if>
+		<if test="isValid !=null and isValid !=''">
+			and t.is_valid = #{isValid,jdbcType=VARCHAR}
+		</if>
+		<if test="pathCode !=null and pathCode !=''">
+			and t.path_code = #{pathCode,jdbcType=VARCHAR}
+		</if>
+</select>
+
+<select id="queryDepPathList" 
+parameterType="com.ower.dsyz.admin.manual.dto.DepPath" 
+resultType="com.ower.dsyz.admin.manual.dto.DepPath">
+		SELECT
+		t.path_code as pathCode,
+		t.ins_id as insId
+		from t_admin_department t
+		where 1 = 1
+		<if test="pathCode != null">
+			and t.path_code like concat(#{pathCode,jdbcType=VARCHAR},'%')
+		</if>
+		<if test="insId != null and insId != ''">
+			and t.ins_id = #{insId,jdbcType=VARCHAR}
+		</if>
+		<if test="parentDepId != null and parentDepId != ''">
+			and t.parent_dep_id = #{parentDepId,jdbcType=VARCHAR}
+		</if>
+		order by t.path_code
+</select>
+</mapper>

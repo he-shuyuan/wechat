@@ -43,7 +43,50 @@
 		<if test="organizationCode !=null and organizationCode !=''">
 		and t.organization_code = #{organizationCode,jdbcType=VARCHAR}
 		</if>
+ </select>
  
+ <select id="queryAdminInstitutionDTOList" parameterType="com.ower.dsyz.admin.manual.dto.AdminInstitutionDTO" 
+    resultType="com.ower.dsyz.admin.manual.dto.AdminInstitutionDTO">
+    select
+		t.ins_id as insId,
+		t.ins_name as insName,
+		t.ins_short_name as insShortName,
+		t.bus_type_id as busTypeId,
+		t2.bus_type_name as busTypeName,
+		t.type_id as typeId,
+		t3.`name` as typeName,
+		t.organization_code as organizationCode,
+		t.ins_manager as insManager,
+		t.ins_manager_phone as insManagerPhone,
+		t.phone as phone,
+		t.address as address,
+		t.addr_web as addrWeb,
+		t.ins_logo as insLogo,
+		t.contact as contact,
+		t.is_valid as isValid,
+		t.legal as legal
+		from t_admin_institution t
+		LEFT JOIN t_admin_business t2 on t.bus_type_id = t2.bus_type_id
+		LEFT JOIN t_admin_institution_type t3 on t.type_id = t3.id
+		where 1=1 
+		<if test="insId !=null and insId !=''">
+		and t.ins_id = #{insId,jdbcType=VARCHAR}
+		</if>
+		<if test="insName !=null and insName !=''">
+		and t.ins_name = #{insName,jdbcType=VARCHAR}
+		</if>
+		<if test="typeId !=null and typeId !=''">
+		and t.type_id = #{typeId,jdbcType=VARCHAR}
+		</if>
+		<if test="busTypeId !=null and busTypeId !=''">
+		and t.bus_type_id = #{busTypeId,jdbcType=VARCHAR}
+		</if>
+		<if test="isValid !=null and isValid !=''">
+		and t.is_valid = #{isValid,jdbcType=VARCHAR}
+		</if>
+		<if test="organizationCode !=null and organizationCode !=''">
+		and t.organization_code = #{organizationCode,jdbcType=VARCHAR}
+		</if>
  </select>
  
 </mapper>
