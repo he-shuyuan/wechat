@@ -2,6 +2,7 @@
 *.dtd
 *.classpath
 target
+*.project
 log
 .settings
 node_modules
