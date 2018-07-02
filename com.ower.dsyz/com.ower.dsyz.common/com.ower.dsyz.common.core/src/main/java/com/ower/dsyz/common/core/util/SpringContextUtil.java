@@ -19,7 +19,6 @@ import org.springframework.util.Assert;
 
 /**
  * 用于获取spring的applicationContext
- * @author liangxianyong
  * @date 2018年4月24日
  * @time 上午10:44:49
  */
