@@ -14,7 +14,7 @@ import com.ower.dsyz.wechat.manual.dto.WechatAppDTO;
  * 微信公众号管理接口
  * </pre>
  *
- * @author HeShuyuan@foresee.com.cn
+ * @author HeShuyuan@163.com
  * @date 2018年1月11日
  * @version 1.00.00
  * 

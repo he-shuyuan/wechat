@@ -15,7 +15,7 @@ import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
  * 抽象处理微信事件类
  * </pre>
  *
- * @author HeShuyuan@foresee.com.cn
+ * @author HeShuyuan@163.com
  * @date 2018年1月11日
  * @version 1.00.00
  * 

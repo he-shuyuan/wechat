@@ -8,7 +8,7 @@ import com.ower.dsyz.common.vfs.FileSystem;
 /**
  * 文件系统包装.
  * 
- * @author <a href="mailto:liji@foresee.com.cn">liji</a>
+ * @author <a href="mailto:liji@163.com">liji</a>
  */
 public abstract class FileSystemWrapper implements FileSystem {
 

@@ -1,0 +1,23 @@
+
+> vue-admin-template@3.6.0 dev D:\foresee\work\machine\web
+> cross-env CUR_ENV=development webpack-dev-server --config build/webpack.dev.conf.js
+
+[10:01:13] Compiling webpack
+
+> vue-admin-template@3.6.0 dev D:\foresee\work\machine\web
+> cross-env CUR_ENV=development webpack-dev-server --config build/webpack.dev.conf.js
+
+[10:04:24] Compiling webpack
+[10:04:36] Compiled webpack in 12s
+ DONE  Compiled successfully in 11832ms10:04:36
+
+ I  Your application is running here: http://10.10.17.87:9413
+
+> vue-admin-template@3.6.0 dev D:\foresee\work\machine\web
+> cross-env CUR_ENV=development webpack-dev-server --config build/webpack.dev.conf.js
+
+[10:05:25] Compiling webpack
+[10:05:37] Compiled webpack in 12s
+ DONE  Compiled successfully in 12050ms10:05:37
+
+ I  Your application is running here: http://10.10.17.87:9413

@@ -27,7 +27,7 @@ import com.ower.dsyz.common.mybatis.database.page.CustomSqlSessionTemplate;
  * MyBatis基础配置
  * </pre>
  *
- * @author HeShuyuan@foresee.com.cn
+ * @author HeShuyuan@163.com
  * @date 2017年12月28日
  * @version 1.00.00
  * 

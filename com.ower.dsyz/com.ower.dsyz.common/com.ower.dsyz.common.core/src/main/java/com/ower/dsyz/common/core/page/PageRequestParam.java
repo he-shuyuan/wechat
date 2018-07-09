@@ -10,7 +10,7 @@ import com.ower.dsyz.common.core.request.CustomRequestParam;
  * 接收分页参数
  * </pre>
  *
- * @author HeShuyuan@foresee.com.cn
+ * @author HeShuyuan@163.com
  * @date 2018年1月4日
  * @version 1.00.00
  * 

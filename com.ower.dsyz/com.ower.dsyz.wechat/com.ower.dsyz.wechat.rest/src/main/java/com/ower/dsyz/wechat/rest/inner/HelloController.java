@@ -27,7 +27,7 @@ import com.ower.dsyz.wechat.util.ContextUtil;
  * <pre>
  * </pre>
  *
- * @author HeShuyuan@foresee.com.cn
+ * @author HeShuyuan@163.com
  * @date 2017年12月26日
  * @version 1.00.00
  * 

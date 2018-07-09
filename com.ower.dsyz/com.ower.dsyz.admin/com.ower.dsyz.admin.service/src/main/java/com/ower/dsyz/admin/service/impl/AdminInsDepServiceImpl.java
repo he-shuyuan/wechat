@@ -18,7 +18,7 @@ import com.ower.dsyz.admin.service.IAdminInstitutionService;
  * TODO。
  * </pre>
  *
- * @author HeShuyuan@foresee.com.cn
+ * @author HeShuyuan@163.com
  * @date 2018年7月2日
  * @version 1.00.00
  * 

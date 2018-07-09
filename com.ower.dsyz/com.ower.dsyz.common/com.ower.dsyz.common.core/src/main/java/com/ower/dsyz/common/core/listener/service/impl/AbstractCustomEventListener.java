@@ -14,7 +14,7 @@ import com.ower.dsyz.common.core.listener.service.ICustomEventListener;
  * 默认监听器
  * </pre>
  *
- * @author HeShuyuan@foresee.com.cn
+ * @author HeShuyuan@163.com
  * @date 2018年1月17日
  * @version 1.00.00
  * 

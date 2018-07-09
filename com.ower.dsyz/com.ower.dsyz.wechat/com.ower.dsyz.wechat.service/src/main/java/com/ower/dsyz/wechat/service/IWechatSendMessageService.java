@@ -11,7 +11,7 @@ import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
  * 统一推送消息接口
  * </pre>
  *
- * @author HeShuyuan@foresee.com.cn
+ * @author HeShuyuan@163.com
  * @date 2018年1月11日
  * @version 1.00.00
  * 

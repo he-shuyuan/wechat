@@ -26,7 +26,7 @@ import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
  * 订阅关注事件处理
  * </pre>
  *
- * @author HeShuyuan@foresee.com.cn
+ * @author HeShuyuan@163.com
  * @date 2018年1月19日
  * @version 1.00.00
  * 

@@ -8,7 +8,7 @@ package com.ower.dsyz.common.core.json;
  * TODO。
  * </pre>
  *
- * @author HeShuyuan@foresee.com.cn
+ * @author HeShuyuan@163.com
  * @date 2018年1月19日
  * @version 1.00.00
  * 
@@ -31,7 +31,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
  * 自定义返回JSON 数据格中日期格式化处理 
  * </pre>
  *
- * @author HeShuyuan@foresee.com.cn
+ * @author HeShuyuan@163.com
  * @date 2018年1月19日
  * @version 1.00.00
  * 

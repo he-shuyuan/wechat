@@ -14,7 +14,7 @@ import com.ower.dsyz.common.core.redis.IRedisService;
  * redis 同步锁
  * </pre>
  *
- * @author HeShuyuan@foresee.com.cn
+ * @author HeShuyuan@163.com
  * @date 2017年11月13日
  * @version 1.00.00
  * 

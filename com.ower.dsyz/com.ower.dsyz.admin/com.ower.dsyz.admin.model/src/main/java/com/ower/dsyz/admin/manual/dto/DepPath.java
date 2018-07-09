@@ -10,7 +10,7 @@ import org.apache.commons.lang3.StringUtils;
  * 部门路径pathCode
  * </pre>
  *
- * @author HeShuyuan@foresee.com.cn
+ * @author HeShuyuan@163.com
  * @date 2018年4月25日
  * @version 1.00.00
  * 

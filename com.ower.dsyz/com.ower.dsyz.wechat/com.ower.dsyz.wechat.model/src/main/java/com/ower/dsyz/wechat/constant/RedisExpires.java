@@ -4,7 +4,7 @@ package com.ower.dsyz.wechat.constant;
  * redis缓存时间
  * </pre>
  *
- * @author HeShuyuan@foresee.com.cn
+ * @author HeShuyuan@163.com
  * @date 2017年5月11日
  * @version 1.00.00
  * 

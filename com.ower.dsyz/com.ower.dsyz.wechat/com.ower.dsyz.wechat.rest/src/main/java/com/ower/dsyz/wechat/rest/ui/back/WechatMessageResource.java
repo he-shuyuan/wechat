@@ -22,7 +22,7 @@ import com.ower.dsyz.wechat.service.IWechatMessageResourceService;
  * 微信回调消息处理
  * </pre>
  *
- * @author HeShuyuan@foresee.com.cn
+ * @author HeShuyuan@163.com
  * @date 2018年1月22日
  * @version 1.00.00
  * 

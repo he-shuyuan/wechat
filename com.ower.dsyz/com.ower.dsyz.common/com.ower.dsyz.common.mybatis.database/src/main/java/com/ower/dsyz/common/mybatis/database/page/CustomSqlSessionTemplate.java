@@ -22,7 +22,7 @@ import com.ower.dsyz.common.core.page.PageRequestParam;
  * 重写selectOne方法
  * </pre>
  *
- * @author HeShuyuan@foresee.com.cn
+ * @author HeShuyuan@163.com
  * @date 2018年1月4日
  * @version 1.00.00
  * 

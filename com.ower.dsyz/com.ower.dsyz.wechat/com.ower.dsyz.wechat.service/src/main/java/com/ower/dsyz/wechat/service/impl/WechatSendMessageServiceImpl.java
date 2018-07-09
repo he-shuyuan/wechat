@@ -21,7 +21,7 @@ import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
  * 消息实现
  * </pre>
  *
- * @author HeShuyuan@foresee.com.cn
+ * @author HeShuyuan@163.com
  * @date 2018年1月12日
  * @version 1.00.00
  * 

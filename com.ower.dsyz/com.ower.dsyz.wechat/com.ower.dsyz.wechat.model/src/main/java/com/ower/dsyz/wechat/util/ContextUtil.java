@@ -23,7 +23,7 @@ import org.springframework.context.ApplicationContextAware;
  *  用于获取spring的applicationContext
  * </pre>
  *
- * @author HeShuyuan@foresee.com.cn
+ * @author HeShuyuan@163.com
  * @date 2018年1月11日
  * @version 1.00.00
  * 

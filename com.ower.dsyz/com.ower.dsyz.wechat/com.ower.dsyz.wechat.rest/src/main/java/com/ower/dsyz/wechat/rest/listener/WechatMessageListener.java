@@ -11,7 +11,7 @@ import com.ower.dsyz.common.core.redisListener.service.impl.AbstractMessageListe
  * TODO。
  * </pre>
  *
- * @author HeShuyuan@foresee.com.cn
+ * @author HeShuyuan@163.com
  * @date 2018年1月31日
  * @version 1.00.00
  * 

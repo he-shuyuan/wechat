@@ -16,7 +16,7 @@ import com.ower.dsyz.common.core.json.CustomDateSerializer;
  * TODO。
  * </pre>
  *
- * @author HeShuyuan@foresee.com.cn
+ * @author HeShuyuan@163.com
  * @date 2018年1月19日
  * @version 1.00.00
  * 

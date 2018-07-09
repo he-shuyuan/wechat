@@ -8,7 +8,7 @@ package com.ower.dsyz.admin.manual.constant;
  * TODO。
  * </pre>
  *
- * @author HeShuyuan@foresee.com.cn
+ * @author HeShuyuan@163.com
  * @date 2018年7月2日
  * @version 1.00.00
  * 
@@ -22,7 +22,7 @@ public interface AdminConstant {
     
     /**
      * 部门常量
-     * @author HeShuyuan@foresee.com.cn
+     * @author HeShuyuan@163.com
      * @date 2018年7月2日
      * @version 1.00.00
      */

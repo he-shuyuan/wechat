@@ -38,7 +38,7 @@ import com.ower.dsyz.common.core.valid.service.ICustomValidService;
  * controller层切面控制
  * </pre>
  *
- * @author HeShuyuan@foresee.com.cn
+ * @author HeShuyuan@163.com
  * @date 2018年1月2日
  * @version 1.00.00
  * 

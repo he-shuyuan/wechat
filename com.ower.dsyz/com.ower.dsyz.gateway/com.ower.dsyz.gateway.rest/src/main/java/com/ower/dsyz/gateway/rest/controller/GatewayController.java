@@ -22,7 +22,7 @@ import com.ower.dsyz.gateway.service.IGatewayRequestFactory;
  * 网关统一配置
  * </pre>
  *
- * @author HeShuyuan@foresee.com.cn
+ * @author HeShuyuan@163.com
  * @date 2018年1月22日
  * @version 1.00.00
  * 

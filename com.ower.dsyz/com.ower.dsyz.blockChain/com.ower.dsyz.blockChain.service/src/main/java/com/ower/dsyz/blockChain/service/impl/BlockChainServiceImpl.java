@@ -16,7 +16,7 @@ import com.ower.dsyz.common.core.util.HashUtil;
  * TODO。
  * </pre>
  *
- * @author HeShuyuan@foresee.com.cn
+ * @author HeShuyuan@163.com
  * @date 2018年3月19日
  * @version 1.00.00
  * 

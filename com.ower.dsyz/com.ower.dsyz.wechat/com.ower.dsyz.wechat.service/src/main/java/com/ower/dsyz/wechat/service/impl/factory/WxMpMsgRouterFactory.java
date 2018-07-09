@@ -26,7 +26,7 @@ import me.chanjar.weixin.mp.api.WxMpService;
  * 订阅号、服务号微信消息路由工厂
  * </pre>
  *
- * @author HeShuyuan@foresee.com.cn
+ * @author HeShuyuan@163.com
  * @date 2018年1月11日
  * @version 1.00.00
  * 

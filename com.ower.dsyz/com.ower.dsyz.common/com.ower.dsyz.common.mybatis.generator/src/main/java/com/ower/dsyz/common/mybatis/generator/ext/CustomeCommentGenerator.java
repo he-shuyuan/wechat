@@ -18,7 +18,7 @@ import org.mybatis.generator.internal.DefaultCommentGenerator;
  * TODO。
  * </pre>
  *
- * @author HeShuyuan@foresee.com.cn
+ * @author HeShuyuan@163.com
  * @date 2017年12月27日
  * @version 1.00.00
  * 

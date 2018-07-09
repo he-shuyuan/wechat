@@ -6,7 +6,7 @@ import com.ower.dsyz.common.vfs.FileContent;
 /**
  * 文件内容包装.
  * 
- * @author <a href="mailto:liji@foresee.com.cn">liji</a>
+ * @author <a href="mailto:liji@163.com">liji</a>
  */
 public abstract class FileContentWrapper implements FileContent {
 

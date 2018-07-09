@@ -20,7 +20,7 @@ import com.ower.dsyz.wechat.service.IWechatAppResourceService;
  * 微信app后台配置
  * </pre>
  *
- * @author HeShuyuan@foresee.com.cn
+ * @author HeShuyuan@163.com
  * @date 2018年1月15日
  * @version 1.00.00
  * 

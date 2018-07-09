@@ -1,0 +1,118 @@
+@import './vueImport/index.scss';
+
+.svg-icon {
+    position: relative;
+    top: 3px;
+}
+
+// 在页面使用class="reset"让下面的样式生效
+.reset {
+    .el-card__header {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .el-form-item {
+        margin-bottom: 0;
+        width: 35%;
+    }
+    .el-form-item__label {
+        color: #939393;
+        font-weight: normal;
+    }
+}
+
+// 统一表单样式
+.uni-form-header {
+    .long-input {
+        width: 500px;
+    }
+
+    .long-button {
+        width: 150px;
+    }
+
+    .modify .el-card__header {
+        background: $border-color;
+        font-weight: bold;
+    }
+
+    .avatar-uploader .el-upload {
+        border: 1px dashed #d9d9d9;
+        border-radius: 6px;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .avatar-uploader .el-upload:hover {
+        border-color: #409eff;
+    }
+
+    .avatar-uploader-icon {
+        font-size: 28px;
+        color: #8c939d;
+        width: 250px;
+        height: 178px;
+        line-height: 178px;
+        text-align: center;
+    }
+
+    .avatar {
+        height: 178px;
+        display: block;
+    }
+
+    .el-upload__tip p {
+        line-height: 2;
+        margin: 0;
+    }
+}
+
+// 提示信息位置调整
+.el-message {
+    top: 20%;
+}
+
+.el-card {
+    .el-card__header {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .header-slot {
+        padding: 10px 0;
+    }
+
+    .machine-block {
+        min-height: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+//级联选择器选项卡宽度调整
+.el-cascader-menu__item {
+    padding: 8px 25px 8px 18px;
+}
+
+.el-button--danger {
+    background-color:#00BBF0;
+    border-color: #00BBF0;
+}
+
+.el-button--danger:hover,
+.el-button--danger:focus {
+    background-color: #00bbf0c7;
+    border-color:transparent;
+}
+
+.el-button--success {
+    background-color:#005792;
+    border-color: #005792;
+}
+
+.el-button--success:hover,
+.el-button--success:focus {
+    background-color: #005792c7;
+    border-color:transparent;
+}

@@ -10,7 +10,7 @@ import com.ower.dsyz.common.core.constant.ErrorCodeConstants;
  * 回参头部
  * </pre>
  *
- * @author HeShuyuan@foresee.com.cn
+ * @author HeShuyuan@163.com
  * @date 2017年12月28日
  * @version 1.00.00
  * 

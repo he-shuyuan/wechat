@@ -10,7 +10,7 @@ import org.apache.commons.codec.digest.DigestUtils;
  * TODO。
  * </pre>
  *
- * @author HeShuyuan@foresee.com.cn
+ * @author HeShuyuan@163.com
  * @date 2018年3月21日
  * @version 1.00.00
  * 

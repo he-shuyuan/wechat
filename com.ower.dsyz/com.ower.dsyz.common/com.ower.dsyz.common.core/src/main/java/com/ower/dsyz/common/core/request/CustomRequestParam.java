@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
  *  通用入参
  * </pre>
  *
- * @author HeShuyuan@foresee.com.cn
+ * @author HeShuyuan@163.com
  * @date 2018年1月4日
  * @version 1.00.00
  * 
