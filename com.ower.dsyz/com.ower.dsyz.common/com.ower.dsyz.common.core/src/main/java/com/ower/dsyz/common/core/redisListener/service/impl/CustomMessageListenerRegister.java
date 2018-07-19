@@ -31,7 +31,7 @@ import com.ower.dsyz.common.core.redisListener.service.ICustomMessageListererReg
  *    修改后版本:     修改人：  修改日期:     修改内容:
  *          </pre>
  */
-@Component
+//@Component
 public class CustomMessageListenerRegister implements ICustomMessageListererRegister{
 
     private Logger                            logger    = LoggerFactory.getLogger(CustomMessageListenerRegister.class);

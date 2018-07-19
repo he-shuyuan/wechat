@@ -1,7 +1,7 @@
 /**
  * Copyright(c) Foresee Science & Technology Ltd. 
  */
-package com.ower.dsyz.common.core.rest.impl;
+package com.ower.dsyz.common.core.rest;
 
 import java.util.Map;
 

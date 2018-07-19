@@ -1,7 +1,7 @@
 /**
  * Copyright(c) Foresee Science & Technology Ltd. 
  */
-package com.ower.dsyz.common.core.rest;
+package com.ower.dsyz.common.core.rest.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ import org.springframework.web.client.RestTemplate;
 import com.ower.dsyz.common.core.holder.CustomLoginUserIdHolder;
 import com.ower.dsyz.common.core.holder.CustomUrlParamHolder;
 import com.ower.dsyz.common.core.response.CustomResponse;
-import com.ower.dsyz.common.core.rest.impl.ICustomRestClient;
+import com.ower.dsyz.common.core.rest.ICustomRestClient;
 import com.ower.dsyz.common.core.util.Jackson;
 
 /**
@@ -76,7 +76,6 @@ public class CustomRestClient implements ICustomRestClient {
 		log.info("\n【内部请求】=》url=>>>{}\n" + "【内部请求】=》header=>>>{}\n" + "【内部请求】=》param=>>>{}\n", url, header, data);
 		ResponseEntity<CustomResponse> res = restTemplate.exchange(url, HttpMethod.POST, httpEnty, CustomResponse.class,
 				CustomUrlParamHolder.get());
-		//System.err.println(CustomUrlParamHolder.get());
 		if (res.getStatusCodeValue() == 200) {
 			log.info("\n【内部请求】=》response=>>>{}\n" + "【内部请求】=》body=>>>{}", res, res.getBody());
 			Object ob = res.getBody().getBody();

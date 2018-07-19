@@ -6,7 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ower.dsyz.common.core.response.CustomResponse;
-import com.ower.dsyz.common.core.rest.impl.ICustomRestClient;
+import com.ower.dsyz.common.core.rest.ICustomRestClient;
 import com.ower.dsyz.gateway.model.GatewayRequest;
 import com.ower.dsyz.gateway.service.IGatewayLevelService;
 

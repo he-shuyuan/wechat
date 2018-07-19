@@ -27,7 +27,7 @@ import com.ower.dsyz.common.core.listener.util.ListenerThreadPoolUtil;
  *    修改后版本:     修改人：  修改日期:     修改内容:
  *          </pre>
  */
-@Component
+//@Component
 public class CustomManagerListener {
 
     private Map<Class<? extends CustomEventSource>, ICustomEventListener> listeners = null;
