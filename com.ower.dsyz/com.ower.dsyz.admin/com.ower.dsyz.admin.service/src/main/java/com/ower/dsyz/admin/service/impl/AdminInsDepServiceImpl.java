@@ -5,6 +5,7 @@ package com.ower.dsyz.admin.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import com.ower.dsyz.admin.manual.constant.AdminConstant;
 import com.ower.dsyz.admin.manual.dto.AdminDepartmentDTO;
 import com.ower.dsyz.admin.manual.dto.AdminInstitutionDTO;
@@ -37,6 +38,7 @@ public class AdminInsDepServiceImpl implements IAdminInsDepService {
     IAdminInstitutionService adminInstitutionService;
     
     @Override
+    @Transactional
     public void addInsAndDep(AdminInstitutionDTO adminInstitution) {
         //新增机构
         String insId = adminInstitutionService.addInstitution(adminInstitution);
@@ -46,6 +48,7 @@ public class AdminInsDepServiceImpl implements IAdminInsDepService {
         adminDepartment.setDepId(insId);
         adminDepartment.setParentDepId(AdminConstant.DepartmentConstant.DEFAULT_PARENT_DEP_ID);
         adminDepartment.setDepName(adminInstitution.getInsName());
+        adminDepartment.setBusTypeId(adminInstitution.getBusTypeId());
         adminDepartmentService.addDepartment(adminDepartment);
     }
 

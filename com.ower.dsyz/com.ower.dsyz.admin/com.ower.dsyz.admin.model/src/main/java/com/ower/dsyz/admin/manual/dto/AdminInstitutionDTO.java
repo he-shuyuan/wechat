@@ -1,6 +1,7 @@
 package com.ower.dsyz.admin.manual.dto;
 
 import java.io.Serializable;
+import org.hibernate.validator.constraints.NotBlank;
 
 public class AdminInstitutionDTO implements Serializable{
 
@@ -21,6 +22,7 @@ public class AdminInstitutionDTO implements Serializable{
      * 表 : t_admin_institution
      * 对应字段 : ins_name
      */
+    @NotBlank(message="机构名称不能为空")
     private String insName;
 
     /**
@@ -35,6 +37,7 @@ public class AdminInstitutionDTO implements Serializable{
      * 表 : t_admin_institution
      * 对应字段 : organization_code
      */
+    @NotBlank(message="组织机构代码不能为空")
     private String organizationCode;
 
     /**
@@ -42,6 +45,7 @@ public class AdminInstitutionDTO implements Serializable{
      * 表 : t_admin_institution
      * 对应字段 : type_id
      */
+    @NotBlank(message="机构类型不能为空")
     private String typeId;
 
     /**
@@ -49,6 +53,7 @@ public class AdminInstitutionDTO implements Serializable{
      * 表 : t_admin_institution
      * 对应字段 : bus_type_id
      */
+    @NotBlank(message="业务类型不能为空")
     private String busTypeId;
 
     /**

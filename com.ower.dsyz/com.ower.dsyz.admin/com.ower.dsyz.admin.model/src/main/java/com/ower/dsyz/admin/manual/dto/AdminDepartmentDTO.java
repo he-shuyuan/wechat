@@ -48,7 +48,11 @@ public class AdminDepartmentDTO implements Serializable {
      * 对应字段 : ins_id
      */
     private String insId;
-
+    
+    /**
+     * 业务类型
+     */
+    private String busTypeId;
     /**
      * 根机构的parent_id为000
      * 表 : t_admin_department
@@ -230,6 +234,18 @@ public class AdminDepartmentDTO implements Serializable {
     
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+
+    
+    public String getBusTypeId() {
+        return busTypeId;
+    }
+
+
+    
+    public void setBusTypeId(String busTypeId) {
+        this.busTypeId = busTypeId;
     }
 
 

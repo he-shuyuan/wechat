@@ -81,7 +81,7 @@ public class AdminInstitutionServiceImpl implements IAdminInstitutionService{
             tempDTO.setInsName(adminInstitutionDTO.getInsName());
             List<AdminInstitutionDTO> list = this.queryAdminInstitutionDTOList(tempDTO);
             if(!list.isEmpty() 
-               && (StringUtils.isNotBlank(adminInstitutionDTO.getInsId()) 
+               && !(StringUtils.isNotBlank(adminInstitutionDTO.getInsId()) 
                        && list.get(0).getInsId().equals(adminInstitutionDTO.getInsId()))){
                 throw new CustomRunTimeException("机构名称已存在");
             }
@@ -92,7 +92,7 @@ public class AdminInstitutionServiceImpl implements IAdminInstitutionService{
             tempDTO.setOrganizationCode(adminInstitutionDTO.getOrganizationCode());
             List<AdminInstitutionDTO> list = this.queryAdminInstitutionDTOList(tempDTO);
             if(!list.isEmpty() 
-               && (StringUtils.isNotBlank(adminInstitutionDTO.getInsId()) 
+               && !(StringUtils.isNotBlank(adminInstitutionDTO.getInsId()) 
                        && list.get(0).getInsId().equals(adminInstitutionDTO.getInsId()))){
                 throw new CustomRunTimeException("机构信用编码已存在");
             }

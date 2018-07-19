@@ -28,6 +28,10 @@ public class DepPath {
     private String pathCode = "";
     
     /**
+     * 业务类型
+     */
+    private String busTypeId;
+    /**
      * 机构id
      */
     private String insId;
@@ -73,6 +77,18 @@ public class DepPath {
     
     public void setParentDepId(String parentDepId) {
         this.parentDepId = parentDepId;
+    }
+
+
+    
+    public String getBusTypeId() {
+        return busTypeId;
+    }
+
+
+    
+    public void setBusTypeId(String busTypeId) {
+        this.busTypeId = busTypeId;
     }
 
 
