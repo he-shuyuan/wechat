@@ -37,11 +37,12 @@ var proxyTable =
                       '^/gateway/cms': '/cms',
                   },
               },
-              '/mgateway': {
-                  target: 'http://dwx.wintax.cn/',
-                  // target: 'http://tcszd.jchl.com/',
-                  //target:'http://10.10.24.42:8989/',
+              '/gateway': {
+                  target: 'http://127.0.0.1:8250',
                   changeOrigin: true,
+                  pathRewrite: {
+                      '^/gateway': '',
+                  },
               },
           }
         : {}

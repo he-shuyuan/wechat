@@ -3,30 +3,23 @@ export default (()=>{
     let columns = [{
         prop: 'insName',
         label: '公司名称',
-        minWidth: 150,
-        slotName: 'insName'
+        minWidth: 150
+    },
+     {
+        prop: 'organizationCode',
+        label: '组织信用代码',
+        minWidth: 100
     },
     {
-        prop: 'insStyle',
+        prop: 'insTypeName',
         label: '组织类型',
-        minWidth: 100,
-           render: row => {
-             return row.insStyle == '1801'?'有限责任公司' : '个体户'
-           }
+        minWidth: 100
     },
     {
-        prop: 'legal',
-        label: '法人代表',
+        prop: 'busTypeName',
+        label: '所属业务',
         minWidth: 100,
         
-    },
-    {
-        prop: 'openDate',
-        label: '登记日期',
-        minWidth: 100,
-        render: row => {
-            return utils.toDatetime(row.openDate,'yyyy-MM-dd')
-        }
     },
     {
         prop: '',

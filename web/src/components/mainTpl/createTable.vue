@@ -294,7 +294,7 @@
                         if(this.showPagination) {
                           result = res.body.data
                             this.tableData = result
-                          this.total = res.body.pager.recordCount
+                          this.total = res.body.pageInfo.recordCount
                         } else {
                           result = res.body
                           this.total = res.body.length

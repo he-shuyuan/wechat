@@ -10,7 +10,7 @@
 		t.bus_type_id as busTypeId,
 		t2.bus_type_name as busTypeName,
 		t.type_id as typeId,
-		t3.`name` as typeName,
+		t3.`name` as insTypeName,
 		t.organization_code as organizationCode,
 		t.ins_manager as insManager,
 		t.ins_manager_phone as insManagerPhone,

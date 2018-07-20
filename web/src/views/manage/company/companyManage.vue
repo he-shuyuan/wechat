@@ -2,17 +2,12 @@
     <router-view v-if="$route.name !== thisRouteName"></router-view>
     <mc-table v-else
               stripe ref="refCreateTable" 
-              :formOpt="formOpt" 
+              
               showAdd 
               addBtnText="新增公司" 
               :columns="columns"
               @addEvent="$router.push({path:'/manage/companyManage/addCompany'})"
-              method="pageQueryInstitution" :params="params">
-        <template slot-scope="scope" slot="insName">
-            <router-link style="color: #3366FF;" :to="{ name:'companyDetail', query: {insId:scope.row.insId} }">
-                {{scope.row.insName}} </br> {{scope.row.organizationCode}}
-            </router-link>
-        </template>
+              method="pageQueryAdminInstitutionDTOList" :params="params">
         <template slot-scope="scope" slot="handle">
             <el-button size="mini" type="danger" v-if="isShowButton"
             @click.native="$router.push({name:'userView',params:{depId:scope.row.insId,pathCode:scope.row.pathCode,depName:scope.row.insName}})">用户管理</el-button>

@@ -87,7 +87,8 @@ function abstractStep(
 // 处理服务端返回
 function processReponse(that, method, paramObj, callback, response, errorMsg, errorCallback) {
     //
-    paramObj && paramObj.notShowLoading && loadingInstance.close()
+    debugger;
+    paramObj && !paramObj.notShowLoading && loadingInstance.close()
         // HTTP OK
     if (response.status === 200) {
         // head存在判断
