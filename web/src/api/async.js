@@ -87,7 +87,6 @@ function abstractStep(
 // 处理服务端返回
 function processReponse(that, method, paramObj, callback, response, errorMsg, errorCallback) {
     //
-    debugger;
     paramObj && !paramObj.notShowLoading && loadingInstance.close()
         // HTTP OK
     if (response.status === 200) {
@@ -141,3 +140,5 @@ function processError(that, error, method, paramObj, errorCallback, doCallbackWh
         errorCallback.bind(that)()
     }
 }
+
+function noop() {}

@@ -6,14 +6,14 @@ const routerStorePrefixed = 'router_';
  * @return {[type]}        [description]
  */
 export const routerParamsStore = (router)=>{
-    console.log("dsd",router)
+     console.log(router.params)
      if(isEmptyObject(router.params)){
          let ob = sessionStorageUtil.getItem(routerStorePrefixed+router.name);
+         console.log('2121212',ob)
          if(ob){
            Object.assign(router.params,ob);
          }
      }else{
-        console.log(router.params)
         sessionStorageUtil.setItem(routerStorePrefixed+router.name,router.params);
      }
 }

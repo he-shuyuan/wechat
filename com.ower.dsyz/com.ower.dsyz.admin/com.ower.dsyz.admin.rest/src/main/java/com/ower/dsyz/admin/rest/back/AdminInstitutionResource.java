@@ -12,7 +12,9 @@ import com.ower.dsyz.admin.service.IAdminInstitutionService;
 import com.ower.dsyz.common.core.annotation.EnableValid;
 import com.ower.dsyz.common.core.page.PageQueryResult;
 import com.ower.dsyz.common.core.page.PageRequestParam;
+import com.ower.dsyz.common.core.request.CustomRequestParam;
 import com.ower.dsyz.common.core.response.CustomResponse;
+import com.ower.dsyz.common.core.util.ParamCheckUtil;
 
 @RestController
 @RequestMapping("/back/adminInstitutionService/")
@@ -36,7 +38,7 @@ public class AdminInstitutionResource {
 	}
 	
 	/**
-	 * 添加部门
+	 * 添加机构
 	 * @param adminInstitutionDTO
 	 * @return CustomResponse<?>
 	 */
@@ -47,7 +49,7 @@ public class AdminInstitutionResource {
 	}
 	
 	/**
-     * 修改部门
+     * 修改机构
      * @param adminInstitutionDTO
      * @return CustomResponse<?>
      */
@@ -58,4 +60,15 @@ public class AdminInstitutionResource {
 	    adminInstitutionService.updataInstitution(adminInstitution);
 	    return CustomResponse.success("修改成功");
 	}
+    /**
+     * 根据id获取信息
+     * TODO。
+     * @param param
+     * @return CustomResponse<AdminInstitution>
+     */
+    @RequestMapping("queryAdminInstitutionById")
+    public CustomResponse<AdminInstitution> queryAdminInstitutionById(@RequestBody CustomRequestParam param){
+        ParamCheckUtil.checkEmpty(param.getString("insId"));
+        return CustomResponse.success(adminInstitutionService.queryAdminInstitutionById(param.getString("insId")));
+    }
 }

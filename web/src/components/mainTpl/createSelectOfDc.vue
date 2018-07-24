@@ -2,7 +2,6 @@
     <el-select v-bind="$attrs"
                v-bind:value="value" 
                v-on="$listeners" 
-               :dcCodeMain="dcCodeMain" 
                :clearable="clearable || true"
                :placeholder="placeholder" 
                :size="size"
@@ -31,13 +30,14 @@
 
 <script>
     import {
+       standardAsync,
         customAsync
     } from '@/api/async'
     export default {
         props: {
             value: String,
-            dcCodeMain: String,
             placeholder: String,
+            propParams:Object,
             size: String,
             name: String,
             clearable: Boolean,
@@ -86,26 +86,19 @@
         },
         methods: {
             setInitData() {
-                    this.loading = true
-                    let params = {}
-                    params.dcCodeMain = this.dcCodeMain
-                    params.notShowLoading = true
-                    customAsync({
-                        that: this,
-                        method: 'getDicList',
-                        paramObj: params,
-                        callback: res => {
-                            //sessionStorage储存区域列表
-                            this.loading = false
-                            this.initData = res.body.map(item => {
+              if(!this.propParams){
+                return;
+              }
+              let _this = this;
+              standardAsync(this,this.propParams.method,this.propParams.param || {},res=>{
+                   this.initData = res.body.map(item => {
                                 return {
-                                    value: item.dcCode,
-                                    label: item.dcname
+                                    value: item[_this.propParams.value],
+                                    label: item[_this.propParams.label]
                                 }
                             })
-                        },
-                        errorCallback: () => {},
-                    })
+              });
+                   
             },
             emitEventHandler(event) {
                 this.$emit(event, ...Array.from(arguments).slice(1))

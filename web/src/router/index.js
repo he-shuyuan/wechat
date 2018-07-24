@@ -197,13 +197,7 @@ export const constantRouterMap = [
                 meta: { title: '公司管理',requiresAuth:true ,auth:true},
                 children:[
                     {
-                        path: 'companyDetail',
-                        name: 'companyDetail',
-                        component: () => import('@/views/manage/company/companyDetail'),
-                        meta: { title: '公司详情',requiresAuth:true },
-                    },
-                    {
-                        path: ':name',
+                        path: 'addorModifyCompany',
                         name: 'addorModifyCompany',
                         component: () => import('@/views/manage/company/editCompany'),
                         meta: { title: '',requiresAuth:true },
@@ -316,8 +310,8 @@ router.beforeEach((to, from, next) => {
                 })
             }
         }
-    }
-    routerParamsStore(to)*/
+    }*/
+    routerParamsStore(to)
     next();
 })
 export default router

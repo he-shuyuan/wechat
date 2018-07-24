@@ -61,7 +61,7 @@ public class AdminInstitutionServiceImpl implements IAdminInstitutionService{
         BeanUtils.copyProperties(adminInstitution, adminInstitutionDTO);
         this.checkInstutionRepeat(adminInstitutionDTO);
         
-        return adminInstitutionMapper.updateByPrimaryKey(adminInstitution);
+        return adminInstitutionMapper.updateByPrimaryKeySelective(adminInstitution);
     }
 
     @Override
@@ -97,6 +97,12 @@ public class AdminInstitutionServiceImpl implements IAdminInstitutionService{
                 throw new CustomRunTimeException("机构信用编码已存在");
             }
         }
+    }
+
+    @Override
+    public AdminInstitution queryAdminInstitutionById(String id) {
+        
+        return adminInstitutionMapper.selectByPrimaryKey(id);
     }
 }
 

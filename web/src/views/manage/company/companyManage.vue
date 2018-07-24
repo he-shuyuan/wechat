@@ -2,11 +2,11 @@
     <router-view v-if="$route.name !== thisRouteName"></router-view>
     <mc-table v-else
               stripe ref="refCreateTable" 
-              
+              :formOpt="formOpt"
               showAdd 
               addBtnText="新增公司" 
               :columns="columns"
-              @addEvent="$router.push({path:'/manage/companyManage/addCompany'})"
+              @addEvent="$router.push({name: 'addorModifyCompany', params: {name:'addCompany'}})"
               method="pageQueryAdminInstitutionDTOList" :params="params">
         <template slot-scope="scope" slot="handle">
             <el-button size="mini" type="danger" v-if="isShowButton"
@@ -29,8 +29,7 @@
             return {
                 formOpt,
                 columns,
-                params: {currentInsId:util.sStore.getItem(util.sStore.MACE_SELECED_INS_ID)},
-                currentInsId: util.sStore.getItem(util.sStore.MACE_SELECED_INS_ID),
+                params: {isValid:'Y'},
                 thisRouteName: 'companyManage',
                 isShowButton:util.sStore.getItem(util.sStore.AUTH_MENU_LIST) && util.sStore.getItem(util.sStore.AUTH_MENU_LIST).indexOf('_user_manage')>-1,
             }
@@ -38,24 +37,25 @@
         methods: {
             editCompany(row) {
                 this.$router.push({
-                    path: '/manage/companyManage/modifyCompany',
-                    query: {
-                        insId: row.insId
+                    name: 'addorModifyCompany',
+                    params: {
+                        insId: row.insId,
+                        name:'modifyCompany'
                     }
                 })
             },
             deleteCompany(row) {
                 let _this = this
                 let params = {
-                    "parentInsId":this.currentInsId,
-                    "childInsId":row.insId
+                    "insId":row.insId,
+                    "isValid":"N"
                 }
                   MessageBox.confirm('确定删除此记录吗?', '确定', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    standardAsync(_this, 'delSecInstitutionGroup', params, res => {
+                    standardAsync(_this, 'updateAdminInstitution', params, res => {
                          _this.$notify({
                             title: '提示',
                             message: '删除成功',

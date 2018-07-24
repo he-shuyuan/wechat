@@ -1,3 +1,10 @@
 {
-  pageQueryAdminInstitutionDTOList:"/back/adminInstitutionService/pageQueryAdminInstitutionDTOList"
+  pageQueryAdminInstitutionDTOList:'/back/adminInstitutionService/pageQueryAdminInstitutionDTOList',
+  queryInsTypeList:'/back/adminTypeService/queryInsTypeList',
+  queryBusTypeList:'/back/adminTypeService/queryBusTypeList',
+  queryAdminInstitutionById:'/back/adminInstitutionService/queryAdminInstitutionById',
+  updateAdminInstitution:'/back/adminInstitutionService/updateAdminInstitution',
+  addInsAndDep:'/back/adminInstitutionService/addInsAndDep',
+  queryAdminFunctionList:'/back/adminFunctionService/queryAdminFunctionList',
+  queryAdminFunctionById:'/back/adminFunctionService/queryAdminFunctionById',
 }

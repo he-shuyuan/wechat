@@ -33,8 +33,8 @@
 
 
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://192.168.1.104:3306/admin" userId="root"
-			password="123456">
+			connectionURL="jdbc:mysql://localhost:3306/admin" userId="root"
+			password="foresee"><!-- 123456 -->
 		</jdbcConnection>
 
 		<javaTypeResolver>
@@ -58,19 +58,19 @@
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
-		<table schema="" tableName="t_admin_institution" domainObjectName="AdminInstitution"
+		<table schema="" tableName="t_admin_function" domainObjectName="AdminFunction"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false"></table>
-		<table schema="" tableName="t_admin_institution_type" domainObjectName="AdminInstitutionType"
+		<table schema="" tableName="t_admin_role" domainObjectName="AdminRole"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false"></table>
-		<table schema="" tableName="t_admin_business" domainObjectName="AdminBusiness"
+		<table schema="" tableName="t_admin_role_fun" domainObjectName="AdminRoleFun"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false"></table>
-		<table schema="" tableName="t_admin_department" domainObjectName="AdminDepartment"
+		<table schema="" tableName="t_admin_ins_role" domainObjectName="AdminInsRole"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false"></table>

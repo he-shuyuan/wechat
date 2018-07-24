@@ -7,19 +7,19 @@
             <el-form-item label="公司名称" prop="insName">
                 <el-input v-model="ruleForm.insName" placeholder="请输入公司名称" class="long-input"></el-input>
             </el-form-item>
-            <el-form-item label="组织类型" prop="insStyle">
-                <mc-select class="long-input" v-model="ruleForm.insStyle" placeholder="请选择组织类型" dcCodeMain="18"></mc-select>                
+            <el-form-item label="简称" prop="insShortName">
+                <el-input v-model="ruleForm.insShortName" placeholder="请输入公司简称" class="long-input"></el-input>
+            </el-form-item>
+             <el-form-item label="业务类型" prop="busTypeId">
+                <mc-select class="long-input" v-model="ruleForm.busTypeId" placeholder="请选择业务类型" 
+                  :propParams="{method:'queryBusTypeList',label:'busTypeName',value:'busTypeId'}"></mc-select>       
+            </el-form-item>
+            <el-form-item label="组织类型" prop="typeId">
+                <mc-select class="long-input" v-model="ruleForm.typeId" placeholder="请选择组织类型" 
+                  :propParams="{method:'queryInsTypeList',label:'name',value:'id'}"></mc-select>                
             </el-form-item>
             <el-form-item label="经营地址" prop="address">
-                <el-input v-model="ruleForm.address" placeholder="请输入经营地址" class="long-input"></el-input>
-            </el-form-item>
-            <el-form-item label="经营范围" prop="remark">
-                <el-input type="textarea" :autosize="{ minRows: 3,maxRows:5}" class="long-input" placeholder="请输入经营范围" v-model="ruleForm.remark">
-                </el-input>
-            </el-form-item>
-            <el-form-item label="登记日期" prop="openDate">
-                <el-date-picker class="long-input" v-model="ruleForm.openDate" type="date" placeholder="选择日期">
-                </el-date-picker>
+                <el-input v-model="ruleForm.address" placeholder="请输入公司地址" class="long-input"></el-input>
             </el-form-item>
             <el-form-item label="法人代表" prop="legal">
                 <el-input v-model="ruleForm.legal" placeholder="请输入法人代表" class="long-input"></el-input>
@@ -30,18 +30,13 @@
             <el-form-item label="联系电话" prop="phone">
                 <el-input v-model="ruleForm.phone" placeholder="请输入联系电话" class="long-input"></el-input>
             </el-form-item>
-            <el-form-item label="开户名称" prop="openName">
-                <el-input v-model="ruleForm.openName" placeholder="请输入开户名称" class="long-input"></el-input>
-            </el-form-item>
-            <el-form-item label="开户银行" prop="openBank">
-                <el-input v-model="ruleForm.openBank" placeholder="请输入开户银行" class="long-input"></el-input>
-            </el-form-item>
-            <el-form-item label="银行账号" prop="bankNo">
-                <el-input v-model="ruleForm.bankNo" placeholder="请输入银行账号" class="long-input"></el-input>
+             <el-form-item label="备注" prop="remark">
+                 <el-input type="textarea" :autosize="{ minRows: 3,maxRows:5}" class="long-input" placeholder="备注" v-model="ruleForm.remark">
+                </el-input>
             </el-form-item>
             <el-form-item style="margin: 50px 0;">
                 <el-button type="primary" class="long-button" @click="submitForm('ruleForm')">保存</el-button>
-                <el-button @click="resetForm('ruleForm')" class="long-button">重置</el-button>
+                <el-button @click="()=>$router.go(-1)" class="long-button">返回</el-button>
             </el-form-item>
         </uni-form-header>
     </el-form>
@@ -59,36 +54,10 @@
             uniFormHeader
         },
         data() {
-            var checkPhone = (rule, value, callback) => {
-                if (value) {
-                    var isPhone = /^([0-9]{3,4}(-)?)?[0-9]{7,8}$/;
-                    var isMob = /^1[34578]\d{9}$/; 
-                    if (isMob.test(value) || isPhone.test(value)) {
-                        callback();
-                    } else {
-                        callback(new Error('请填写正确的号码格式'));
-                    }
-                } else {
-                    callback(new Error('请填写联系电话'));
-                }
-            }
-            var checkBankNo = (rule, value, callback) => {
-                if (value) {
-                    var pattern = /^\d{13,19}$/
-                    if (pattern.test(value)) {
-                        callback();
-                    } else {
-                        callback(new Error('请填写正确的银行账号'));
-                    }
-                } else {
-                    callback(new Error('请填写银行账号'));
-                }
-            }
             return {
                 ruleForm: {
                     organizationCode: '',
                     insName: '',
-                    insStyle: '',
                     address: '',
                     remark: '',
                     openDate: '',
@@ -98,8 +67,8 @@
                     openName: '',
                     openBank: '',
                     bankNo: '',
-                    typeId:'3',
-                    busTypeId:'2'
+                    typeId:'',
+                    busTypeId:''
                 },
                 rules: {
                     organizationCode: [{
@@ -112,20 +81,14 @@
                         message: '请填写公司名称',
                         trigger: 'change'
                     }],
-                    insStyle: [{
+                    typeId: [{
                         required: true,
                         message: '请选择组织类型',
                         trigger: 'change'
                     }],
-                    address: [{
+                    busTypeId: [{
                         required: true,
-                        message: '请填写经营地址',
-                        trigger: 'change'
-                    }],
-                    remark: [{
-                        required: true,
-                        max: 3000,
-                        message: '填写公司/个体户经营范围，最长不能超过3000个字符',
+                        message: '请选择业务类型',
                         trigger: 'change'
                     }],
                     openDate: [{
@@ -145,26 +108,9 @@
                     }],
                     phone: [{
                         required: true,
-                        validator: checkPhone,
-                        // message: '请填写联系电话',
+                        message: '请填写联系电话',
                         trigger: 'change'
                     }],
-                    openName: [{
-                        required: true,
-                        message: '请填写开户名称',
-                        trigger: 'change'
-                    }],
-                    openBank: [{
-                        required: true,
-                        message: '请填写开户银行',
-                        trigger: 'change'
-                    }],
-                    bankNo: [{
-                        required: true,
-                        validator: checkBankNo,
-                        // message: '请填写银行账号',
-                        trigger: 'change'
-                    }]
                 },
             }
         },
@@ -174,17 +120,18 @@
                 console.log('this.ruleForm',this.ruleForm)
                 let paramsName = this.$route.params.name
                 let params = this.ruleForm
-                params.currentInsId = util.sStore.getItem(util.sStore.MACE_SELECED_INS_ID)
+                //params.currentInsId = util.sStore.getItem(util.sStore.MACE_SELECED_INS_ID)
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                         if (paramsName == "addCompany") {
-                            standardAsync(this, 'addInstitution', params, res => {
+                            standardAsync(this, 'addInsAndDep', params, res => {
                                 this.$message.success('提交成功');
                                 this.$router.go(-1)
                             })
                         } else {
-                            params.insId = this.$route.query.insId
-                            standardAsync(this, 'modifyInstitution', params, res => {
+                            params.insId = this.$route.params.insId
+                            console.log('form',this.ruleForm)
+                            standardAsync(this, 'updateAdminInstitution', params, res => {
                                 this.$message.success('提交成功');
                                 this.$router.go(-1)
                             })
@@ -200,8 +147,8 @@
             },
             getCompanyInfo() {
                 let params = {}
-                params.insId = this.$route.query.insId
-                standardAsync(this, 'queryInstitutionById', params, res => {
+                params.insId = this.$route.params.insId
+                standardAsync(this, 'queryAdminInstitutionById', {insId:this.$route.params.insId}, res => {
                     Object.assign(this.ruleForm,res.body)
                 })
             }
@@ -209,7 +156,6 @@
         beforeRouteEnter(to, from, next) {
             // ...
             next(vm => {
-                console.log(to)
                 if (to.params.name == "modifyCompany") {
                     to.meta.title = "修改公司信息"
                     vm.getCompanyInfo()

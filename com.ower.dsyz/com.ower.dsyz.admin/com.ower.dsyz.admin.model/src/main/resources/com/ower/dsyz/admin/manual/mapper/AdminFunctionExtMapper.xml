@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ower.dsyz.admin.manual.dao.AdminFunctionExtMapper">
+	<select id="queryAdminFunctionList" parameterType="com.ower.dsyz.admin.manual.dto.AdminFunctionDTO"
+		resultType="com.ower.dsyz.admin.manual.dto.AdminFunctionDTO">
+		SELECT
+		t.function_id AS functionId,
+		t.`code` AS CODE,
+		t.bus_type_id AS busTypeId,
+		t1.bus_type_name AS busTypeName,
+		t.function_type AS functionType,
+		t.image_url AS imageUrl,
+		t.target AS target,
+		t.url AS url,
+		t.remark AS remark,
+		t.`name` AS NAME,
+		t.is_context_relative AS isContextRelative,
+		t.parent_id AS parentId,
+		(
+		SELECT
+		t0.`name`
+		FROM
+		t_admin_function t0
+		WHERE
+		t0.function_id = t.parent_id
+		) AS parentName,
+		t.sort_no AS sortNo,
+		(
+		SELECT
+		count(*)
+		FROM
+		t_admin_function t3
+		WHERE
+		t3.parent_id = t.function_id
+		) AS hasChildNum,
+		IF (
+		(
+		SELECT
+		count(*)
+		FROM
+		t_admin_function t3
+		WHERE
+		t3.parent_id = t.function_id
+		) > 0,
+		FALSE,
+		TRUE
+		) AS isLeaf
+		FROM
+		t_admin_function t
+		LEFT JOIN t_admin_business t1 ON t.bus_type_id = t1.bus_type_id
+		where t.is_valid = 'Y'
+		<if test="functionId !=null and functionId !=''">
+		 and t.function_id = #{functionId,jdbcType=VARCHAR}
+		</if>
+		<if test="parentId !=null and parentId !=''">
+		 and t.parent_id = #{parentId,jdbcType=VARCHAR}
+		</if>
+		<if test="busTypeId !=null and busTypeId !=''">
+		and t.bus_type_id = #{busTypeId,jdbcType=VARCHAR}
+		</if>
+		<if test="code !=null and code !=''">
+		and t.code = #{code,jdbcType=VARCHAR}
+		</if>
+		ORDER BY
+		t.sort_no
+	</select>
+	<select id="pageQueryAdminFunctionDTOList" parameterType="com.ower.dsyz.admin.manual.dto.AdminFunctionDTO"
+		resultType="com.ower.dsyz.admin.manual.dto.AdminFunctionDTO">
+		SELECT
+		t.function_id AS functionId,
+		t.`code` AS CODE,
+		t.bus_type_id AS busTypeId,
+		t1.bus_type_name AS busTypeName,
+		t.function_type AS functionType,
+		t.image_url AS imageUrl,
+		t.target AS target,
+		t.url AS url,
+		t.remark AS remark,
+		t.`name` AS NAME,
+		t.is_context_relative AS isContextRelative,
+		t.parent_id AS parentId,
+		(
+		SELECT
+		t0.`name`
+		FROM
+		t_admin_function t0
+		WHERE
+		t0.function_id = t.parent_id
+		) AS parentName,
+		t.sort_no AS sortNo,
+		(
+		SELECT
+		count(*)
+		FROM
+		t_admin_function t3
+		WHERE
+		t3.parent_id = t.function_id
+		) AS hasChildNum,
+
+		IF (
+		(
+		SELECT
+		count(*)
+		FROM
+		t_admin_function t3
+		WHERE
+		t3.parent_id = t.function_id
+		) > 0,
+		FALSE,
+		TRUE
+		) AS isLeaf
+		FROM
+		t_admin_function t
+		LEFT JOIN t_admin_business t1 ON t.bus_type_id = t1.bus_type_id
+		ORDER BY
+		t.sort_no
+	</select>
+</mapper>

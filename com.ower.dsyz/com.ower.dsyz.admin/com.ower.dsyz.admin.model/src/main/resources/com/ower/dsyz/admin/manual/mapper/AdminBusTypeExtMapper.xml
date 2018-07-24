@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ower.dsyz.admin.manual.dao.AdminBusTypeExtMapper">
+	<select id="queryBusTypeList" parameterType="com.ower.dsyz.admin.auto.model.AdminBusiness"
+		resultType="com.ower.dsyz.admin.auto.model.AdminBusiness">
+		select bus_type_id as busTypeId,
+		remark as remark,
+		bus_type_name as busTypeName from t_admin_business
+	</select>
+
+	<select id="queryInsTypeList" parameterType="com.ower.dsyz.admin.auto.model.AdminInstitutionType"
+		resultType="com.ower.dsyz.admin.auto.model.AdminInstitutionType">
+		select t.id as id,t.`name` as name,t.remark as remark from
+		t_admin_institution_type t
+	</select>
+</mapper>

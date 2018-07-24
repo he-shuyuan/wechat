@@ -152,8 +152,8 @@
                         id: 'button'
                     }],
                     busTypeList: [{
-                        busTypeId: '2',
-                        busTypeName: '机械智能'
+                        busTypeId: null,
+                        busTypeName: '全业务'
                     }],
                     defaultName: null,
                 },
@@ -169,9 +169,8 @@
                 },
                 rules: [],
                 defaultProps: {
-                    children: 'children',
                     label: 'name',
-                    isLeaf: 'childNum'
+                    isLeaf: 'isLeaf'
                 },
                 svgList,
                 showSvgSelectView: false,
@@ -219,21 +218,12 @@
              * @return {[type]}         [description]
              */
             reloadTree(node, resolve) {
-                standardAsync(this, 'queryFunctionListTree', {
-                    busTypeId: config.busTypeId,
+                standardAsync(this, 'queryAdminFunctionList', {
+                    busTypeId: '1',
                     parentId: node.data ? node.data.functionId : "",
                     notShowLoading: true
                 }, res => {
-                    res.body.forEach(ob => {
-                        if (ob.childNum > 0) {
-                            ob.childNum = false;
-                        } else {
-                            ob.childNum = true;
-                        }
-                    })
-                    if (!node.data) {
-                        this.initTreeSelect();
-                    }
+                    (!node.data) && this.initTreeSelect();
                     resolve(res.body);
                 })
             },
@@ -254,11 +244,12 @@
              * @return {[type]}    [description]
              */
             queryFunctionById: function (id) {
-                standardAsync(this, 'queryFunctionById', {
+                standardAsync(this, 'queryAdminFunctionById', {
                         functionId: id,
                         notShowLoading: true
                     },
                     res => {
+
                         this.ruleForm = res.body;
                     });
             },
@@ -422,15 +413,6 @@
     .el-main {
         border: solid 1px #e4e7ed;
     }
-
-    /* 
-    ._menu_op {
-        width: 100%;
-        border: solid 1px #e4e7ed;
-        height: 30px;
-        line-height: 30px;
-        text-align: center;
-    } */
 
     .el-button--mini {
         padding: 4px 10px;

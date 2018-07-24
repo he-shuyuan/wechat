@@ -54,4 +54,12 @@ public interface IAdminInstitutionService {
      * @return List<AdminInstitutionDTO>
      */
     List<AdminInstitutionDTO> queryAdminInstitutionDTOList(AdminInstitutionDTO addInstitutionDTO);
+    
+    /**
+     * 通过id获取机构
+     * TODO。
+     * @param id
+     * @return AdminInstitution
+     */
+    AdminInstitution queryAdminInstitutionById(String id);
 }
