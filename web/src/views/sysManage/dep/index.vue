@@ -1,10 +1,10 @@
 <template>
 <router-view v-if="$route.name !== thisRouteName"></router-view>
 <el-container v-else class="_body">
-  <el-header>部门管理</el-header>
+  <el-header>用户管理</el-header>
   <el-container>
     <el-aside width="200px">
-      <el-tag class="_menu_op">机构管理</el-tag>
+      <el-tag class="_menu_op">部门层级</el-tag>
       <el-tag  class="_menu_op"><span style="color:black">已选择：</span>
       {{($refs.tree && $refs.tree.getCurrentNode())?$refs.tree.getCurrentNode().depName:(init.defaultName || '未选择')}}</el-tag>
       <div  class="_menu_op">
@@ -24,7 +24,7 @@
     </el-tree>
     </el-aside>
     <el-main style="padding:0">
-        <user-manager :depId="init.depId" ></user-manager>
+         <user-manager :depId="init.depId" ></user-manager>
     </el-main>
   </el-container>
 </el-container>
@@ -52,7 +52,7 @@ export default {
           },
           defaultProps: {
                 label: 'depName',
-                isLeaf:'childNum'
+                isLeaf:'leaf'
           }
         };
     },
@@ -88,17 +88,10 @@ export default {
          * @return {[type]}         [description]
          */
         reloadTree(node,resolve){
-           standardAsync(this,'querySecDepartmentTree',
+           standardAsync(this,'queryAdminDepTreeDTOList',
             {parentDepId:node.data?node.data.depId:'',
-            depId:util.sStore.getItem(util.sStore.MACE_SELECED_DEP_ID)
+            depId:'1'
             ,notShowLoading:true},res=>{
-             res.body.forEach(ob=>{
-                  if(ob.childNum >0){
-                    ob.childNum = false;
-                  }else{
-                     ob.childNum = true;
-                  }
-                })
                 if(!node.data){
                   this.initSelect();
                 }
@@ -126,7 +119,7 @@ export default {
           */
          initSelect:function(){
             setTimeout(()=>{
-                this.$refs.tree && this.$refs.tree.setCurrentKey(util.sStore.getItem(util.sStore.MACE_SELECED_DEP_ID))
+                this.$refs.tree && this.$refs.tree.setCurrentKey("1")
 
                 if(this.$refs.tree && this.$refs.tree.getCurrentNode()){
                    this.init.defaultName = this.$refs.tree.getCurrentNode().depName;
@@ -177,7 +170,7 @@ export default {
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-            standardAsync(_this,'delDepartmentById',
+            standardAsync(_this,'delDepartment',
               {depId:_this.status.currentNode.data.depId},res=>{
                  _this.$refs.tree.remove(_this.status.currentNode);
                  _this.$message.success("删除成功");

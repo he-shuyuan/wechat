@@ -5,6 +5,7 @@ package com.ower.dsyz.admin.service;
 
 import java.util.List;
 import com.ower.dsyz.admin.auto.model.AdminDepartment;
+import com.ower.dsyz.admin.manual.dto.AdminDepTreeDTO;
 import com.ower.dsyz.admin.manual.dto.AdminDepartmentDTO;
 import com.ower.dsyz.admin.manual.dto.DepPath;
 
@@ -30,7 +31,7 @@ public interface IAdminDepartmentService {
      * @param adminDepartment
      * @return String
      */
-    String addDepartment(AdminDepartmentDTO adminDepartment);
+    AdminDepartment addDepartment(AdminDepartmentDTO adminDepartment);
     
     /**
      * 删除部门
@@ -64,4 +65,20 @@ public interface IAdminDepartmentService {
      * @return List<DepPath>
      */
     List<DepPath> queryDepPathList(DepPath depPath);
+    
+    
+    /**
+     * 部门树列表
+     * @param adminDepTreeDTO
+     * @return List<AdminDepTreeDTO>
+     */
+    List<AdminDepTreeDTO> queryDepTreeList(AdminDepTreeDTO adminDepTreeDTO);
+
+    /**
+     * 获取部门信息
+     * TODO。
+     * @param adminDepartmentDTO
+     * @return AdminDepartmentDTO
+     */
+    AdminDepartmentDTO queryAdmimDepartmentById(AdminDepartmentDTO adminDepartmentDTO);
 }

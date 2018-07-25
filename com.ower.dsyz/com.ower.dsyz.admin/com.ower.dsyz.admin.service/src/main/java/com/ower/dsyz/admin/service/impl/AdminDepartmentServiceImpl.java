@@ -12,10 +12,13 @@ import com.ower.dsyz.admin.auto.dao.AdminDepartmentMapper;
 import com.ower.dsyz.admin.auto.model.AdminDepartment;
 import com.ower.dsyz.admin.manual.constant.AdminConstant;
 import com.ower.dsyz.admin.manual.dao.AdminDepartmentExtMapper;
+import com.ower.dsyz.admin.manual.dto.AdminDepTreeDTO;
 import com.ower.dsyz.admin.manual.dto.AdminDepartmentDTO;
 import com.ower.dsyz.admin.manual.dto.DepPath;
 import com.ower.dsyz.admin.service.IAdminDepartmentService;
+import com.ower.dsyz.common.core.exception.CustomRunTimeException;
 import com.ower.dsyz.common.core.util.IDUtil;
+import com.ower.dsyz.common.core.util.ParamCheckUtil;
 
 
 /**
@@ -42,7 +45,7 @@ public class AdminDepartmentServiceImpl implements IAdminDepartmentService {
     AdminDepartmentExtMapper adminDepartmentExtMapper;
     
     @Override
-    public String addDepartment(AdminDepartmentDTO adminDepartmentDTO) {
+    public AdminDepartment addDepartment(AdminDepartmentDTO adminDepartmentDTO) {
         AdminDepartment adminDepartment = new AdminDepartment();
         BeanUtils.copyProperties(adminDepartmentDTO, adminDepartment);
         if(StringUtils.isBlank(adminDepartmentDTO.getDepId())){
@@ -52,7 +55,7 @@ public class AdminDepartmentServiceImpl implements IAdminDepartmentService {
         BeanUtils.copyProperties(adminDepartmentDTO, depPath);
         adminDepartment.setPathCode(this.buildPathCode(depPath));
         adminDepartmentMapper.insertSelective(adminDepartment);
-        return adminDepartment.getDepId();
+        return adminDepartment;
     }
 
     @Override
@@ -79,6 +82,13 @@ public class AdminDepartmentServiceImpl implements IAdminDepartmentService {
     public List<DepPath> queryDepPathList(DepPath depPath) {
         
         return adminDepartmentExtMapper.queryDepPathList(depPath);
+    }
+    
+    
+    @Override
+    public List<AdminDepTreeDTO> queryDepTreeList(AdminDepTreeDTO adminDepTreeDTO) {
+        
+        return adminDepartmentExtMapper.queryDepTreeList(adminDepTreeDTO);
     }
     
     /**
@@ -114,4 +124,15 @@ public class AdminDepartmentServiceImpl implements IAdminDepartmentService {
         return deptPath.getPathCode() + String.format("%03d", i);
     }
 
+    @Override
+    public AdminDepartmentDTO queryAdmimDepartmentById(AdminDepartmentDTO adminDepartmentDTO) {
+        ParamCheckUtil.checkEmpty(adminDepartmentDTO.getDepId());
+        List<AdminDepartmentDTO> list = this.queryDepartmentList(adminDepartmentDTO);
+        if(list.isEmpty()){
+            throw new CustomRunTimeException("非法部门id");
+        }
+        return list.get(0);
+    }
+
+ 
 }

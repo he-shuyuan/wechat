@@ -1,7 +1,8 @@
 <template>
     <router-view v-if="$route.name !== thisRouteName"></router-view>
-    <mc-table v-else ref="table" stripe :formOpt="formOpt" :columns="columns" method="pageQueryRole" :params="params" showAdd addBtnText="新增角色" 
-    @addEvent="$router.push({name:'roleDetail'})">
+    <mc-table v-else ref="table" stripe :formOpt="formOpt" :columns="columns" 
+    method="pageQueryAdminRoleDTOList" :params="params" showAdd addBtnText="新增角色" 
+    @addEvent="$router.push({name:'roleDetail',params:{name:'add'}})">
      <template slot-scope="scope" slot="isValid">
         <el-button v-if="scope.row.isValid =='Y'" type="primary" size="mini">已启用</el-button>
         <el-button v-else type="danger" size="mini">已禁用</el-button>
@@ -36,29 +37,37 @@
                 },
                 formOpt: [{
                         label: '业务类型',
-                        col:8,
+                        col:10,
                         type: 'select',
                         prop: 'busTypeId',
                         placeholder: '请选择',
-                        method:'queryBusinessList',
+                        method:'queryBusTypeList',
                         params:{},
                         valueName:'busTypeId',
                         labelName:'busTypeName'
                     },
-                    {
-                        label: '机构类型',
-                        col:8,
-                        type: 'select',
-                        prop: 'insTypeId',
-                        placeholder: '请选择',
-                        method:'queryInsTypeList',
-                        params:{},
-                        valueName:'id',
-                        labelName:'name'
+                     {
+                        label: '角色名称',
+                        col:10,
+                        type: 'text',
+                        placeholder: '请输入',
+                        prop: 'roleName',
+                    },
+                     {
+                        col:2,
+                        label: '',
+                        type: 'reset',
                     },
                     {
+                        label: '角色编码',
+                        col:10,
+                        type: 'text',
+                        placeholder: '请输入',
+                        prop: 'roleCode',
+                    },
+                       {
                         label: '是否启用',
-                        col:8,
+                        col:10,
                         type: 'select',
                         placeholder: '请输入',
                         prop: 'isValid',
@@ -67,54 +76,25 @@
                         {value:'N',label:'禁用'}]
                     },
                     {
-                        label: '角色名称',
-                        col:8,
-                        type: 'text',
-                        placeholder: '请输入',
-                        prop: 'roleName',
-                    },
-                    {
-                        label: '角色编码',
-                        col:8,
-                        type: 'text',
-                        placeholder: '请输入',
-                        prop: 'roleCode',
-                    },
-                    {
-                        col:2,
-                        label: '',
-                        type: 'hidden',
-                    },
-                    {
                         col:2,
                         label: '',
                         type: 'search',
                     },
-                    {
-                        col:2,
-                        label: '',
-                        type: 'reset',
-                    },
+
                 ],
                 columns: [{
                         prop: 'roleName',
                         label: '角色名称',
-                        minWidth: 200
+                        minWidth: 150
                     },
                     {
                         prop: 'roleCode',
                         label: '角色编码',
-                        minWidth: 200,
+                        minWidth: 150,
                     },
                     {
                         prop: 'busTypeName',
                         label: '业务类型',
-                        minWidth: 100,
-                        
-                    },
-                     {
-                        prop: 'insTypeName',
-                        label: '机构类型',
                         minWidth: 100,
                         
                     },
@@ -157,7 +137,7 @@
              * @return {[type]}        [description]
              */
             changeStatus:function(id,status){
-               standardAsync(this,'modifyRole',{roleId:id,isValid:status},res=>{
+               standardAsync(this,'updateAdminRoleDTO',{roleId:id,isValid:status},res=>{
                      this.$message.success("状态改变成功")
                      this.$refs.table.searchHandle()
                  });
@@ -174,7 +154,7 @@
                     cancelButtonText: '取消',
                     type: 'warning'
                     }).then(() => {
-                     standardAsync(_this,'delRole',{roleId:id},res=>{
+                     standardAsync(_this,'delAdminRoleDTO',{roleId:id},res=>{
                      _this.$message.success("删除成功")
                      _this.$refs.table.searchHandle()
                          });
@@ -186,7 +166,6 @@
               * @return {[type]}      [description]
               */
              showMenu:function(data){
-                console.log(data)
                this.$router.push({name:'showMenu',
                 params:{roleId:data.roleId,
                          busTypeId:data.busTypeId,

@@ -1,5 +1,5 @@
 <template>
-    <mc-table ref="table" stripe :columns="columns" method="pageQueryUser" :params="params" showAdd addBtnText="新增用户" 
+    <mc-table ref="table" stripe :columns="columns" method="pageQueryAdminUserDTOList" :params="params" showAdd addBtnText="新增用户" 
     :btnData="{btnStyle:'text-align:right;padding-top:20px;margin-right:20px'}"
     @addEvent="$router.push({name:'userAdd',params:{depId:params.depId}})">
        <template slot-scope="scope" slot="nickName">

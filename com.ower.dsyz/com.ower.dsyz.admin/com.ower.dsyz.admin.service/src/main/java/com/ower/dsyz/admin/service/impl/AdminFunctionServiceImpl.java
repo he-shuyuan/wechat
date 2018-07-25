@@ -4,14 +4,19 @@
 package com.ower.dsyz.admin.service.impl;
 
 import java.util.List;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.ower.dsyz.admin.auto.dao.AdminFunctionMapper;
+import com.ower.dsyz.admin.auto.model.AdminFunction;
 import com.ower.dsyz.admin.manual.dao.AdminFunctionExtMapper;
 import com.ower.dsyz.admin.manual.dto.AdminFunctionDTO;
 import com.ower.dsyz.admin.service.IAdminFunctionService;
 import com.ower.dsyz.common.core.exception.CustomRunTimeException;
 import com.ower.dsyz.common.core.page.PageQueryResult;
 import com.ower.dsyz.common.core.page.PageRequestParam;
+import com.ower.dsyz.common.core.util.IDUtil;
+import com.ower.dsyz.common.core.util.ParamCheckUtil;
 
 
 /**
@@ -34,6 +39,9 @@ public class AdminFunctionServiceImpl implements IAdminFunctionService {
     @Autowired
     private AdminFunctionExtMapper adminFunctionExtMapper;
     
+    @Autowired
+    private AdminFunctionMapper adminFunctionMapper;
+    
     @Override
     public PageQueryResult<AdminFunctionDTO> pageQueryAdminFunctionDTOList(PageRequestParam param) {
 
@@ -53,6 +61,28 @@ public class AdminFunctionServiceImpl implements IAdminFunctionService {
             throw new CustomRunTimeException("1","找不到相应的数据");
         }
         return list.get(0);
+    }
+
+    @Override
+    public AdminFunction addAdminFunction(AdminFunctionDTO adminFunctionDTO) {
+        AdminFunction adminFunction = new AdminFunction();
+        BeanUtils.copyProperties(adminFunctionDTO, adminFunction);
+        adminFunction.setFunctionId(IDUtil.getUUID());
+        adminFunctionMapper.insertSelective(adminFunction);
+        return adminFunction;
+    }
+
+    @Override
+    public int updateAdminFunction(AdminFunctionDTO adminFunctionDTO) {
+        AdminFunction adminFunction = new AdminFunction();
+        BeanUtils.copyProperties(adminFunctionDTO, adminFunction);
+        return adminFunctionMapper.updateByPrimaryKeySelective(adminFunction);
+    }
+
+    @Override
+    public int delAdminFunction(AdminFunctionDTO adminFunctionDTO) {
+        ParamCheckUtil.checkEmpty(adminFunctionDTO.getFunctionId(), "菜单id不能为空");
+        return adminFunctionMapper.deleteByPrimaryKey(adminFunctionDTO.getFunctionId());
     }
 
 }

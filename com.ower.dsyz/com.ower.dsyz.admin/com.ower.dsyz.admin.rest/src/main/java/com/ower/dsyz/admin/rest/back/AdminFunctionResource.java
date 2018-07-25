@@ -10,8 +10,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.ower.dsyz.admin.auto.model.AdminFunction;
 import com.ower.dsyz.admin.manual.dto.AdminFunctionDTO;
 import com.ower.dsyz.admin.service.IAdminFunctionService;
+import com.ower.dsyz.common.core.annotation.EnableValid;
 import com.ower.dsyz.common.core.response.CustomResponse;
 import com.ower.dsyz.common.core.util.ParamCheckUtil;
 
@@ -62,5 +64,35 @@ public class AdminFunctionResource {
     public CustomResponse<AdminFunctionDTO> queryAdminFunctionById(@RequestBody AdminFunctionDTO adminFunctionDTO){
         ParamCheckUtil.checkEmpty(adminFunctionDTO.getFunctionId(), "菜单id不能为空");
         return CustomResponse.success(adminFunctionService.queryAdminFunctionById(adminFunctionDTO));
+    }
+    
+    /**
+     * 新增菜单
+     * @param adminFunctionDTO
+     * @return CustomResponse<AdminFunction>
+     */
+    @RequestMapping("addAdminFunction")
+    public CustomResponse<AdminFunction> addAdminFunction(@RequestBody @EnableValid AdminFunctionDTO adminFunctionDTO){
+        return CustomResponse.success(adminFunctionService.addAdminFunction(adminFunctionDTO));
+    }
+    
+    /**
+     * 修改菜单
+     * @param adminFunctionDTO
+     * @return CustomResponse<AdminFunction>
+     */
+    @RequestMapping("updateAdminFunction")
+    public CustomResponse<Integer> updateAdminFunction(@RequestBody AdminFunctionDTO adminFunctionDTO){
+        return CustomResponse.success(adminFunctionService.updateAdminFunction(adminFunctionDTO));
+    }
+    
+    /**
+     * 删除菜单
+     * @param adminFunctionDTO
+     * @return CustomResponse<AdminFunction>
+     */
+    @RequestMapping("delAdminFunction")
+    public CustomResponse<Integer> delAdminFunction(@RequestBody AdminFunctionDTO adminFunctionDTO){
+        return CustomResponse.success(adminFunctionService.delAdminFunction(adminFunctionDTO));
     }
 }

@@ -4,6 +4,7 @@
 package com.ower.dsyz.admin.service;
 
 import java.util.List;
+import com.ower.dsyz.admin.auto.model.AdminFunction;
 import com.ower.dsyz.admin.manual.dto.AdminFunctionDTO;
 import com.ower.dsyz.common.core.page.PageQueryResult;
 import com.ower.dsyz.common.core.page.PageRequestParam;
@@ -44,4 +45,26 @@ public interface IAdminFunctionService {
      * @return AdminFunctionDTO
      */
     AdminFunctionDTO queryAdminFunctionById(AdminFunctionDTO adminFunctionDTO);
+    
+    /**
+     * 新增菜单
+     * @param AdminFunctionDTO
+     * @return AdminFunction
+     */
+    AdminFunction addAdminFunction(AdminFunctionDTO adminFunctionDTO);
+    
+    /**
+     * 修改菜单
+     * @param AdminFunctionDTO
+     * @return int
+     */
+    int updateAdminFunction(AdminFunctionDTO adminFunctionDTO);
+    
+    
+    /**
+     * 删除菜单
+     * @param AdminFunctionDTO
+     * @return int
+     */
+    int delAdminFunction(AdminFunctionDTO adminFunctionDTO);
 }

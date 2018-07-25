@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ower.dsyz.admin.manual.dao.AdminRoleExtMapper">
+	<select id="queryAdminRoleDTOList" parameterType="com.ower.dsyz.admin.manual.dto.AdminRoleDTO"
+		resultType="com.ower.dsyz.admin.manual.dto.AdminRoleDTO">
+		SELECT
+		t.role_id AS roleId,
+		t.role_code AS roleCode,
+		t.role_name AS roleName,
+		t.is_valid AS isValid,
+		t.remark AS remark,
+		t.bus_type_id AS busTypeId,
+		t1.bus_type_name AS busTypeName
+		FROM
+		t_admin_role t
+		LEFT JOIN t_admin_business t1 ON t.bus_type_id = t1.bus_type_id
+		where 1=1
+		<if test="roleId!=null and roleId!=''">
+			and t.role_id = #{roleId,jdbcType=VARCHAR}
+		</if>
+		<if test="roleCode!=null and roleCode!=''">
+			and t.role_code = #{roleCode,jdbcType=VARCHAR}
+		</if>
+		<if test="roleName!=null and roleName!=''">
+			and t.role_name like concat('%',#{roleName,jdbcType=VARCHAR},'%')
+		</if>
+		<if test="isValid!=null and isValid!=''">
+			and t.is_valid = #{isValid,jdbcType=VARCHAR}
+		</if>
+		<if test="busTypeId!=null and busTypeId!=''">
+			and t.bus_type_id = #{busTypeId,jdbcType=VARCHAR}
+		</if>
+	</select>
+	<select id="pageQueryAdminRoleDTOList" parameterType="com.ower.dsyz.admin.manual.dto.AdminRoleDTO"
+		resultType="com.ower.dsyz.admin.manual.dto.AdminRoleDTO">
+		SELECT
+		t.role_id AS roleId,
+		t.role_code AS roleCode,
+		t.role_name AS roleName,
+		t.is_valid AS isValid,
+		t.remark AS remark,
+		t.bus_type_id AS busTypeId,
+		t1.bus_type_name AS busTypeName
+		FROM
+		t_admin_role t
+		LEFT JOIN t_admin_business t1 ON t.bus_type_id = t1.bus_type_id
+		where 1=1
+		<if test="roleId!=null and roleId!=''">
+			and t.role_id = #{roleId,jdbcType=VARCHAR}
+		</if>
+		<if test="roleCode!=null and roleCode!=''">
+			and t.role_code = #{roleCode,jdbcType=VARCHAR}
+		</if>
+		<if test="roleName!=null and roleName!=''">
+			and t.role_name like concat('%',#{roleName,jdbcType=VARCHAR},'%')
+		</if>
+		<if test="isValid!=null and isValid!=''">
+			and t.is_valid = #{isValid,jdbcType=VARCHAR}
+		</if>
+		<if test="busTypeId!=null and busTypeId!=''">
+			and t.bus_type_id = #{busTypeId,jdbcType=VARCHAR}
+		</if>
+	</select>
+</mapper>

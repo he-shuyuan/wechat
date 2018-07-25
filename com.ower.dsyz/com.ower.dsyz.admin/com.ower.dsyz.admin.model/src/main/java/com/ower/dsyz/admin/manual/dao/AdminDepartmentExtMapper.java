@@ -4,6 +4,7 @@
 package com.ower.dsyz.admin.manual.dao;
 
 import java.util.List;
+import com.ower.dsyz.admin.manual.dto.AdminDepTreeDTO;
 import com.ower.dsyz.admin.manual.dto.AdminDepartmentDTO;
 import com.ower.dsyz.admin.manual.dto.DepPath;
 
@@ -39,4 +40,11 @@ public interface AdminDepartmentExtMapper {
      * @return List<DepPath>
      */
     List<DepPath> queryDepPathList(DepPath depPath);
+
+    /**
+     * 部门树列表
+     * @param adminDepTreeDTO
+     * @return List<AdminDepTreeDTO>
+     */
+    List<AdminDepTreeDTO> queryDepTreeList(AdminDepTreeDTO adminDepTreeDTO);
 }

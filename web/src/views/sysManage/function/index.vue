@@ -66,7 +66,6 @@
                                 <div class="_svg_select">
                                     <div @click="showSvgSelectView = true" id="svgSelectBtn">
                                         <svg-icon v-if="ruleForm.imageUrl" :icon-class="ruleForm.imageUrl" style="font-size: 20px"></svg-icon>
-                                        <!-- <svg-icon v-else icon-class="floder" style="font-size: 20px"></svg-icon> -->
                                         <svg-icon icon-class="down" style="font-size: 10px"></svg-icon>
                                     </div>
                                     <div class="arrow" v-show="showSvgSelectView"></div>
@@ -232,11 +231,11 @@
              * @return {[type]} [description]
              */
             initSelect: function () {
-                /* standardAsync(this, 'queryBusinessList', {
+                standardAsync(this, 'queryBusTypeList', {
                      notShowLoading: true
                  }, res => {
-                     this.init.busTypeList = res.body;
-                 });*/
+                     this.init.busTypeList = this.init.busTypeList.concat(res.body);
+                 });
             },
             /**
              * 通过id查找菜单
@@ -271,16 +270,18 @@
              */
             saveFunction: function () {
                 if (this.ruleForm.functionId) { //update
-                    standardAsync(this, 'modifyFunction', this.ruleForm, res => {
+                    standardAsync(this, 'updateAdminFunction', this.ruleForm, res => {
                         //this.ruleForm.functionId = res.body;
                         Object.assign(this.status.currentNode.data, this.ruleForm)
                         this.$message.success("修改成功");
                     });
                 } else { //add
                     this.ruleForm.parentId = this.status.currentParentId;
-                    standardAsync(this, 'addFunction', this.ruleForm, res => {
-                        this.ruleForm.functionId = res.body;
-                        this.append(this.status.currentNode, this.ruleForm);
+                    standardAsync(this, 'addAdminFunction', this.ruleForm, res => {
+                        this.ruleForm.functionId = res.body.functionId;
+                        let param = JSON.parse(JSON.stringify(this.ruleForm));
+                        param.isLeaf = true;
+                        this.append(this.status.currentNode,param);
                         this.$message.success("新增成功");
                     });
                 }
@@ -309,10 +310,11 @@
                     this.$message.warning("请先删除子节点");
                     return;
                 }
-                standardAsync(this, 'delFunctionById', {
+                standardAsync(this, 'delAdminFunction', {
                     functionId: this.status.currentNodeId
                 }, res => {
                     this.$refs.tree.remove(this.status.currentNode);
+                    this.ruleForm = {};
                     this.$message.success("删除成功");
                 });
             },
@@ -322,7 +324,7 @@
              */
             initTreeSelect: function () {
                 setTimeout(() => {
-                    this.$refs.tree && this.$refs.tree.setCurrentKey(config.busTypeId)
+                    this.$refs.tree && this.$refs.tree.setCurrentKey("1")
                     if (this.$refs.tree && this.$refs.tree.getCurrentNode()) {
                         this.init.defaultName = this.$refs.tree.getCurrentNode().name;
                         this.queryFunctionById(this.$refs.tree.getCurrentNode().functionId);

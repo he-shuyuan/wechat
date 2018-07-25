@@ -50,9 +50,18 @@ public class AdminDepartmentDTO implements Serializable {
     private String insId;
     
     /**
+     * 机构名称
+     */
+    private String insName;
+    /**
      * 业务类型
      */
     private String busTypeId;
+    
+    /**
+     * 业务名称
+     */
+    private String busTypeName;
     /**
      * 根机构的parent_id为000
      * 表 : t_admin_department
@@ -249,11 +258,38 @@ public class AdminDepartmentDTO implements Serializable {
     }
 
 
+    
+    public String getBusTypeName() {
+        return busTypeName;
+    }
+
+
+    
+    public void setBusTypeName(String busTypeName) {
+        this.busTypeName = busTypeName;
+    }
+
+
+    
+    public String getInsName() {
+        return insName;
+    }
+
+
+    
+    public void setInsName(String insName) {
+        this.insName = insName;
+    }
+
+
     @Override
     public String toString() {
-        return "AdminDepartmentDTO [depId=" + depId + ", depName=" + depName + ", insId=" + insId + ", parentDepId=" + parentDepId
-                + ", pathCode=" + pathCode + ", address=" + address + ", contactor=" + contactor + ", area=" + area + ", longitude="
-                + longitude + ", latitude=" + latitude + ", isValid=" + isValid + ", remark=" + remark + "]";
+        return "AdminDepartmentDTO [depId=" + depId + ", depName=" + depName + ", insId=" + insId + ", busTypeId=" + busTypeId
+                + ", busTypeName=" + busTypeName + ", parentDepId=" + parentDepId + ", pathCode=" + pathCode + ", address=" + address
+                + ", contactor=" + contactor + ", area=" + area + ", longitude=" + longitude + ", latitude=" + latitude + ", isValid="
+                + isValid + ", remark=" + remark + "]";
     }
-    
+
+
+  
 }

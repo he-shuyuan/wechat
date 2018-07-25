@@ -1,7 +1,6 @@
 <template>
   
     <el-form :model="ruleForm"
-             
              ref="ruleForm"
              label-width="100px"
              class="demo-ruleForm">
@@ -30,15 +29,9 @@
                           placeholder="请输入"
                           class="long-input"></el-input>
             </el-form-item>
-            <el-form-item label="邮箱"
-                          prop="email" >
-                <el-input v-model="ruleForm.email"
-                          placeholder="请输入"
-                          class="long-input"></el-input>
-            </el-form-item>
-             <el-form-item label="电话"
-                          prop="phone" >
-                <el-input v-model="ruleForm.phone"
+             <el-form-item label="联系人"
+                          prop="contactor" >
+                <el-input v-model="ruleForm.contactor"
                           placeholder="请输入"
                           class="long-input"></el-input>
             </el-form-item>
@@ -97,8 +90,7 @@
                  insId:'',
                  parentDepId:'',
                  pathCode:'',
-                 email:'',
-                 phone:'',
+                 contactor:'',
                  address:'',
                  remark:''
                 },
@@ -108,9 +100,6 @@
         },
         beforeRouteEnter (to, from, next) {
           next(vm => {
-           /* if(!to.params.node){
-              return;
-            }*/
             if(!to.params.depId){
               console.log(to.params)
               vm.init.op = '新增'
@@ -120,12 +109,10 @@
               vm.ruleForm.parentDepId = to.params.data.depId;
               vm.init.parentName = to.params.data.depName;
               vm.ruleForm.pathCode = to.params.data.pathCode;
-              //vm.init.currentTreeNode = to.params.node;
             }else{
               vm.init.op = '修改'
               to.meta.title='修改部门'
               vm.init.insName = to.params.data.insName;
-              debugger;
               if(to.params.parentData){
               vm.init.parentName = to.params.parentData.depName;
               }else{
@@ -157,7 +144,7 @@
            * 添加部门
            */
           addDepartment:function(){
-              standardAsync(this,'addDepartment',this.ruleForm,res=>{
+              standardAsync(this,'addAdminDepartment',this.ruleForm,res=>{
                      this.$message.success("添加成功"); 
                      this.$router.push({name:'userManage'})
               });
@@ -167,7 +154,7 @@
            * @return {[type]} [description]
            */
            modifyDepartment:function(){
-              standardAsync(this,'modifyDepartment',this.ruleForm,res=>{
+              standardAsync(this,'updateDepartment',this.ruleForm,res=>{
                      this.$message.success("修改成功"); 
                      this.$router.push({name:'userManage'})
               });
@@ -177,7 +164,7 @@
            * @return {[type]} [description]
            */
           queryDepDetailById:function(id){
-                standardAsync(this,'querySecDepartmentById',{depId:id},res=>{
+                standardAsync(this,'queryAdmimDepartmentById',{depId:id},res=>{
                 this.ruleForm = res.body;
               });
           },

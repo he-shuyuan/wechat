@@ -29,15 +29,6 @@
                        </el-select> 
                     
                     </el-form-item>
-                     <el-form-item prop="insTypeId" label="所属机构类型">
-                        <el-select v-model="ruleForm.insTypeId"
-                                  placeholder="请选择">
-                           <el-option v-for="(item,index) in init.insTypeList"
-                                :key="index"
-                                :label="item.name"
-                                :value="item.id"></el-option>
-                       </el-select> 
-                    </el-form-item>
                 <el-form-item label="备注"
                           prop="remark">
                 <textarea class="long-input"
@@ -49,9 +40,9 @@
                 <el-button type="primary"
                            class="long-button"
                            @click="submitForm('ruleForm')">保存</el-button>
-                <el-button v-if="init.currentOp!='add'" type="default"
+                <el-button type="default"
                            class="long-button"
-                           @click="$router.push({name:'roleManage'})">取消</el-button>
+                           @click="$router.go(-1)">取消</el-button>
             </el-form-item>
         </uni-form-header>
     </el-form>
@@ -75,7 +66,6 @@
                   roleName:'',
                   roleId:'',
                   busTypeId:'',
-                  insTypeId:'',
                   isValid:'',
                   remark:'',
                   roleCode:''
@@ -86,9 +76,7 @@
                     roleCode: [{ required: true,
                      message: '角色编码不能为空', trigger: 'change' }],
                     busTypeId:[{required:true,
-                      message:'业务类型不能为空',trigger: 'change' }],
-                    insTypeId: [{ required: true, 
-                      message: '机构类型不能为空', trigger: 'change' }]
+                      message:'业务类型不能为空',trigger: 'change' }]
                 }
             }
            
@@ -117,11 +105,8 @@
             * @return {[type]} [description]
             */
            initSelect:function(){
-            standardAsync(this,'queryBusinessList',{},res=>{
+            standardAsync(this,'queryBusTypeList',{},res=>{
               this.init.busTypeList = res.body;
-            });
-            standardAsync(this,'queryInsTypeList',{},res=>{
-              this.init.insTypeList = res.body;
             });
            },
            /**
@@ -132,12 +117,12 @@
            submitForm:function(key){
               if(this.init.currentOp == 'add'){
                 this.ruleForm.roleId = null;
-                standardAsync(this,'addRole',this.ruleForm,res=>{
+                standardAsync(this,'addAdminRoleDTO',this.ruleForm,res=>{
                     this.$message.success('保存成功');
                     this.$router.push({name:'roleManage'})
                  });
               }else{
-                  standardAsync(this,'modifyRole',this.ruleForm,res=>{
+                  standardAsync(this,'updateAdminRoleDTO',this.ruleForm,res=>{
                     this.$message.success('修改成功');
                     this.$router.push({name:'roleManage'})
                  });
@@ -149,7 +134,7 @@
             * @return {[type]}    [description]
             */
            queryRoleById:function(id){
-            standardAsync(this,'queryRoleById',{roleId:id},res=>{
+            standardAsync(this,'queryAdminRoleById',{roleId:id},res=>{
                  this.ruleForm = res.body;
                  }); 
            }

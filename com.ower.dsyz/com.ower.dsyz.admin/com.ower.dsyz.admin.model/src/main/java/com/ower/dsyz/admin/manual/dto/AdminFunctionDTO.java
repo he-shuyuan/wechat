@@ -4,6 +4,7 @@
 package com.ower.dsyz.admin.manual.dto;
 
 import java.io.Serializable;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  * <pre>
@@ -33,6 +34,7 @@ public class AdminFunctionDTO implements Serializable{
      * 表 : t_admin_function
      * 对应字段 : bus_type_id
      */
+    @NotBlank(message="业务类型不能为空")
     private String busTypeId;
     
     /**
@@ -44,6 +46,7 @@ public class AdminFunctionDTO implements Serializable{
      * 表 : t_admin_function
      * 对应字段 : name
      */
+    @NotBlank(message="名称不能为空")
     private String name;
 
     /**
@@ -51,6 +54,7 @@ public class AdminFunctionDTO implements Serializable{
      * 表 : t_admin_function
      * 对应字段 : code
      */
+    @NotBlank(message="编号不能为空")
     private String code;
 
     /**
@@ -58,6 +62,7 @@ public class AdminFunctionDTO implements Serializable{
      * 表 : t_admin_function
      * 对应字段 : function_type
      */
+    @NotBlank(message="菜单类型不能为空")
     private String functionType;
 
     /**
@@ -65,6 +70,7 @@ public class AdminFunctionDTO implements Serializable{
      * 表 : t_admin_function
      * 对应字段 : url
      */
+    @NotBlank(message="菜单地址不能为空")
     private String url;
 
     /**
@@ -114,6 +120,7 @@ public class AdminFunctionDTO implements Serializable{
      * 表 : t_admin_function
      * 对应字段 : target
      */
+    @NotBlank(message="菜单展现方式不能为空")
     private String target;
 
     /**

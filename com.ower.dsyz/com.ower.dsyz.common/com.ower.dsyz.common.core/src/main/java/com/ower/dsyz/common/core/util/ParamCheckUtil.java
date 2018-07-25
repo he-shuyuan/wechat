@@ -7,7 +7,7 @@ import com.ower.dsyz.common.core.exception.CustomRunTimeException;
 
 public abstract class ParamCheckUtil {
 
-	private static final String DEFAULT_MESSAGE = "参数异常";
+	private static final String DEFAULT_MESSAGE = "参数空异常";
 
 	public static void checkEmpty(String param, String callMess) {
 		if (StringUtils.isBlank(param)) {

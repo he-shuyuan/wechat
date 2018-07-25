@@ -71,7 +71,7 @@ public class DaoInterceptor {
 
             if (getMethod != null) {
                 Object value = getMethod.invoke(obj, new Object[0]);
-                if (value == null) {
+                if (value == null ||((value instanceof String) && StringUtils.isBlank((String)value))) {
                     Method setMethod = obj.getClass().getMethod("set" + propertyName, new Class[] { propertyValue.getClass() });
                     setMethod.invoke(obj, new Object[] { propertyValue });
                     if (logger.isDebugEnabled()) {
