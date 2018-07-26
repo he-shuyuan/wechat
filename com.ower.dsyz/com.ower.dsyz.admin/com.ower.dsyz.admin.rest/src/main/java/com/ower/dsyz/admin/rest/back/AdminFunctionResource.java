@@ -6,11 +6,11 @@ package com.ower.dsyz.admin.rest.back;
 import java.util.List;
 import javax.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.ower.dsyz.admin.auto.model.AdminFunction;
+import com.ower.dsyz.admin.manual.constant.AdminConstant;
 import com.ower.dsyz.admin.manual.dto.AdminFunctionDTO;
 import com.ower.dsyz.admin.service.IAdminFunctionService;
 import com.ower.dsyz.common.core.annotation.EnableValid;
@@ -35,8 +35,7 @@ import com.ower.dsyz.common.core.util.ParamCheckUtil;
 @RequestMapping("/back/adminFunctionService/")
 public class AdminFunctionResource {
     
-    @Value("${admin.function.top.code:HEAD}")
-    private String topMenu;
+
     
     @Resource
     private IAdminFunctionService adminFunctionService;
@@ -49,7 +48,7 @@ public class AdminFunctionResource {
     @RequestMapping("queryAdminFunctionList")
     public CustomResponse<List<AdminFunctionDTO>> queryAdminFunctionList(@RequestBody AdminFunctionDTO adminFunctionDTO){
         if(StringUtils.isBlank(adminFunctionDTO.getParentId())){
-            adminFunctionDTO.setCode(topMenu);
+            adminFunctionDTO.setCode(AdminConstant.FunctionConstant.DEFAULT_PARENT_TOP_CODE);
             adminFunctionDTO.setBusTypeId("");
         }
         return CustomResponse.success(adminFunctionService.queryAdminFunctionList(adminFunctionDTO));

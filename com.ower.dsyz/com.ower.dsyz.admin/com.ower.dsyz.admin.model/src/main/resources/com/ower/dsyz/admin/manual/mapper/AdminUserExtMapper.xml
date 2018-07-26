@@ -5,79 +5,121 @@
 		resultType="com.ower.dsyz.admin.manual.dto.AdminUserDTO">
 		select t1.user_id as userId,
 		t1.is_valid as isValid,
-		t1.user_birtd as userBirth,
+		t1.user_birtd as
+		userBirtd,
 		t1.user_head as userHead,
 		t1.user_name as userName,
 		t1.user_sex as userSex,
 		t2.login_name as loginName,
-		t2.`password` as `password`,
+		t2.`password` as
+		`password`,
 		t2.phone as phone,
 		t2.remark as remark,
 		t2.salt as salt
-		from t_admin_user t1 left JOIN t_admin_user_login t2 on t1.user_id =
+		from
+		t_admin_user t1 left JOIN t_admin_user_login t2 on t1.user_id =
 		t2.user_id
 		where 1=1
 		<if test="userId != null  and userId !=''">
-		and t1.user_id = #{userId,jdbcType=VARCHAR}
+			and t1.user_id = #{userId,jdbcType=VARCHAR}
 		</if>
 		<if test="isValid != null  and isValid !=''">
-		and t1.is_valid = #{isValid,jdbcType=VARCHAR}
+			and t1.is_valid = #{isValid,jdbcType=VARCHAR}
 		</if>
 		<if test="userName != null  and userName !=''">
-		and t1.user_name like concat('%',#{userName,jdbcType=VARCHAR},'%')
+			and t1.user_name like concat('%',#{userName,jdbcType=VARCHAR},'%')
 		</if>
 		<if test="userSex != null  and userSex !=''">
-		and t1.user_sex = #{userSex,jdbcType=VARCHAR}
+			and t1.user_sex = #{userSex,jdbcType=VARCHAR}
 		</if>
 		<if test="loginName != null  and loginName !=''">
-		and t2.login_name = #{loginName,jdbcType=VARCHAR}
+			and t2.login_name = #{loginName,jdbcType=VARCHAR}
 		</if>
 		<if test="phone != null  and phone !=''">
-		and t2.phone = #{phone,jdbcType=VARCHAR}
+			and t2.phone = #{phone,jdbcType=VARCHAR}
 		</if>
 	</select>
-	
+
 	<select id="pageQueryAdminUserDTOList" parameterType="com.ower.dsyz.admin.manual.dto.AdminUserDepDTO"
 		resultType="com.ower.dsyz.admin.manual.dto.AdminUserDepDTO">
 		select t1.user_id as userId,
 		t1.is_valid as isValid,
-		t1.user_birtd as userBirth,
+		t1.user_birtd as
+		userBirtd,
 		t1.user_head as userHead,
 		t1.user_name as userName,
 		t1.user_sex as userSex,
 		t2.login_name as loginName,
-		t2.`password` as `password`,
+		t2.`password` as
+		`password`,
 		t2.phone as phone,
 		t2.remark as remark,
 		t2.salt as salt
-		from t_admin_user t1 left JOIN t_admin_user_login t2 on t1.user_id =
+		from
+		t_admin_user t1 left JOIN t_admin_user_login t2 on t1.user_id =
 		t2.user_id
 		where 1=1
 		<if test="userId != null  and userId !=''">
-		and t1.user_id = #{userId,jdbcType=VARCHAR}
+			and t1.user_id = #{userId,jdbcType=VARCHAR}
 		</if>
 		<if test="isValid != null  and isValid !=''">
-		and t1.is_valid = #{isValid,jdbcType=VARCHAR}
+			and t1.is_valid = #{isValid,jdbcType=VARCHAR}
 		</if>
 		<if test="userName != null  and userName !=''">
-		and t1.user_name like concat('%',#{userName,jdbcType=VARCHAR},'%')
+			and t1.user_name like concat('%',#{userName,jdbcType=VARCHAR},'%')
 		</if>
 		<if test="userSex != null  and userSex !=''">
-		and t1.user_sex = #{userSex,jdbcType=VARCHAR}
+			and t1.user_sex = #{userSex,jdbcType=VARCHAR}
 		</if>
 		<if test="loginName != null  and loginName !=''">
-		and t2.login_name = #{loginName,jdbcType=VARCHAR}
+			and t2.login_name = #{loginName,jdbcType=VARCHAR}
 		</if>
 		<if test="phone != null  and phone !=''">
-		and t2.phone = #{phone,jdbcType=VARCHAR}
+			and t2.phone = #{phone,jdbcType=VARCHAR}
 		</if>
 		<if test="depId !=null and depId !=''">
-		and t1.user_id in 
-		(select t3.user_id from t_admin_dep_user t3 where t3.dep_id = #{depId,jdbcType=VARCHAR} and t3.is_valid='Y')
+			and t1.user_id in
+			(select t3.user_id from t_admin_dep_user t3 where t3.dep_id =
+			#{depId,jdbcType=VARCHAR} and t3.is_valid='Y')
 		</if>
-		<if test="pathCode !=null and pathCode !=''">
-		and t1.user_id in 
-		(select t3.user_id from t_admin_department t4 left join t_admin_dep_user t3  on t3.dep_id =t4.dep_id where t4.path_code like concat(#{pathCode,jdbcType=VARCHAR},'%'}) and t3.is_valid='Y')
+		<if test="pathCode !=null and pathCode !='' and insId !=null and insId!=''">
+			and t1.user_id in
+			(select t3.user_id from t_admin_department t4 left join t_admin_dep_user t3
+			on t3.dep_id =t4.dep_id where t4.path_code like
+			concat(#{pathCode,jdbcType=VARCHAR},'%') and t3.is_valid='Y' and
+			t4.ins_id=#{insId,jdbcType=VARCHAR})
+		</if>
+	</select>
+
+	<select id="queryUserDepInfoList" parameterType="com.ower.dsyz.admin.manual.dto.AdminUserDepDTO"
+		resultType="com.ower.dsyz.admin.manual.dto.AdminUserDepDTO">
+		SELECT
+		t1.user_id AS userId,
+		t1.is_valid AS isValid,
+		t1.user_birtd AS userBirtd,
+		t1.user_head AS userHead,
+		t1.user_name AS userName,
+		t1.user_sex AS userSex,
+		t2.login_name AS loginName,
+		t2.phone AS phone,
+		t2.remark AS remark,
+		t3.dep_id AS depId,
+		t4.dep_name AS depName,
+		t4.ins_id AS insId,
+		t5.ins_name AS insName
+		FROM
+		t_admin_user t1
+		LEFT JOIN t_admin_user_login t2 ON t1.user_id = t2.user_id
+		LEFT JOIN t_admin_dep_user t3 ON t3.user_id = t1.user_id
+		LEFT JOIN t_admin_department t4 ON t4.dep_id = t3.dep_id
+		LEFT JOIN t_admin_institution t5 ON t5.ins_id = t4.ins_id
+		WHERE
+		1 = 1
+		<if test="userId != null and userId !=''">
+			and t1.user_id = #{userId,jdbcType=VARCHAR}
+		</if>
+		<if test="insId != null and insId !=''">
+			and t1.ins_id = #{insId,jdbcType=VARCHAR}
 		</if>
 	</select>
 </mapper>

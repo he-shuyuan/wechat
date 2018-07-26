@@ -35,7 +35,6 @@ import com.ower.dsyz.common.core.util.ParamCheckUtil;
  */
 @Service
 public class AdminFunctionServiceImpl implements IAdminFunctionService {
-
     @Autowired
     private AdminFunctionExtMapper adminFunctionExtMapper;
     

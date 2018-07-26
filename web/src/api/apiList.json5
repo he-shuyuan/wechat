@@ -21,4 +21,10 @@
   addAdminDepartment:'/back/adminDepartmentService/addAdminDepartment',
   queryAdmimDepartmentById:'/back/adminDepartmentService/queryAdmimDepartmentById',
   pageQueryAdminUserDTOList:'/back/adminUserService/pageQueryAdminUserDTOList',
+  queryUserDepInfo:'/back/adminUserService/queryUserDepInfo',
+  addAdminUser:'/back/adminUserService/addAdminUser',
+  updateAdminUser:'/back/adminUserService/updateAdminUser',
+  removeAdminDepUser:'/back/adminUserService/removeAdminDepUser',
+  queryAdminRoleFunDTOTreeList:'/back/adminRoleFunctionService/queryAdminRoleFunDTOTreeList',
+  addAuthFunctionList:'/back/adminRoleFunctionService/addAuthFunctionList',
 }

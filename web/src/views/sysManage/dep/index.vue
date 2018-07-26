@@ -24,7 +24,9 @@
     </el-tree>
     </el-aside>
     <el-main style="padding:0">
-         <user-manager :depId="init.depId" ></user-manager>
+         <user-manager :depId="init.depId" 
+         :pathCode="init.pathCode"
+         :insId="init.insId"></user-manager>
     </el-main>
   </el-container>
 </el-container>
@@ -43,8 +45,10 @@ export default {
         return {
           thisRouteName:'userManage',
           init:{
-             depId:util.sStore.getItem(util.sStore.MACE_SELECED_DEP_ID),
+             depId:'',
              defaultName:null,
+             pathCode:'',
+             insId:'',
           },
           status:{
              currentNode:'',
@@ -77,7 +81,8 @@ export default {
           this.status.currentNode = node;
           if(node.data){
             this.status.currentNodeName = node.data.depName;
-            console.log(node.data.depId)
+            this.init.pathCode = node.data.pathCode;
+            this.init.insId = node.data.insId;
             this.init.depId = node.data.depId;
            } 
         },
@@ -124,6 +129,8 @@ export default {
                 if(this.$refs.tree && this.$refs.tree.getCurrentNode()){
                    this.init.defaultName = this.$refs.tree.getCurrentNode().depName;
                    this.status.currentNode=this.$refs.tree.getNode(this.$refs.tree.getCurrentNode());
+                   this.init.pathCode = this.$refs.tree.getCurrentNode().pathCode;
+                   this.init.insId = this.$refs.tree.getCurrentNode().insId;
                    this.init.depId = this.$refs.tree.getCurrentNode().depId;
                 }
                },10);

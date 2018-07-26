@@ -26,15 +26,28 @@ public class AdminUserDepDTO extends AdminUserDTO {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 
+     * 部门Id
      */
     private String depId;
     
     /**
-     * 
+     * 部门名称
+     */
+    private String depName;
+    /**
+     * 部门code
      */
     private String pathCode;
 
+    /**
+     * 机构Id
+     */
+    private String insId;
+    /**
+     * 机构名称
+     */
+    private String insName;
+    
     
     public String getDepId() {
         return depId;
@@ -55,15 +68,51 @@ public class AdminUserDepDTO extends AdminUserDTO {
         this.pathCode = pathCode;
     }
 
+    public String getInsId() {
+        return insId;
+    }
+
+
+    
+    public void setInsId(String insId) {
+        this.insId = insId;
+    }
+
+
+    
+    public String getDepName() {
+        return depName;
+    }
+
+
+    
+    public void setDepName(String depName) {
+        this.depName = depName;
+    }
+
+
+    
+    public String getInsName() {
+        return insName;
+    }
+
+
+    
+    public void setInsName(String insName) {
+        this.insName = insName;
+    }
+
 
     @Override
     public String toString() {
-        return "AdminUserDepDTO [depId=" + depId + ", pathCode=" + pathCode + ", getUserId()=" + getUserId() + ", getUserName()="
-                + getUserName() + ", getUserSex()=" + getUserSex() + ", getUserHead()=" + getUserHead() + ", getUserBirtd()="
-                + getUserBirtd() + ", getIsValid()=" + getIsValid() + ", getPhone()=" + getPhone() + ", getLoginName()=" + getLoginName()
-                + ", getPassword()=" + getPassword() + ", getSalt()=" + getSalt() + ", toString()=" + super.toString() + ", getClass()="
-                + getClass() + ", hashCode()=" + hashCode() + "]";
+        return "AdminUserDepDTO [depId=" + depId + ", depName=" + depName + ", pathCode=" + pathCode + ", insId=" + insId + ", insName="
+                + insName + ", getUserId()=" + getUserId() + ", getUserName()=" + getUserName() + ", getUserSex()=" + getUserSex()
+                + ", getUserHead()=" + getUserHead() + ", getUserBirtd()=" + getUserBirtd() + ", getIsValid()=" + getIsValid()
+                + ", getPhone()=" + getPhone() + ", getLoginName()=" + getLoginName() + ", getPassword()=" + getPassword()
+                + ", getSalt()=" + getSalt() + ", toString()=" + super.toString() + ", getClass()=" + getClass() + ", hashCode()="
+                + hashCode() + "]";
     }
-    
-    
+
+
+   
 }

@@ -1,29 +1,28 @@
 <template>
     <mc-table ref="table" stripe :columns="columns" method="pageQueryAdminUserDTOList" :params="params" showAdd addBtnText="新增用户" 
+    :formOpt="formOpt"
+    :autoLoad="false"
     :btnData="{btnStyle:'text-align:right;padding-top:20px;margin-right:20px'}"
-    @addEvent="$router.push({name:'userAdd',params:{depId:params.depId}})">
-       <template slot-scope="scope" slot="nickName">
-       <router-link :to="{name:'userDetail',params:{data:scope.row}}">
-            {{scope.row.ucUserDTO.nickName}}
-        </router-link>
+    @addEvent="$router.push({name:'userAdd',params:{depId:params.depId,insId:params.insId}})">
+       <template slot-scope="scope" slot="userName">
+      <!--  <router-link :to="{name:'userDetail',params:{data:scope.row}}"> -->
+            {{scope.row.userName}}
+        <!-- </router-link> -->
        </template> 
-       <template slot-scope="scope" slot="empNum">
-        {{scope.row.ucUserDTO.empNum}}
-       </template> 
-        <template slot-scope="scope" slot="sex">
-        {{scope.row.ucUserDTO.sex}}
+        <template slot-scope="scope" slot="userSex">
+        {{scope.row.userSex=='1'?'男':'女'}}
        </template> 
        <template slot-scope="scope" slot="status">
-          <el-tag v-if="scope.row.ucUserDTO.status=='Y'">已禁用</el-tag>
-          <el-tag v-else>已启用</el-tag>
+            <el-button v-if="scope.row.isValid =='Y'" type="primary" size="mini">已启用</el-button>
+            <el-button v-else type="danger" size="mini">已禁用</el-button>
        </template> 
        <template slot-scope="scope" slot="handle">
         <el-button type="primary" size="mini"
-         @click.native="$router.push({name:'userRole',params:{depId:params.depId,userId:scope.row.ucUserDTO.userId,userName:scope.row.ucUserDTO.nickName}})">角色分配</el-button>
-        <el-button v-if="scope.row.ucUserDTO.status=='Y'" 
-           type="warning" size="mini"  @click.native="changeStatus('N',scope.row.ucUserDTO.userId)">启用</el-button>
-        <el-button v-else type="warning" size="mini" @click.native="changeStatus('Y',scope.row.ucUserDTO.userId)">禁用</el-button>
-        <el-button type="danger" size="mini" @click.native="removeUserDep(scope.row.ucUserDTO.userId)">移除</el-button>
+         @click.native="$router.push({name:'userRole',params:{depId:params.insId,userId:scope.row.userId,userName:scope.row.userName}})">角色分配</el-button>
+        <el-button v-if="scope.row.isValid=='Y'" 
+           type="warning" size="mini"  @click.native="changeStatus('N',scope.row.userId)">禁用</el-button>
+        <el-button v-else type="warning" size="mini" @click.native="changeStatus('Y',scope.row.userId)">启用</el-button>
+        <el-button type="danger" size="mini" @click.native="removeUserDep(scope.row.userId)">移除</el-button>
        </template> 
     </mc-table>
 </template>
@@ -36,89 +35,101 @@
         props:{
            depId:null,
            pathCode:'',
-           isDist:'0'
+           insId:''
         },
         data() {
             return {
                 init:{
                    contractTypeMap:{},
                 },
-                formOpt: [{
+                formOpt: [
+                  {
                         label: '用户名称',
-                        col:8,
+                        col:7,
                         type: 'text',
-                        prop: 'nickName',
+                        prop: 'userName',
+                        placeholder: '请输入',
+                      
+                    },
+                     {
+                        label: '登录名',
+                        col:7,
+                        type: 'text',
+                        prop: 'loginName',
                         placeholder: '请输入',
                       
                     },
                     {
-                        label: '性别',
-                        col:8,
-                        type: 'select',
-                        prop: 'sex',
-                        placeholder: '请选择',
-                        initData: [{label:'男',value:'男'},
-                                   {label:'女',value:'女'}]
+                        label: '手机号',
+                        col:7,
+                        type: 'text',
+                        prop: 'phone',
+                        placeholder: '请输入',
+                      
                     },
                      {
-                        col:2,
-                        label: '',
-                        type: 'hidden'
-                    },
-                    {
-                        col:6,
+                        col:3,
                         label: '',
                         type: 'search'
                     },
                     {
-                        label: '工号',
-                        col:8,
-                        type: 'text',
-                        placeholder: '请输入',
-                        prop: 'empNum',
+                        label: '性别',
+                        col:7,
+                        type: 'select',
+                        prop: 'userSex',
+                        placeholder: '请选择',
+                        initData: [{label:'男',value:'1'},
+                                   {label:'女',value:'0'}]
                     },
                     {
                         label: '范围',
-                        col:8,
+                        col:7,
                         type: 'select',
                         prop: 'optionsRadios',
                         placeholder: '请选择',
                         initData: [{value:'0',label:'仅当前部门'},
                                    {value:'1',label:'当前部门及其下级'}]
                     },
-                    {
-                        col:2,
-                        label: '',
-                        type: 'hidden'
+                     {
+                        label: '状态',
+                        col:7,
+                        type: 'select',
+                        prop: 'isValid',
+                        placeholder: '请选择',
+                        initData: [{label:'已启用',value:'Y'},
+                                   {label:'已禁用',value:'N'}]
                     },
                     {
-                        col:6,
+                        col:3,
                         label: '',
                         type: 'reset',
                     },
                 ],
                 columns: [
                      {
-                        prop: 'nickName',
+                        prop: 'userName',
                         label: '用户名称',
-                        minWidth: 200,
-                        slotName: 'nickName'
+                        minWidth: 100,
+                        slotName: 'userName'
                     },
                      {
-                        prop: 'empNum',
-                        label: '工号',
-                        minWidth: 200,
-                        slotName: 'empNum'
-                        
+                        prop: 'loginName',
+                        label: '登录名',
+                        minWidth: 100
+                    },
+                     {
+                        prop: 'phone',
+                        label: '手机号',
+                        minWidth: 100
                     },
                     {
-                        prop: 'sex',
+                        prop: 'userSex',
                         label: '性别',
                         minWidth: 50,
-                        slotName: 'sex'
+                        slotName: 'userSex'
                     },
                     {
-                        prop: 'status',
+                        prop: 'isValid',
                         label: '状态',
                         minWidth: 100,
                         slotName: 'status'
@@ -131,28 +142,29 @@
                     },
                 ],
                 params: {
-                    depId: util.sStore.getItem(util.sStore.MACE_SELECED_DEP_ID),
-                    isValid:'Y',
+                    depId: '',
                     pathCode:'',
-                    isDist:'0'
+                    insId:''
                 }
             }
         },
         watch:{
           'depId':function(nv,ov){
             this.params.depId = nv;
+            this.params.pathCode = this.pathCode;
+            this.params.insId = this.insId;
              if(this.$refs.table)
                this.$refs.table.searchHandle()
           }
         },
         created(){
+        },
+        mounted() {
             this.params.depId = this.depId;
+            this.params.insId = this.insId;
             this.params.pathCode = this.$route.params.pathCode;
              if(this.$refs.table)
                this.$refs.table.searchHandle()
-        },
-        mounted() {
-           
         },
         methods: {
             /**
@@ -167,7 +179,7 @@
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-               standardAsync(_this,'removeUserDep',{userId:userId,depId:_this.params.depId},res=>{
+               standardAsync(_this,'removeAdminDepUser',{userId:userId,depId:_this.params.depId},res=>{
                    _this.$message.success('移除成功')
                    _this.$refs.table.searchHandle()
 
@@ -175,12 +187,12 @@
               });
             },
             /**
-             * 改变机械状态
+             * 改变用户状态
              * @param  {[type]} status [description]
              * @return {[type]}        [description]
              */
             changeStatus:function(status,userId){
-                standardAsync(this,'modifyUser',{userId:userId,status:status},res=>{
+                standardAsync(this,'updateAdminUser',{userId:userId,isValid:status},res=>{
                    this.$message.success(status=='N'?'已启用':'已禁用')
                    this.$refs.table.searchHandle()
 

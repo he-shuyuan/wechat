@@ -353,5 +353,7 @@
 
     .table-wrpper {
         padding-bottom: 20px;
+        padding-top:10px;
+        border-top:solid 3px #e2e2e2;
     }
 </style>

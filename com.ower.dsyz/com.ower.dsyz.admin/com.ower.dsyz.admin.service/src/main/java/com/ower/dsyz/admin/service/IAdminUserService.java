@@ -3,6 +3,7 @@
  */
 package com.ower.dsyz.admin.service;
 
+import java.util.List;
 import com.ower.dsyz.admin.manual.dto.AdminUserDepDTO;
 import com.ower.dsyz.common.core.page.PageQueryResult;
 import com.ower.dsyz.common.core.page.PageRequestParam;
@@ -30,4 +31,35 @@ public interface IAdminUserService {
      * @return PageQueryResult<AdminFunctionDTO>
      */
     PageQueryResult<AdminUserDepDTO> pageQueryAdminUserDTOList(PageRequestParam param);
+    
+    /**
+     * 修改用户
+     * @param adminUserDTO
+     * @return int
+     */
+    int updateAdminUser(AdminUserDepDTO adminUserDepDTO);
+    
+    /**
+     * 新增用户
+     * @param adminUserDepDTO
+     * @return int
+     */
+    int addAdminUser(AdminUserDepDTO adminUserDepDTO);
+    
+    
+    /**
+     * 
+     * 获取用户部门信息
+     * @param adminUserDepDTO
+     * @return AdminUserDepDTO
+     */
+    List<AdminUserDepDTO> queryUserDepInfoList(AdminUserDepDTO adminUserDepDTO);
+    
+    /**
+     * 
+     * 获取用户部门信息
+     * @param adminUserDepDTO
+     * @return AdminUserDepDTO
+     */
+    AdminUserDepDTO queryUserDepInfo(AdminUserDepDTO adminUserDepDTO);
 }

@@ -21,4 +21,13 @@ public interface AdminUserExtMapper {
      * @return List<AdminFunctionDTO>
      */
     List<AdminUserDTO> queryAdminUserDTOList(AdminUserDTO adminUserDTO);
+    
+    
+    /**
+     * 
+     * 获取用户部门信息
+     * @param adminUserDepDTO
+     * @return AdminUserDepDTO
+     */
+    List<AdminUserDepDTO> queryUserDepInfoList(AdminUserDepDTO adminUserDepDTO);
 }

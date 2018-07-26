@@ -58,19 +58,19 @@
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
-		<table schema="" tableName="t_admin_function" domainObjectName="AdminFunction"
+		<!-- <table schema="" tableName="t_admin_function" domainObjectName="AdminFunction"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false"></table>
 		<table schema="" tableName="t_admin_role" domainObjectName="AdminRole"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
-			selectByExampleQueryId="false"></table>
-		<table schema="" tableName="t_admin_role_fun" domainObjectName="AdminRoleFun"
+			selectByExampleQueryId="false"></table>-->
+		<table schema="" tableName="t_admin_ins_role" domainObjectName="AdminInsRole"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
-			selectByExampleQueryId="false"></table>
-		<table schema="" tableName="t_admin_ins_role" domainObjectName="AdminInsRole"
+			selectByExampleQueryId="false"></table> 
+		<table schema="" tableName="t_admin_user_role" domainObjectName="AdminUserRole"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false"></table>

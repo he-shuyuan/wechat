@@ -1,18 +1,22 @@
 <template>
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
         <uni-form-header title="用户基本信息">
-            <el-form-item label="用户名称" prop="nickName">
-                <el-input v-model="ruleForm.nickName" placeholder="请输入" class="long-input"></el-input>
+            <el-form-item label="用户名称" prop="userName">
+                <el-input v-model="ruleForm.userName" placeholder="请输入" class="long-input"></el-input>
+            </el-form-item>
+             <el-form-item label="登录账号" prop="loginName">
+                <el-input v-model="ruleForm.loginName" placeholder="请输入" class="long-input"></el-input>
             </el-form-item>
             <el-form-item label="手机号" prop="phone">
                 <el-input v-model="ruleForm.phone" placeholder="请输入" class="long-input"></el-input>
             </el-form-item>
-            <el-form-item prop="empNum" label="工号">
-                <el-input v-model="ruleForm.empNum" placeholder="请输入" class="long-input"></el-input>
-            </el-form-item>
             <el-form-item prop="depName" label="所在部门">
                 <input-tree v-model="ruleForm.depName" class="long-input" @nodeSelect="nodeSelect" :load="reloadTree" placeholder="请选择所在部门"
                     :props="defaultProps" lazy node-key="depId"></input-tree>
+            </el-form-item>
+             <el-form-item prop="userSex" label="性别">
+               <el-radio v-model="ruleForm.userSex" label="1" border>男</el-radio>
+               <el-radio v-model="ruleForm.userSex" label="0" border>女</el-radio>
             </el-form-item>
             <el-form-item label="备注" prop="remark">
                 <textarea class="long-input" style="height:70px" v-model="ruleForm.remark">
@@ -42,23 +46,30 @@
         data() {
             return {
                 init: {
-                    title: '新增合同',
                     busTypeList: [],
                     depIdList: [],
                     currentOp: ''
                 },
                 ruleForm: {
-                    nickName: '',
+                    userName: '',
+                    loginName:'',
                     phone: '',
-                    empNum: '',
+                    userSex: '',
                     depId: '',
                     remark: '',
                     depName: ''
                 },
                 rules: {
-                    nickName: [{
+                    userName: [{
                         required: true,
                         message: '用户名称不能为空',
+                        trigger: 'change'
+                    }],
+                    loginName: [{
+                        required: true,
+                        min: 1,
+                        max: 10,
+                        message: '登录名称不能为空,少于10个字符',
                         trigger: 'change'
                     }],
                     phone: [{
@@ -74,35 +85,23 @@
                 },
                 defaultProps: {
                     label: 'depName',
-                    isLeaf: 'childNum'
+                    isLeaf: 'leaf'
                 }
             }
 
         },
         beforeRouteEnter(to, from, next) {
             next(vm => {
-
+              console.log(to.params)
             })
         },
         created() {
 
         },
         mounted() {
-            this.initSelect();
+            
         },
         methods: {
-            /**
-             * 初始化下拉框
-             * @return {[type]} [description]
-             */
-            initSelect: function () {
-                standardAsync(this, 'queryBusinessList', {}, res => {
-                    this.init.busTypeList = res.body;
-                });
-                standardAsync(this, 'queryInsTypeList', {}, res => {
-                    this.init.insTypeList = res.body;
-                });
-            },
             /**
              * 表单提交
              * @param  {[type]} key [description]
@@ -111,8 +110,8 @@
             submitForm: function (key) {
                 this.$refs['ruleForm'].validate((valid) => {
                     if (valid) {
-                        this.ruleForm.insId = util.sStore.getItem(util.sStore.MACE_SELECED_INS_ID);
-                        standardAsync(this, 'addUser', this.ruleForm, res => {
+                        this.ruleForm.insId = this.$route.params.insId;
+                        standardAsync(this, 'addAdminUser', this.ruleForm, res => {
                             this.$message.success('保存成功');
                             this.$router.back()
                         });
@@ -123,25 +122,13 @@
                 });
             },
             /**
-             * 获取角色详情
-             * @param  {[type]} id [description]
-             * @return {[type]}    [description]
-             */
-            queryRoleById: function (id) {
-                standardAsync(this, 'queryRoleById', {
-                    roleId: id
-                }, res => {
-                    this.ruleForm = res.body;
-                });
-            },
-            /**
              * 加载数据节点
              * @param  {[type]} node    [description]
              * @param  {[type]} resolve [description]
              * @return {[type]}         [description]
              */
             reloadTree(node, resolve) {
-                standardAsync(this, 'querySecDepartmentTree', {
+                standardAsync(this, 'queryAdminDepTreeDTOList', {
                     parentDepId: node.data ? node.data.depId : '',
                     depId: this.$route.params.depId,
                     notShowLoading: true

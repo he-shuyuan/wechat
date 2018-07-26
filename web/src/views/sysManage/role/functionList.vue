@@ -20,7 +20,7 @@
     </el-aside>
      <el-footer><el-button type="danger" @click.native="confirmDist">确认授权</el-button></el-footer>
      </el-container>
-   <el-main>当前角色:<span style="color:red">{{init.roleName}}</span>
+   <el-main>当前角色:<span style="color:red">{{$route.params.roleName}}</span>
    </el-main>
 </el-container>
 </template>
@@ -40,14 +40,14 @@ export default {
             defaultExpand:[],
             defaultProps: { 
                 label: 'functionName',
-                isLeaf:'childNum'
+                isLeaf:'leaf'
             }
         };
     },
     beforeRouteEnter (to, from, next) {
           next(vm => {
-            vm.init.roleId = to.params.roleId;
-            vm.init.roleName = to.params.roleName;
+         /*   vm.init.roleId = to.params.roleId;
+            vm.init.roleName = to.params.roleName;*/
           })
       },
     mounted(){
@@ -61,23 +61,19 @@ export default {
          * @return {[type]}         [description]
          */
         reloadTree(node,resolve){
-           standardAsync(this,'queryFunctionDistList',
+           standardAsync(this,'queryAdminRoleFunDTOTreeList',
             {busTypeId:this.$route.params.busTypeId
-            ,functionParentId:node.data?node.data.functionId:"",
+            ,parentId:node.data?node.data.functionId:"",
             roleId:this.$route.params.roleId
             ,notShowLoading:true},res=>{
                res.body.forEach(ob=>{
-                  if(ob.childNum >0){
-                     ob.childNum = false;
+                  if(!ob.leaf){
                      this.defaultExpand.push(ob.functionId)
-                  }else{
-                     ob.childNum = true;
                   }
-                  if(ob.hasSelected == '1'){
+                  if(ob.hasSelected){
                     this.defaultSelect.push(ob.functionId);
                   }
                 })
-               console.log(res.body);
                 resolve(res.body);
            })
         },
@@ -92,7 +88,7 @@ export default {
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-            standardAsync(_this,'addFunctionRoleList',{roleId:_this.$route.params.roleId,functionIdList:_this.$refs.tree.getCheckedKeys()},res=>{
+            standardAsync(_this,'addAuthFunctionList',{roleId:_this.$route.params.roleId,functionIdList:_this.$refs.tree.getCheckedKeys()},res=>{
                  _this.$message.success('授权成功')
                 _this.$router.push({name:'roleManage'})
             });
