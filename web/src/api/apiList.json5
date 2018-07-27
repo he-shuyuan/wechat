@@ -27,4 +27,5 @@
   removeAdminDepUser:'/back/adminUserService/removeAdminDepUser',
   queryAdminRoleFunDTOTreeList:'/back/adminRoleFunctionService/queryAdminRoleFunDTOTreeList',
   addAuthFunctionList:'/back/adminRoleFunctionService/addAuthFunctionList',
+  pageQueryAdminUserRoleList:'/back/adminUserRoleService/pageQueryAdminUserRoleList',
 }

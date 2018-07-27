@@ -9,7 +9,7 @@
       <el-tab-pane label="已分配">
        <mc-table ref="recyleTable" stripe :formOpt="formOpt" :columns="columns" 
        type="selection"
-       method="pageQuerySecUserRoleList" :params="{isDist:'0'
+       method="pageQueryAdminUserRoleList" :params="{dist:'Y'
        ,depId:$route.params.depId,
        userId:$route.params.userId}" showAdd addBtnText="批量回收"
         :btnData="{addBtnStyle:'background-color:#f56c6c'}"
@@ -24,7 +24,7 @@
       <el-tab-pane label="未分配">
           <mc-table ref="addTable" stripe :formOpt="formOpt" :columns="columns" 
            type="selection"
-       method="pageQuerySecUserRoleList" :params="{isDist:'1',depId:$route.params.depId,
+       method="pageQueryAdminUserRoleList" :params="{dist:'N',depId:$route.params.depId,
        userId:$route.params.userId}" showAdd addBtnText="批量分配"
        @addEvent="addRole(init.addSelectList)"
        @selection-change="addSelectList"> 

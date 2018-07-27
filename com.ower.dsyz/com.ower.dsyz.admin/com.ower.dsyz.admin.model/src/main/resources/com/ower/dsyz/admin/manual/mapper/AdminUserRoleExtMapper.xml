@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ower.dsyz.admin.manual.dao.AdminUserRoleExtMapper">
+	<select id="pageQueryAdminUserRoleList" parameterType="com.ower.dsyz.admin.manual.dto.AdminUserRoleDTO"
+		resultType="com.ower.dsyz.admin.manual.dto.AdminUserRoleDTO">
+		SELECT DISTINCT
+		t.role_id as roleId,
+		t.role_name as roleName,
+		t.role_code as roleCode,
+		t.bus_type_id as busTypeId
+		from t_admin_role t
+		left JOIN t_admin_ins_role t3 on t.role_id=t3.role_id
+		LEFT JOIN t_admin_department t4 on t3.ins_id= t4.ins_id
+		left JOIN t_admin_dep_user t5 on t4.dep_id = t5.dep_id
+		where
+		t5.is_valid = 'Y'
+	    <if test="userId !=null and userId !=''">
+	       	and t5.user_id =#{userId,jdbcType=VARCHAR}
+	    </if>
+	    <if test="insId !=null and insId !=''">
+	       	and t4.ins_id =#{insId,jdbcType=VARCHAR}
+	    </if>
+	    <if test="dist=='Y'.toString() and userId !=null and userId !=''">
+	       and t.role_id in
+		   (select t2.role_id from t_admin_user_role t2 where t2.user_id= #{userId,jdbcType=VARCHAR})
+	    </if>
+		<if test="dist=='N'.toString() and userId !=null and userId !=''">
+	       and t.role_id  not in
+		   (select t2.role_id from t_admin_user_role t2 where t2.user_id= #{userId,jdbcType=VARCHAR})
+	    </if>
+	</select>
+</mapper>

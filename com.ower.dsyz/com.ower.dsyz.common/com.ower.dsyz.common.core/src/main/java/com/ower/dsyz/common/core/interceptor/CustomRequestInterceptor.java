@@ -15,6 +15,7 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -49,6 +50,7 @@ import com.ower.dsyz.common.core.valid.service.ICustomValidService;
  */
 @Aspect
 @Component
+@Order(999999)
 public class CustomRequestInterceptor {
 
 	private static final String USER_ID = "userId";

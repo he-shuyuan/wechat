@@ -3,11 +3,14 @@
  */
 package com.ower.dsyz.admin.rest.back;
 
+import javax.annotation.Resource;
+
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.ower.dsyz.admin.manual.dto.AdminUserRoleDTO;
 import com.ower.dsyz.admin.manual.dto.AdminUserRoleDistDTO;
+import com.ower.dsyz.admin.service.IAdminUserRoleService;
 import com.ower.dsyz.common.core.annotation.EnableValid;
 import com.ower.dsyz.common.core.page.PageQueryResult;
 import com.ower.dsyz.common.core.page.PageRequestParam;
@@ -31,6 +34,9 @@ import com.ower.dsyz.common.core.response.CustomResponse;
 @RequestMapping("/back/adminUserRoleService/")
 public class AdminUserRoleResource {
     
+	@Resource
+	IAdminUserRoleService adminUserRoleService;
+	
     /**
      * 分页获取用户角色信息
      * @param param
@@ -38,7 +44,7 @@ public class AdminUserRoleResource {
      */
     @RequestMapping("pageQueryAdminUserRoleList")
     public CustomResponse<PageQueryResult<AdminUserRoleDTO>> pageQueryAdminUserRoleList(@RequestBody PageRequestParam param){
-        return null;
+        return CustomResponse.success(adminUserRoleService.pageQueryAdminUserRoleList(param));
     }
     
     /**

@@ -3,7 +3,6 @@
  */
 package com.ower.dsyz.admin.manual.dto;
 
-
 /**
  * <pre>
  * TODO。
@@ -21,46 +20,54 @@ package com.ower.dsyz.admin.manual.dto;
 
 public class AdminUserRoleDTO extends AdminRoleDTO {
 
-    /**
-     * serialVersionUID:TODO。
-     */
-    private static final long serialVersionUID = 1L;
+	/**
+	 * serialVersionUID:TODO。
+	 */
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * 用户id
-     */
-    private String userId;
-    
-    /**
-     * 是否分配
-     */
-    private String isDist;
+	/**
+	 * 用户id
+	 */
+	private String userId;
 
+	/**
+	 * 机构id
+	 */
+	private String insId;
+	/**
+	 * 是否分配
+	 */
+	private String dist;
     
-    public String getUserId() {
-        return userId;
-    }
+	public String getUserId() {
+		return userId;
+	}
 
-    
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 
-    
-    public String getIsDist() {
-        return isDist;
-    }
+	public String getInsId() {
+		return insId;
+	}
 
-    
-    public void setIsDist(String isDist) {
-        this.isDist = isDist;
-    }
+	public void setInsId(String insId) {
+		this.insId = insId;
+	}
 
 
-    @Override
-    public String toString() {
-        return "AdminUserRoleDTO [userId=" + userId + ", isDist=" + isDist + "]";
-    }
-    
-    
+	public String getDist() {
+		return dist;
+	}
+
+	public void setDist(String dist) {
+		this.dist = dist;
+	}
+
+	@Override
+	public String toString() {
+		return "AdminUserRoleDTO [userId=" + userId + ", insId=" + insId + ", dist=" + dist + "]";
+	}
+
+
 }
