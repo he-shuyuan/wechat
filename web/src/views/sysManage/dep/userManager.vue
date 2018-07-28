@@ -18,7 +18,7 @@
        </template> 
        <template slot-scope="scope" slot="handle">
         <el-button type="primary" size="mini"
-         @click.native="$router.push({name:'userRole',params:{depId:params.insId,userId:scope.row.userId,userName:scope.row.userName}})">角色分配</el-button>
+         @click.native="$router.push({name:'userRole',params:{insId:params.insId,userId:scope.row.userId,userName:scope.row.userName}})">角色分配</el-button>
         <el-button v-if="scope.row.isValid=='Y'" 
            type="warning" size="mini"  @click.native="changeStatus('N',scope.row.userId)">禁用</el-button>
         <el-button v-else type="warning" size="mini" @click.native="changeStatus('Y',scope.row.userId)">启用</el-button>

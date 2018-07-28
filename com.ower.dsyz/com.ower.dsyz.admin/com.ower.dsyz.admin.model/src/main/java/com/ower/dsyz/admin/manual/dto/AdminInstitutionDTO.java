@@ -150,6 +150,12 @@ public class AdminInstitutionDTO implements Serializable{
      */
     private String insTypeName;
     
+    /**
+     * 路径
+     */
+    private String pathCode;
+    
+    
     public String getInsId() {
 		return insId;
 	}
@@ -309,37 +315,24 @@ public class AdminInstitutionDTO implements Serializable{
 	public void setInsTypeName(String insTypeName) {
 		this.insTypeName = insTypeName;
 	}
+ 
+	public String getPathCode() {
+		return pathCode;
+	}
 
-	/**
-     *
-     */
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", insId=").append(insId);
-        sb.append(", insName=").append(insName);
-        sb.append(", insShortName=").append(insShortName);
-        sb.append(", organizationCode=").append(organizationCode);
-        sb.append(", typeId=").append(typeId);
-        sb.append(", busTypeId=").append(busTypeId);
-        sb.append(", industryType=").append(industryType);
-        sb.append(", legal=").append(legal);
-        sb.append(", contact=").append(contact);
-        sb.append(", phone=").append(phone);
-        sb.append(", insManager=").append(insManager);
-        sb.append(", insManagerPhone=").append(insManagerPhone);
-        sb.append(", address=").append(address);
-        sb.append(", addrWeb=").append(addrWeb);
-        sb.append(", insLogoBackgroud=").append(insLogoBackgroud);
-        sb.append(", insLogo=").append(insLogo);
-        sb.append(", remark=").append(remark);
-        sb.append(", isValid=").append(isValid);
-        sb.append(", busTypeName=").append(busTypeName);
-        sb.append(", insTypeName=").append(insTypeName);
-        sb.append("]");
-        return sb.toString();
-    }
+	public void setPathCode(String pathCode) {
+		this.pathCode = pathCode;
+	}
+
+	@Override
+	public String toString() {
+		return "AdminInstitutionDTO [insId=" + insId + ", insName=" + insName + ", insShortName=" + insShortName
+				+ ", organizationCode=" + organizationCode + ", typeId=" + typeId + ", busTypeId=" + busTypeId
+				+ ", industryType=" + industryType + ", legal=" + legal + ", contact=" + contact + ", phone=" + phone
+				+ ", insManager=" + insManager + ", insManagerPhone=" + insManagerPhone + ", address=" + address
+				+ ", addrWeb=" + addrWeb + ", insLogoBackgroud=" + insLogoBackgroud + ", insLogo=" + insLogo
+				+ ", remark=" + remark + ", isValid=" + isValid + ", busTypeName=" + busTypeName + ", insTypeName="
+				+ insTypeName + ", pathCode=" + pathCode + "]";
+	}
+    
 }

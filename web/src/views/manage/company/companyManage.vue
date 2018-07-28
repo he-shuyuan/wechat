@@ -9,8 +9,10 @@
               @addEvent="$router.push({name: 'addorModifyCompany', params: {name:'addCompany'}})"
               method="pageQueryAdminInstitutionDTOList" :params="params">
         <template slot-scope="scope" slot="handle">
-            <el-button size="mini" type="danger" v-if="isShowButton"
+            <el-button size="mini" type="danger"
             @click.native="$router.push({name:'userView',params:{depId:scope.row.insId,pathCode:scope.row.pathCode,depName:scope.row.insName}})">用户管理</el-button>
+            <el-button size="mini" type="warning"
+            @click.native="$router.push({name:'insRole',params:{insId:scope.row.insId}})">查看角色</el-button>
             <el-button size="mini" type="success" @click="editCompany(scope.row)">编辑</el-button>
             <el-button v-if="true" size="mini" type="danger" @click="deleteCompany(scope.row)">删除</el-button>
         </template>

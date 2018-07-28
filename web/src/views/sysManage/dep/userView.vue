@@ -5,7 +5,9 @@
    <el-tag @click.native="$router.go(-1)" class="_back">返回</el-tag>
   </el-header>
   <el-main>
-      <user-manager :depId="$route.params.depId"></user-manager>
+      <user-manager :depId="$route.params.depId"
+         :pathCode="$route.params.pathCode"
+         :insId="$route.params.depId"></user-manager>
   </el-main>
   </el-container>
 </template>
@@ -25,7 +27,7 @@ export default {
         }
     },
     mounted(){
-     
+     console.log(this.$route.params.pathCode,this.$route.params.depId)
     },
     methods:{
    

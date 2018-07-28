@@ -20,6 +20,8 @@
 		t.ins_logo as insLogo,
 		t.contact as contact,
 		t.is_valid as isValid,
+		(select t5.path_code from t_admin_department t5 where t5.dep_id=t.ins_id)
+		as pathCode,
 		t.legal as legal
 		from t_admin_institution t
 		LEFT JOIN t_admin_business t2 on t.bus_type_id = t2.bus_type_id

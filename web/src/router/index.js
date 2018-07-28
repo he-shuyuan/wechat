@@ -236,7 +236,14 @@ export const constantRouterMap = [
                 component: () =>
                     import ('@/views/sysManage/role/userRole'),
                 meta: { title: '分配角色' },
-            }, {
+            }, 
+             {
+                path: 'insRole',
+                name: 'insRole',
+                component: () =>
+                    import ('@/views/sysManage/role/insRole'),
+                meta: { title: '机构角色' },
+            },{
                 path: 'showMenu',
                 name: 'showMenu',
                 component: () =>

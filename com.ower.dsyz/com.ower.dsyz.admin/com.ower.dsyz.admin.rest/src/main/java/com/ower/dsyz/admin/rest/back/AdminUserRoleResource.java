@@ -53,8 +53,8 @@ public class AdminUserRoleResource {
      * @return CustomResponse<?>
      */
     @RequestMapping("distAdminUserRole")
-    public CustomResponse<?> distAdminUserRole(@RequestBody @EnableValid AdminUserRoleDistDTO param){
-        return null;
+    public CustomResponse<Integer> distAdminUserRole(@RequestBody @EnableValid AdminUserRoleDistDTO param){
+        return CustomResponse.success(adminUserRoleService.distAdminUserRole(param));
     }
     
     /**
@@ -63,7 +63,7 @@ public class AdminUserRoleResource {
      * @return CustomResponse<?>
      */
     @RequestMapping("recyleAdminUserRole")
-    public CustomResponse<?> recyleAdminUserRole(@RequestBody @EnableValid AdminUserRoleDistDTO param){
-        return null;
+    public CustomResponse<Integer> recyleAdminUserRole(@RequestBody @EnableValid AdminUserRoleDistDTO param){
+        return  CustomResponse.success(adminUserRoleService.recyleAdminUserRole(param));
     }
 }

@@ -28,4 +28,6 @@
   queryAdminRoleFunDTOTreeList:'/back/adminRoleFunctionService/queryAdminRoleFunDTOTreeList',
   addAuthFunctionList:'/back/adminRoleFunctionService/addAuthFunctionList',
   pageQueryAdminUserRoleList:'/back/adminUserRoleService/pageQueryAdminUserRoleList',
+  distAdminUserRole:'/back/adminUserRoleService/distAdminUserRole',
+  recyleAdminUserRole:'/back/adminUserRoleService/recyleAdminUserRole',
 }
