@@ -26,11 +26,6 @@ public class AdminInsRoleDTO extends AdminRoleDTO {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * 用户id
-	 */
-	private String userId;
-
-	/**
 	 * 机构id
 	 */
 	private String insId;
@@ -38,15 +33,8 @@ public class AdminInsRoleDTO extends AdminRoleDTO {
 	 * 是否分配
 	 */
 	private String dist;
-    
-	public String getUserId() {
-		return userId;
-	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
+	
 	public String getInsId() {
 		return insId;
 	}
@@ -64,10 +52,10 @@ public class AdminInsRoleDTO extends AdminRoleDTO {
 		this.dist = dist;
 	}
 
-	@Override
-	public String toString() {
-		return "AdminUserRoleDTO [userId=" + userId + ", insId=" + insId + ", dist=" + dist + "]";
-	}
+    @Override
+    public String toString() {
+        return "AdminInsRoleDTO [insId=" + insId + ", dist=" + dist + "]";
+    }
 
 
 }

@@ -30,4 +30,7 @@
   pageQueryAdminUserRoleList:'/back/adminUserRoleService/pageQueryAdminUserRoleList',
   distAdminUserRole:'/back/adminUserRoleService/distAdminUserRole',
   recyleAdminUserRole:'/back/adminUserRoleService/recyleAdminUserRole',
+  pageQueryAdminInsRoleList:'/back/adminInsRoleService/pageQueryAdminInsRoleList',
+  distAdminInsRole:'/back/adminInsRoleService/distAdminInsRole',
+  recyleAdminInsRole:'/back/adminInsRoleService/recyleAdminInsRole',
 }

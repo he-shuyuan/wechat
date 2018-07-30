@@ -9,9 +9,8 @@
       <el-tab-pane label="已分配">
        <mc-table ref="recyleTable" stripe :formOpt="formOpt" :columns="columns" 
        type="selection"
-       method="pageQueryAdminUserRoleList" :params="{dist:'Y'
-       ,insId:$route.params.insId,
-       userId:$route.params.userId}" showAdd addBtnText="批量回收"
+       method="pageQueryAdminInsRoleList" :params="{dist:'Y'
+       ,insId:$route.params.insId}" showAdd addBtnText="批量回收"
         :btnData="{addBtnStyle:'background-color:#f56c6c'}"
         @addEvent="recyleRole(init.recyleSelectList)"
         @selection-change="recyleSelectList"
@@ -24,8 +23,7 @@
       <el-tab-pane label="未分配">
           <mc-table ref="addTable" stripe :formOpt="formOpt" :columns="columns" 
            type="selection"
-       method="pageQueryAdminUserRoleList" :params="{dist:'N',insId:$route.params.insId,
-       userId:$route.params.userId}" showAdd addBtnText="批量分配"
+       method="pageQueryAdminInsRoleList" :params="{dist:'N',insId:$route.params.insId}" showAdd addBtnText="批量分配"
        @addEvent="addRole(init.addSelectList)"
        @selection-change="addSelectList"> 
       <template slot-scope="scope" slot="handle">
@@ -126,7 +124,7 @@
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                     standardAsync(_this,'recyleAdminUserRole',{userId:_this.$route.params.userId,
+                     standardAsync(_this,'recyleAdminInsRole',{insId:_this.$route.params.insId,
                       roleIdList:list},res=>{
                          _this.$message.success('回收成功');
                          _this.$refs.recyleTable.searchHandle();
@@ -150,7 +148,7 @@
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                     standardAsync(_this,'distAdminUserRole',{userId:_this.$route.params.userId,
+                     standardAsync(_this,'distAdminInsRole',{insId:_this.$route.params.insId,
                       roleIdList:list},res=>{
                          _this.$message.success('分配成功');
                          _this.$refs.addTable.searchHandle();

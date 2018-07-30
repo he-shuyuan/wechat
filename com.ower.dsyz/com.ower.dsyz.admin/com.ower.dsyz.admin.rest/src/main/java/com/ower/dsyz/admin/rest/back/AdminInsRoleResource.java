@@ -1,29 +1,31 @@
 package com.ower.dsyz.admin.rest.back;
 
+import javax.annotation.Resource;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.ower.dsyz.admin.manual.dto.AdminUserRoleDTO;
-import com.ower.dsyz.admin.manual.dto.AdminUserRoleDistDTO;
+import com.ower.dsyz.admin.manual.dto.AdminInsRoleDTO;
+import com.ower.dsyz.admin.manual.dto.AdminInsRoleDistDTO;
 import com.ower.dsyz.common.core.annotation.EnableValid;
 import com.ower.dsyz.common.core.page.PageQueryResult;
 import com.ower.dsyz.common.core.page.PageRequestParam;
 import com.ower.dsyz.common.core.response.CustomResponse;
+import com.ower.dsyz.admin.service.IAdminInsRoleService;
 
 @RestController
 @RequestMapping("/back/adminInsRoleService/")
 public class AdminInsRoleResource {
 
-	
+	@Resource
+	IAdminInsRoleService  adminInsRoleService;
     /**
      * 分页获取机构角色信息
      * @param param
      * @return CustomResponse<?>
      */
     @RequestMapping("pageQueryAdminInsRoleList")
-    public CustomResponse<PageQueryResult<AdminUserRoleDTO>> pageQueryAdminInsRoleList(@RequestBody PageRequestParam param){
-        return null;
+    public CustomResponse<PageQueryResult<AdminInsRoleDTO>> pageQueryAdminInsRoleList(@RequestBody PageRequestParam param){
+        return CustomResponse.success(adminInsRoleService.pageQueryAdminInsRoleList(param));
     }
     
     /**
@@ -31,9 +33,9 @@ public class AdminInsRoleResource {
      * @param param
      * @return CustomResponse<?>
      */
-    @RequestMapping("distAdminUserRole")
-    public CustomResponse<Integer> distAdminUserRole(@RequestBody @EnableValid AdminUserRoleDistDTO param){
-        return null;
+    @RequestMapping("distAdminInsRole")
+    public CustomResponse<Integer> distAdminInsRole(@RequestBody @EnableValid AdminInsRoleDistDTO adminInsRoleDistDTO){
+        return CustomResponse.success(adminInsRoleService.disAdminInsRole(adminInsRoleDistDTO));
     }
     
     /**
@@ -41,8 +43,8 @@ public class AdminInsRoleResource {
      * @param param
      * @return CustomResponse<?>
      */
-    @RequestMapping("recyleAdminUserRole")
-    public CustomResponse<Integer> recyleAdminUserRole(@RequestBody @EnableValid AdminUserRoleDistDTO param){
-        return  null;
+    @RequestMapping("recyleAdminInsRole")
+    public CustomResponse<Integer> recyleAdminInsRole(@RequestBody @EnableValid AdminInsRoleDistDTO adminInsRoleDistDTO){
+        return CustomResponse.success(adminInsRoleService.batchDelAdminInsRole(adminInsRoleDistDTO));
     }
 }

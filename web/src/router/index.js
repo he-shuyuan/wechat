@@ -44,61 +44,6 @@ export const constantRouterMap = [
             meta: { title: '首页', requiresAuth: true }
         }, ],
     },
-
-    {
-        path: '/monitor',
-        component: Layout,
-        redirect: 'noredirect',
-        name: 'monitor',
-        meta: { title: '监测', icon: 'dashboard' },
-        children: [{
-            path: 'tree1',
-            name: 'tree1',
-            component: () =>
-                import ('@/views/tree/index'),
-            meta: { title: '监测概览', requiresAuth: true },
-        }, {
-            path: 'tree2',
-            name: 'tree2',
-            component: () =>
-                import ('@/views/tree/index'),
-            meta: { title: '机械位置', requiresAuth: true },
-        }, {
-            path: 'netManage',
-            name: 'netManage',
-            component: () =>
-                import ('@/views/monitor/netManage'),
-            meta: { title: '入网管理', requiresAuth: true, auth: true },
-        }, ],
-    },
-
-    {
-        path: '/reports',
-        component: Layout,
-        redirect: 'noredirect',
-        name: 'reports',
-        meta: { title: '报表', icon: 'form2' },
-        children: [{
-            path: 'tree4',
-            name: 'tree4',
-            component: () =>
-                import ('@/views/tree/index'),
-            meta: { title: '综合查询', requiresAuth: true },
-        }, {
-            path: 'tree5',
-            name: 'tree5',
-            component: () =>
-                import ('@/views/tree/index'),
-            meta: { title: '监测统计', requiresAuth: true },
-        }, {
-            path: 'tree6',
-            name: 'tree6',
-            component: () =>
-                import ('@/views/tree/index'),
-            meta: { title: '统计报表', requiresAuth: true },
-        }, ],
-    },
-
     {
         path: '/manage',
         component: Layout,
@@ -106,90 +51,6 @@ export const constantRouterMap = [
         name: 'manage',
         meta: { title: '管理', icon: 'manage' },
         children: [
-            {
-                path: 'machineManage',
-                name: 'machineManage',
-                component: () => import('@/views/manage/machineManage'),
-                meta: { title: '机械管理',requiresAuth:true,auth:true},
-                children:[
-                    {
-                        path: 'detail',
-                        name: 'machineDetail',
-                        component: () => import('@/views/machineDetail/index'),
-                        meta: { title: '机械详情',requiresAuth:true },
-                        hidden: true,
-                    },
-                    {
-                        path: 'networkAccessInfo',
-                        name: 'networkAccessInfo',
-                        component: () => import('@/views/machineDetail/networkAccessInfo'),
-                        meta: { title: '机械入网信息',requiresAuth:true },
-                        hidden: true,
-                    },
-                    {
-                        path: 'edit',
-                        name: 'editMachine',
-                        component: () => import('@/views/machineDetail/editMachine'),
-                        meta: { title: '编辑机械信息',requiresAuth:true },
-                        hidden: true,
-                    },
-                ]
-            },
-            {
-                path: 'project',
-                name: 'project',
-                component: () => import('@/views/project/index'),
-                meta: { title: '项目管理',requiresAuth:true ,auth:true},
-                children: [
-                    {
-                        path: 'edit',
-                        name: 'editProject',
-                        component: () => import('@/views/project/editProject'),
-                        meta: { title: '项目编辑',requiresAuth:true },
-                        hidden: true,
-                    },
-                    {
-                        path: 'detail',
-                        name: 'projectDetail',
-                        component: () => import('@/views/project/projectDetail'),
-                        meta: { title: '项目详情',requiresAuth:true },
-                        hidden: true,
-                    },
-                    {
-                        path: 'editM',
-                        name: 'editM',
-                        component: () => import('@/views/project/editMachine'),
-                        meta: { title: '机械编辑',requiresAuth:true },
-                        hidden: true,
-                    },
-                ]
-            },
-            {
-                path: 'contract',
-                name: 'contract',
-                component: () => import('@/views/manage/contract/index'),
-                meta: { title: '合同管理',requiresAuth:true ,auth:true},
-                children:[
-                            {
-                                path: 'op/:op',
-                                name: 'addOrUpdate',
-                                component: () => import('@/views/manage/contract/addOrUpdate'),
-                                meta: { title: '修改合同',requiresAuth:true },
-                            },
-                            {
-                                path: 'detail',
-                                name: 'detail',
-                                component: () => import('@/views/manage/contract/detail'),
-                                meta: { title: '合同详情' },
-                            },
-                             {
-                                path: 'progress',
-                                name: 'progress',
-                                component: () => import('@/views/manage/contract/progress'),
-                                meta: { title: '进度款申报',requiresAuth:true },
-                            },
-                        ]
-            },
             {
                 path: 'companyManage',
                 name: 'companyManage',
@@ -203,12 +64,6 @@ export const constantRouterMap = [
                         meta: { title: '',requiresAuth:true },
                     },
                 ]
-            },
-            {
-                path: 'FTUregister',
-                name: 'FTUregister',
-                component: () => import('@/views/manage/FTUregister'),
-                meta: { title: '终端注册',requiresAuth:true ,auth:true},
             },
         ],
     },
