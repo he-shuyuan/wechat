@@ -58,12 +58,18 @@
         },
         methods: {
             generateRoute() {
-                for (let item of this.authMenuList) {
+                /*for (let item of this.authMenuList) {
                     if (this.$route.name && this.$route.name == item) {
                         return this.$route
                     }
-                }
-                return false
+                }*/
+            /*   console.log('212121',Array.from(this.visitedViews))
+               for(let tag in Array.from(this.visitedViews)){
+                      if (this.$route.name && this.$route.name == tag.name) {
+                        return this.$route
+                    }
+               }*/
+                return  this.$route
             },
             isActive(route) {
                 return route.path === this.$route.path || route.name === this.$route.name

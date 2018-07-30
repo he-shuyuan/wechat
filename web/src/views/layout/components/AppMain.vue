@@ -14,6 +14,9 @@
             // key() {
             //   return this.$route.name !== undefined ? this.$route.name + +new Date() : this.$route + +new Date()
             // }
+        cachedViews() {
+                 return this.$store.state.tagsView.cachedViews
+            },
         },
         mounted() {
             let bodyHeight = document.body.offsetHeight

@@ -11,9 +11,9 @@ const tagsView = {
         path: view.path,
         title: view.meta.title || '无标题'
       })
-      if (!view.meta.noCache) {
+      //if (!view.meta.noCache) {
         state.cachedViews.push(view.name)
-      }
+      //}
     },
     DEL_VISITED_VIEWS: (state, view) => {
       for (const [i, v] of state.visitedViews.entries()) {
