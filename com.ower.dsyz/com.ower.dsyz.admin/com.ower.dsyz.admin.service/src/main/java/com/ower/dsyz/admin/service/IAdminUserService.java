@@ -4,6 +4,7 @@
 package com.ower.dsyz.admin.service;
 
 import java.util.List;
+import com.ower.dsyz.admin.manual.dto.AdminUserDTO;
 import com.ower.dsyz.admin.manual.dto.AdminUserDepDTO;
 import com.ower.dsyz.common.core.page.PageQueryResult;
 import com.ower.dsyz.common.core.page.PageRequestParam;
@@ -62,4 +63,12 @@ public interface IAdminUserService {
      * @return AdminUserDepDTO
      */
     AdminUserDepDTO queryUserDepInfo(AdminUserDepDTO adminUserDepDTO);
+    
+    
+    /**
+     * 分页查询用户
+     * @param param
+     * @return List<AdminFunctionDTO>
+     */
+    List<AdminUserDTO> queryAdminUserDTOList(AdminUserDTO adminUserDTO);
 }

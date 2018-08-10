@@ -3,11 +3,13 @@
  */
 package com.ower.dsyz.admin.rest.back;
 
+import javax.annotation.Resource;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.ower.dsyz.admin.manual.dto.AdminUserDTO;
 import com.ower.dsyz.admin.manual.dto.UserLoginResuest;
+import com.ower.dsyz.admin.service.IAdminUserLoginService;
 import com.ower.dsyz.common.core.annotation.EnableValid;
 import com.ower.dsyz.common.core.response.CustomResponse;
 
@@ -29,6 +31,8 @@ import com.ower.dsyz.common.core.response.CustomResponse;
 @RequestMapping("/back/adminUserLoginService/")
 public class AdminUserLoginResource {
 
+    @Resource
+    IAdminUserLoginService adminUserLoginService;
     
     /**
      * 用户登录
@@ -36,6 +40,6 @@ public class AdminUserLoginResource {
      */
     @RequestMapping("login")
     public CustomResponse<AdminUserDTO> login(@RequestBody @EnableValid UserLoginResuest param){
-        return null;
+        return CustomResponse.success(adminUserLoginService.login(param));
     }
 }

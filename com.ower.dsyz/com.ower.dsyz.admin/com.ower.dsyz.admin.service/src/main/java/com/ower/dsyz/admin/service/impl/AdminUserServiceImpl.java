@@ -15,6 +15,7 @@ import com.ower.dsyz.admin.auto.dao.AdminUserLoginMapper;
 import com.ower.dsyz.admin.auto.dao.AdminUserMapper;
 import com.ower.dsyz.admin.auto.model.AdminUser;
 import com.ower.dsyz.admin.auto.model.AdminUserLogin;
+import com.ower.dsyz.admin.manual.constant.AdminConstant;
 import com.ower.dsyz.admin.manual.dao.AdminUserExtMapper;
 import com.ower.dsyz.admin.manual.dto.AdminDepUserDTO;
 import com.ower.dsyz.admin.manual.dto.AdminUserDTO;
@@ -24,6 +25,7 @@ import com.ower.dsyz.admin.service.IAdminUserService;
 import com.ower.dsyz.common.core.exception.CustomRunTimeException;
 import com.ower.dsyz.common.core.page.PageQueryResult;
 import com.ower.dsyz.common.core.page.PageRequestParam;
+import com.ower.dsyz.common.core.util.HashUtil;
 import com.ower.dsyz.common.core.util.IDUtil;
 
 /**
@@ -94,6 +96,8 @@ public class AdminUserServiceImpl implements IAdminUserService {
             //登录表
             AdminUserLogin adminUserLogin = new AdminUserLogin();
             BeanUtils.copyProperties(adminUserDepDTO, adminUserLogin);
+            adminUserLogin.setSalt(IDUtil.getUUID());
+            adminUserLogin.setPassword(HashUtil.md5Hex(AdminConstant.UserConstant.DEFAULT_PASSWORD+adminUserLogin.getSalt()));
             adminUserLoginMapper.insertSelective(adminUserLogin);
         }
         //用户所属部门信息
@@ -192,5 +196,11 @@ public class AdminUserServiceImpl implements IAdminUserService {
             }
             return false;
         }
+    }
+
+    @Override
+    public List<AdminUserDTO> queryAdminUserDTOList(AdminUserDTO adminUserDTO) {
+        
+        return adminUserExtMapper.queryAdminUserDTOList(adminUserDTO);
     }
 }

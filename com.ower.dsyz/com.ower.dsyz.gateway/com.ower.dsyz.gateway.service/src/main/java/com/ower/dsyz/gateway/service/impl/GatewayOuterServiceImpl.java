@@ -22,7 +22,6 @@ public class GatewayOuterServiceImpl extends AbstractGatewayLevelService {
 		logger.info("{} 级别，不能需要登陆", request.getServiceLevel());
 		ParamCheckUtil.checkEmpty(request.getSign(), "签名不能为空");
 		Map<String, String> header = new HashMap<>();
-		//header.put("userId", userId);
 		return header;
 	}
 

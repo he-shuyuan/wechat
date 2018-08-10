@@ -1,5 +1,5 @@
 /**
- * Copyright(c) Foresee Science & Technology Ltd. 
+ * Copyright(c) Foresee Science & Technology Ltd.
  */
 package com.ower.dsyz.admin.manual.constant;
 
@@ -19,5 +19,21 @@ package com.ower.dsyz.admin.manual.constant;
  */
 
 public enum LoginType {
-  pass,eCode,pCode
+    pass("pass"), eCode("eCode"), pCode("pCode");
+
+    private String value;
+
+
+    private LoginType(String value) {
+        this.value = value;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
 }

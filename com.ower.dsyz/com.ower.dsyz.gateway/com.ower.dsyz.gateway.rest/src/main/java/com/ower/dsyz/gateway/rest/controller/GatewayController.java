@@ -87,17 +87,17 @@ public class GatewayController {
     {
     	GatewayRequest gatewayRequest= new GatewayRequest();
     	String url = request.getRequestURI().substring(1);
-    	gatewayRequest.setAppId(appId);
-    	gatewayRequest.setAppName(appName);
-    	gatewayRequest.setParam(param);
-    	gatewayRequest.setRequestId(requestId);
-    	gatewayRequest.setServiceLevel(serviceLevel);
-    	gatewayRequest.setServiceMethod(serviceMethod);
-    	gatewayRequest.setExtMenthod(extMenthod);
-    	gatewayRequest.setServiceName(serviceName);
-    	gatewayRequest.setSign(sign);
-    	gatewayRequest.setToken(token);
-    	gatewayRequest.setUrl(url);
+    	gatewayRequest.setAppId(appId);//区分微服务
+    	gatewayRequest.setAppName(appName);//微服务名称
+    	gatewayRequest.setParam(param);//post 请求参数
+    	gatewayRequest.setRequestId(requestId);//请求标识
+    	gatewayRequest.setServiceLevel(serviceLevel);//url请求级别
+    	gatewayRequest.setServiceMethod(serviceMethod);//url请求方法
+    	gatewayRequest.setExtMenthod(extMenthod);//url请求拓展方法
+    	gatewayRequest.setServiceName(serviceName);//controller名称
+    	gatewayRequest.setSign(sign);//签名
+    	gatewayRequest.setToken(token);//登录标志
+    	gatewayRequest.setUrl(url);//url
       
       return gatewayRequestFactory.handleRequest(gatewayRequest);
     }
