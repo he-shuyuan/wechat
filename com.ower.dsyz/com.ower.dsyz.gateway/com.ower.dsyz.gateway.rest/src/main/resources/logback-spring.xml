@@ -21,7 +21,7 @@
 	</appender>
 	<!-- 测试环境+开发环境. 多个使用逗号隔开. -->
 	<springProfile name="test,dev,pr">
-		<logger name="com.foresee.mobile" level="${devLogLevel}" />
+		<logger name="com.ower.dsyz" level="${devLogLevel}" />
 		<logger name="com.ibatis" level="${devLogLevel}" />
 		<logger name="java.sql" level="${devLogLevel}" />
 		<logger name="java.sql.Connection" level="${devLogLevel}" />
@@ -37,7 +37,7 @@
 	
 	<!-- 生产环境. -->
 	<springProfile name="pro,px">
-		<logger name="com.foresee.mobile" level="${proLogLevel}" />
+		<logger name="com.ower.dsyz" level="${proLogLevel}" />
 		<logger name="com.ibatis" level="${proLogLevel}" />
 		<logger name="java.sql" level="${proLogLevel}" />
 		<logger name="com.getsentry.raven" level="INFO" />

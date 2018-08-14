@@ -1,6 +1,6 @@
 package com.ower.dsyz.gateway.service;
 
-import com.ower.dsyz.gateway.model.GatewayRequest;
+import com.ower.dsyz.gateway.manual.dto.GatewayRequest;
 
 /**
  * 网关层级分派工厂
@@ -10,11 +10,11 @@ import com.ower.dsyz.gateway.model.GatewayRequest;
 public interface IGatewayRequestFactory {
 
     /**
-     * 
+     * 处理请求
      * @param request
      * @return
      */
-	Object handleRequest(GatewayRequest request);
+    IGatewayLevelService createRequestHandle(GatewayRequest request);
 
 
 }

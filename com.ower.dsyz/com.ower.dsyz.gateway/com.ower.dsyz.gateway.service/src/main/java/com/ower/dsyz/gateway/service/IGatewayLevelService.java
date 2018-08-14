@@ -1,6 +1,6 @@
 package com.ower.dsyz.gateway.service;
 
-import com.ower.dsyz.gateway.model.GatewayRequest;
+import com.ower.dsyz.gateway.manual.dto.GatewayRequest;
 
 /**
  * 网关层级权限接口
@@ -13,5 +13,10 @@ public interface IGatewayLevelService {
      */
 	public static final String BEAN_NAME_PRIFIX="gatewayLevelService_";
 	
+	/**
+	 * 
+	 * @param request
+	 * @return Object
+	 */
 	Object handleRequestLevel(GatewayRequest request);
 }

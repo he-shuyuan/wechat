@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.ower.dsyz.common.core.request.CustomRequestParam;
-import com.ower.dsyz.gateway.model.GatewayRequest;
+import com.ower.dsyz.gateway.manual.dto.GatewayRequest;
 import com.ower.dsyz.gateway.service.IGatewayRequestFactory;
 
 /**
@@ -66,7 +66,7 @@ public class GatewayController {
     	gatewayRequest.setToken(token);
     	gatewayRequest.setUrl(url);
       
-      return gatewayRequestFactory.handleRequest(gatewayRequest);
+      return gatewayRequestFactory.createRequestHandle(gatewayRequest).handleRequestLevel(gatewayRequest);
     }
     
     
@@ -99,7 +99,7 @@ public class GatewayController {
     	gatewayRequest.setToken(token);//登录标志
     	gatewayRequest.setUrl(url);//url
       
-      return gatewayRequestFactory.handleRequest(gatewayRequest);
+      return gatewayRequestFactory.createRequestHandle(gatewayRequest).handleRequestLevel(gatewayRequest);
     }
     
 }

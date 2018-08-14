@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ower.dsyz.gateway.manual.dao.GatewayAuthUrlExtMapper">
+	<select id="queryGatewayAuthUrlDTOList" parameterType="java.util.List"
+		resultType="com.ower.dsyz.gateway.manual.dto.GatewayAuthUrlDTO">
+		SELECT
+		t.id,
+		t.remark,
+		t.type_id AS typeId,
+		t.url_pattern AS urlPattern,
+		t1.`name` AS NAME,
+		t1.class_name AS className
+		FROM
+		t_gateway_auth_url t
+		LEFT JOIN t_gateway_excute_type t1 ON t.type_id = t1.id
+		where 1=1
+		<foreach collection="list" index="index" item="item" open="and (" separator=" " close=")">
+            <if test="index!=0">
+               or
+            </if>
+             t.url_pattern = #{item,jdbcType=VARCHAR}       
+       </foreach>  
+       order by  t.url_pattern DESC
+	</select>
+</mapper>

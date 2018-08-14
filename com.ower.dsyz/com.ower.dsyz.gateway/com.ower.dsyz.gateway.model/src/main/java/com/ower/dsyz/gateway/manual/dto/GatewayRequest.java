@@ -1,4 +1,4 @@
-package com.ower.dsyz.gateway.model;
+package com.ower.dsyz.gateway.manual.dto;
 
 import java.io.Serializable;
 

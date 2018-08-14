@@ -1,16 +1,19 @@
 package com.ower.dsyz.gateway.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import org.apache.commons.lang3.StringUtils;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.ower.dsyz.common.core.constant.ErrorCodeConstants;
 import com.ower.dsyz.common.core.exception.CustomRunTimeException;
 import com.ower.dsyz.common.core.util.SpringContextUtil;
-import com.ower.dsyz.gateway.model.GatewayRequest;
+import com.ower.dsyz.gateway.manual.dto.GatewayAuthUrlDTO;
+import com.ower.dsyz.gateway.manual.dto.GatewayRequest;
+import com.ower.dsyz.gateway.service.IGatewayAuthUrlService;
 import com.ower.dsyz.gateway.service.IGatewayLevelService;
 import com.ower.dsyz.gateway.service.IGatewayRequestFactory;
 
@@ -22,63 +25,52 @@ import com.ower.dsyz.gateway.service.IGatewayRequestFactory;
 @Service
 public class GatewayRequestFactoryImpl implements IGatewayRequestFactory {
 
-	private Logger logger = LoggerFactory.getLogger(GatewayRequestFactoryImpl.class);
 
-	private Map<String,IGatewayLevelService> gatewayLevelService;
-	
-	@Autowired
-	private SpringContextUtil springContextUtil;
-	
-	@Override
-	public Object handleRequest(GatewayRequest request) {
-		
-		return this.handle(request);
-	}
+    private Map<String, IGatewayLevelService> gatewayLevelService;
 
-	private Object handle(GatewayRequest request) {
-		logger.info("网关请求=》{}，{}", request.getUrl(), request.getParam());
-		// 记录url请
-		// 校验appId合法性
-		checkAppId(request.getAppId());
-		checkRequestId(request.getRequestId());
-		// 处理个层级逻辑
-		return this.getHandle(request.getServiceLevel()).handleRequestLevel(request);
-	}
+    @Autowired
+    private SpringContextUtil                 springContextUtil;
 
-	/**
-	 * 校验requestId
-	 * 
-	 * @param requestId
-	 */
-	private void checkRequestId(String requestId) {
-		if (requestId.length() != 32) {
-			throw new CustomRunTimeException(ErrorCodeConstants.PARAM_ERROR, "requestId长度必须是32位");
-		}
-	}
+    @Autowired
+    private IGatewayAuthUrlService gatewayAuthUrlService;
+    
+    private synchronized Map<String, IGatewayLevelService> getGatewayLevelService() {
+        if (gatewayLevelService == null) {
+              gatewayLevelService = new HashMap<>();
+              gatewayLevelService.put("back", springContextUtil.getContext().getBean(GatewayWebServiceImpl.class));
+              gatewayLevelService.put("front", springContextUtil.getContext().getBean(GatewayWebServiceImpl.class));
+              gatewayLevelService.put("outer", springContextUtil.getContext().getBean(GatewayOuterServiceImpl.class));
+        }
+        return gatewayLevelService;
+    }
 
-	/**
-	 * 检验appId
-	 * 
-	 * @param appId
-	 */
-	private void checkAppId(String appId) {
-		if (!"10010".equals(appId)) {
-			throw new CustomRunTimeException(ErrorCodeConstants.AUTH_ERROR, "非法的appId");
-		}
-	}
-
-	private Map<String, IGatewayLevelService> getGatewayLevelService() {
-		if(gatewayLevelService==null){
-			gatewayLevelService  = springContextUtil.getContext().getBeansOfType(IGatewayLevelService.class);
-		}
-		return gatewayLevelService;
-	}
-	
-	
-	private IGatewayLevelService getHandle(String level){
-		if(getGatewayLevelService().get(IGatewayLevelService.BEAN_NAME_PRIFIX+level)==null){
-			throw new CustomRunTimeException(ErrorCodeConstants.AUTH_ERROR, "非法级别["+level+"]");
-		}
-		return getGatewayLevelService().get(IGatewayLevelService.BEAN_NAME_PRIFIX+level);
-	}
+    @Override
+    public IGatewayLevelService createRequestHandle(GatewayRequest request) {
+        List<String> list = new ArrayList<>();
+        list.add("/"+request.getAppName());
+        list.add(list.get(list.size()-1)+"/"+request.getServiceLevel());
+        list.add(list.get(list.size()-1)+"/"+request.getServiceName());
+        list.add(list.get(list.size()-1)+"/"+request.getServiceMethod());
+        if(StringUtils.isNotBlank(request.getExtMenthod())){
+           list.add(list.get(list.size()-1)+"/"+request.getExtMenthod());
+        }
+        List<GatewayAuthUrlDTO> result = gatewayAuthUrlService.queryGatewayAuthUrlDTOList(list);
+        if(!result.isEmpty()){
+            try {
+               return (IGatewayLevelService) springContextUtil.getContext().getBean(Class.forName(result.get(0).getClassName()));
+            } catch (BeansException e) {
+                e.printStackTrace();
+                throw new CustomRunTimeException("007404","找不到对应的bean");
+            } catch (ClassNotFoundException e) { 
+                e.printStackTrace();
+                throw new CustomRunTimeException("007404","找不到对应的Class");
+            } 
+        }
+        IGatewayLevelService impl = this.getGatewayLevelService().get(request.getServiceLevel());
+        if(impl==null){
+            throw new CustomRunTimeException("007404","找不到对应的bean,非法级别["+request.getServiceLevel()+"]");
+        }
+        return impl;
+        
+    }
 }
