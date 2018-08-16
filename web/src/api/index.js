@@ -1,10 +1,9 @@
 import axios from 'axios'
 import config from './config'
 import util from './util'
+import sessionStorageUtil from '@/utils/sessionStorageUtil'
 
 const appId = config.appId
-const cmsAppId = '000111'
-
 
 // api工厂
 const apiFactory = uri => payload => axios.post('/gateway' + uri, JSON.stringify(payload), config)
@@ -16,7 +15,7 @@ let assembledApiList = {}
 for (let key in apiList) {
   if (apiList.hasOwnProperty(key)) {
     let item = apiList[key]
-    assembledApiList[key] = apiFactory(item + `?appId=${appId}&requestId=${util.getUUID()}`)
+    assembledApiList[key] = apiFactory(item + `?appId=${appId}&requestId=${util.getUUID()}&token=${sessionStorageUtil.getToken()}`)
   }
 }
 

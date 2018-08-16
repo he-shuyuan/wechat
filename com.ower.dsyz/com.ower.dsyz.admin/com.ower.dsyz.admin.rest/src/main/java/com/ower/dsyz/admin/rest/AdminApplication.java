@@ -11,7 +11,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
  *
  */
 @EnableEurekaClient
-@EnableDiscoveryClient(autoRegister=false)//禁用客户端
+//@EnableDiscoveryClient(autoRegister=false)//禁用客户端
 @SpringBootApplication(scanBasePackages = { "com.ower.dsyz" })
 public class AdminApplication 
 {

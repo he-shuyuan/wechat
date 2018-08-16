@@ -58,5 +58,6 @@
 		<module>com.ower.dsyz.gateway</module>
 		<module>com.ower.dsyz.wechat</module>
         <module>com.ower.dsyz.admin</module>
+		<module>com.ower.dsyz.netty</module>
   </modules>
 </project>

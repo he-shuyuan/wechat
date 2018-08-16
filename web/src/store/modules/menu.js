@@ -1,8 +1,8 @@
 import util from "../../utils/"
 const menu = {
   state: {
-     menuList:util.sStore.getItem(util.sStore.MENU_LIST) || [],
-     authMenuList:util.sStore.getItem(util.sStore.AUTH_MENU_LIST) || []
+   /*  menuList:util.sStore.getItem(util.sStore.MENU_LIST) || [],
+     authMenuList:util.sStore.getItem(util.sStore.AUTH_MENU_LIST) || []*/
   },
 
   mutations: {
@@ -17,8 +17,8 @@ const menu = {
   actions: {
     // 登录
     changeIns({ commit }, data) {
-      util.sStore.setItem(util.sStore.MENU_LIST,data.functionList)
-      util.sStore.setItem(util.sStore.AUTH_MENU_LIST,data.funCodeList)
+      /*util.sStore.setItem(util.sStore.MENU_LIST,data.functionList)
+      util.sStore.setItem(util.sStore.AUTH_MENU_LIST,data.funCodeList)*/
       commit('DEL_ALL_VIEWS')
       if(data.router){
             data.router.push({name:'Dashboard'})

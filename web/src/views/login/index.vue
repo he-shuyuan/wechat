@@ -6,7 +6,7 @@
              :rules="loginRules"
              ref="loginForm"
              label-position="left">
-      <h3 class="title">机械智能管理平台</h3>
+      <h3 class="title">智能管理平台</h3>
       <el-form-item prop="phone">
         <span class="svg-container svg-container_login">
           <svg-icon icon-class="phone" />
@@ -42,10 +42,6 @@
       </el-form-item>
 
     </el-form>
-
-     <!-- <div class="tips" style="width: 100%;">
-       <div style="text-align:center"> 版权所有 © 1998-2018 方欣科技有限公司 粤ICP备05056155号</div>
-     </div>  -->
   </div>
 </template>
 
@@ -54,7 +50,6 @@
   import { standardAsync, customAsync } from '@/api/async'
   import config from '@/api/config'
   import loginUtil from "@/utils/loginUtil"
-  import localStorageUtil from "@/utils/localStorageUtil"
   import sessionStorageUtil from "@/utils/sessionStorageUtil"
 
    
@@ -101,38 +96,11 @@
         this.$refs.loginForm.validate(valid => {
           if (valid) {
             this.loading = true
-            let params={loginAccount:this.loginForm.phone,password:this.loginForm.password,userLoginType:"accountPassword",busTypeId:config.busTypeId}
-
-            customAsync({
-                  that: this,
-                  method: 'login',
-                  paramObj: params,
-                  callback: res => {
-                      loginUtil.setLoginInfo(res.body)
-                      let insId = sessionStorageUtil.getItem(sessionStorageUtil.MACE_SELECED_INS_ID)
-                      let params = { insId: insId }
-                      customAsync({
-                          that: this,
-                          method: 'changeLoginIns',
-                          paramObj: params,
-                          callback: res => {
-                              let param={};
-                 
-                              param.functionList=res.body.functionList;
-                              param.funCodeList=res.body.funCodeList;
-                              this.$store.dispatch('changeIns', param);
-                              this.loading = false
-                              this.$router.push({ path: '/' })
-                          },
-                          errorCallback: () => {
-                              this.loading = false
-                          },
-                      })
-                  },
-                  errorCallback: () => {
-                      this.loading = false
-                  },
-              })
+            let params={account:this.loginForm.phone,password:this.loginForm.password,type:"pass"}
+              standardAsync(this,'login',params,res=>{
+                sessionStorageUtil.setToken(res.body.token)
+              });
+             this.loading = false;
           } else {
             console.log('error submit!!')
             return false

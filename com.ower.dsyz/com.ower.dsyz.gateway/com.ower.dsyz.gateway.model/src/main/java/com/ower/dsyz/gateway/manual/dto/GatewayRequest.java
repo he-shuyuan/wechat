@@ -19,6 +19,7 @@ public class GatewayRequest implements Serializable{
 	private String appId;
 	private String requestId;
 	private String sign;
+	private String realIp;
 	private CustomRequestParam param;
 
 	public String getAppName() {
@@ -109,11 +110,23 @@ public class GatewayRequest implements Serializable{
 		this.param = param;
 	}
 
-	@Override
-	public String toString() {
-		return "GatewayRequest [appName=" + appName + ", serviceLevel=" + serviceLevel + ", serviceName=" + serviceName
-				+ ", serviceMethod=" + serviceMethod + ", extMenthod=" + extMenthod + ", url=" + url + ", token="
-				+ token + ", appId=" + appId + ", requestId=" + requestId + ", sign=" + sign + ", param=" + param + "]";
-	}
+	
+    public String getRealIp() {
+        return realIp;
+    }
+
+    
+    public void setRealIp(String realIp) {
+        this.realIp = realIp;
+    }
+
+    @Override
+    public String toString() {
+        return "GatewayRequest [appName=" + appName + ", serviceLevel=" + serviceLevel + ", serviceName=" + serviceName
+                + ", serviceMethod=" + serviceMethod + ", extMenthod=" + extMenthod + ", url=" + url + ", token=" + token + ", appId="
+                + appId + ", requestId=" + requestId + ", sign=" + sign + ", realIp=" + realIp + ", param=" + param + "]";
+    }
+
+   
 
 }

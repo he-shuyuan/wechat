@@ -118,7 +118,7 @@ public class CustomResponseHead {
 	}
 
 	public Boolean success(){
-	    return this.errorCode == "0";
+	    return "0".equals(this.errorCode);
 	}
 	
 	public void setRequestTimeStamp(String requestTimeStamp) {

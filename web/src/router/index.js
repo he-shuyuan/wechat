@@ -29,6 +29,7 @@ export const constantRouterMap = [
     { path: '/401', component: () =>
             import ('@/views/401'), hidden: true },
     { path: '*', redirect: '/404', hidden: true },
+    { path: '/websocket', component: () =>  import ('@/views/websocket/index')},
 
     {
         path: '/',
@@ -44,6 +45,7 @@ export const constantRouterMap = [
             meta: { title: '首页', requiresAuth: true }
         }, ],
     },
+
     {
         path: '/manage',
         component: Layout,
