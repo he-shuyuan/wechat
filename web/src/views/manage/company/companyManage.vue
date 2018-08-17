@@ -33,7 +33,7 @@
                 columns,
                 params: {isValid:'Y'},
                 thisRouteName: 'companyManage',
-                isShowButton:util.sStore.getItem(util.sStore.AUTH_MENU_LIST) && util.sStore.getItem(util.sStore.AUTH_MENU_LIST).indexOf('_user_manage')>-1,
+                /*isShowButton:util.sStore.getItem(util.sStore.AUTH_MENU_LIST) && util.sStore.getItem(util.sStore.AUTH_MENU_LIST).indexOf('_user_manage')>-1,*/
             }
         },
         methods: {

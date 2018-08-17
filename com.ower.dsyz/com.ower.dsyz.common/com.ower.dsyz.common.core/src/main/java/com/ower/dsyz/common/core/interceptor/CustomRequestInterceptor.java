@@ -24,6 +24,7 @@ import com.ower.dsyz.common.core.annotation.NotInAspect;
 import com.ower.dsyz.common.core.constant.ErrorCodeConstants;
 import com.ower.dsyz.common.core.constant.UrlParamType;
 import com.ower.dsyz.common.core.exception.CustomRunTimeException;
+import com.ower.dsyz.common.core.holder.CustomLoginUserIdHolder;
 import com.ower.dsyz.common.core.holder.CustomRequestContextHolder;
 import com.ower.dsyz.common.core.holder.CustomUrlParamHolder;
 import com.ower.dsyz.common.core.model.ResultMsg;
@@ -167,6 +168,7 @@ public class CustomRequestInterceptor {
 	 */
 	private void setCustomLoginUserId(Object[] args, HttpServletRequest request, MethodSignature signature) {
 		if (request != null && StringUtils.isNotBlank(request.getHeader(USER_ID))) {
+		    CustomLoginUserIdHolder.set(request.getHeader(USER_ID));
 			Class<?>[] classList = signature.getMethod().getParameterTypes();
 			int i = 0;
 			for (Class<?> clazz : classList) {

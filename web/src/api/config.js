@@ -41,15 +41,15 @@ export default (() => {
     busTypeId:'2',//业产品线id
     url: '/route',
     appId: 'c23087dbd171434697f356859e9e9a93', //
-    method: 'POST',
+    method: 'POST',//声明头部
     headers: { 'Content-Type': 'application/json; charset=utf-8' },
     // paramsSerializer: function(params) {
     //   return Qs.stringify(params)
     // },
-    timeout: 20000,
+    timeout: 20000,//超时时间
     withCredentials: false, // default
-    responseType: 'json', // default
-    maxContentLength: 2000,
+    responseType: 'json', // 报文格式
+    maxContentLength: 2000,//报文大小
     validateStatus: function(status) {
       return status >= 200 && status < 300 // default
     },

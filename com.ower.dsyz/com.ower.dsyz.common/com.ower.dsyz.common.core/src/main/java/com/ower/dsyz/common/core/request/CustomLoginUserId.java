@@ -2,7 +2,6 @@ package com.ower.dsyz.common.core.request;
 
 import java.io.Serializable;
 
-import com.ower.dsyz.common.core.holder.CustomLoginUserIdHolder;
 
 
 public class CustomLoginUserId implements Serializable{
@@ -22,7 +21,6 @@ public class CustomLoginUserId implements Serializable{
 
 	public void setUserId(String userId) {
 		this.userId = userId;
-		CustomLoginUserIdHolder.set(this.userId);
 	}
 
 	@Override

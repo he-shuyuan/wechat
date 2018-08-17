@@ -39,7 +39,7 @@ public class GatewayWebServiceImpl extends AbstractGatewayLevelService{
         String userId = checkToken(request.getToken());
         Map<String,String> header = new HashMap<>();
         header.put("userId", userId);
-        return  customRestClient.postInner(request.getUrl(),request.getParam(),Map.class,header);
+        return  customRestClient.postInner(request.getUrl(),request.getParam(),Object.class,header);
     }
 
 

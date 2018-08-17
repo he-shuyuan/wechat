@@ -1,6 +1,5 @@
 import api from '@/api/'
 import config from './config'
-import sessionStorageUtil from '@/utils/sessionStorageUtil'
 import { Loading, Message } from 'element-ui'
 
 let loadingInstance
@@ -73,7 +72,7 @@ function abstractStep(
             background: 'rgba(0, 0, 0, 0.7)',
         })
     }
-    api[method](paramObj)
+    api.abstractApi(method,paramObj)
         .then(response => {
             processReponse(that, method, paramObj, callback, response, errorMsg, errorCallback)
         })

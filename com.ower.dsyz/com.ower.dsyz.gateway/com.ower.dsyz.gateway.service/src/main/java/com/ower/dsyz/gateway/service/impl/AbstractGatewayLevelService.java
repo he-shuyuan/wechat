@@ -61,7 +61,7 @@ public abstract class AbstractGatewayLevelService implements IGatewayLevelServic
      */
     public String checkToken(String token){
         String userId = redisService.getString(TOKEN_PRIFIXED+token);
-        if(StringUtils.isNotBlank(userId)){
+        if(StringUtils.isBlank(userId)){
             throw new CustomRunTimeException("001001", "用户未登录或登录已超时");
         }
         this.redisService.expire(TOKEN_PRIFIXED+token, 30*60L);
