@@ -2,12 +2,20 @@
     <div class="app-header-wrapper">
       <div class="app-header">
         <img :src="require('../../../assets/img/logo.png')">
-        <p>机械智能手</p>
+        <p>智能管理平台</p>
 
         <img :src="require('../../../assets/img/u89.png')"
              class="app-header-img-middle">
-
-        <el-dropdown v-if="insName"
+        <el-select  v-model="state.insId" placeholder="" id="ins_select">
+         <el-option 
+               v-for="item in sStore.getDepList()"
+               :key="item.insId"
+               :label="item.insName"
+               :value="item.insId">
+         </el-option>
+        </el-select>
+<!-- 
+         <el-dropdown v-if="insName"
                      trigger="click"
                      style="color: #fff;font-size: 16px;cursor: pointer;"
                      @command="handleCommand"
@@ -19,13 +27,13 @@
             <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item :command="item" v-for="(item,index) in insInfo" :key="index">{{item.insName}}</el-dropdown-item>
             </el-dropdown-menu>
-        </el-dropdown>
+        </el-dropdown> -->
         <el-dropdown class="avatar-container"
                      trigger="click">
             <div class="avatar-wrapper">
                 <img class="user-avatar"
                      :src="require('../../../assets/img/u648.png')">
-                <span class="user-name">{{username}}</span>
+                <span class="user-name">{{sStore.getUserInfo().userName}}</span>
                 <i class="el-icon-caret-bottom"></i>
             </div>
             <el-dropdown-menu class="user-dropdown"
@@ -43,9 +51,7 @@
 
 <script>
     import { standardAsync, customAsync } from '@/api/async'
-    import loginUtil from "@/utils/loginUtil"
     import sessionStorageUtil from "@/utils/sessionStorageUtil"
-    import localStorageUtil from "@/utils/localStorageUtil"
     export default {
         name: 'AppHeader',
         components: {
@@ -53,69 +59,37 @@
         },
         data() {
             return {
-                username: '',
-                insInfo: '',
-                insName: ''
-
+                state:{
+                    insId: sessionStorageUtil.getInsId(),
+                },
+                sStore:sessionStorageUtil,
             }
         },
         created() {
-            //debugger
-            this.insInfo=sessionStorageUtil.getItem(sessionStorageUtil.MCE_INS_INFO)
-            this.insName=sessionStorageUtil.getItem(sessionStorageUtil.MACE_SELECED_INS_NAME)
-            let userInfo = sessionStorageUtil.getItem(sessionStorageUtil.MCE_USER_INFO)
-            if (userInfo && userInfo.nickName) {
-                this.username = userInfo.nickName
-            }
+            
         },
         mounted() {
 
         },
         methods: {
-            handleCommand(command){
-            //debugger
-            let selectedInsId=sessionStorageUtil.getItem(sessionStorageUtil.MACE_SELECED_INS_ID)
-            if(command.insId==selectedInsId){
-
-                return ;
-            }
-            this.insName=command.insName
-            let selectIns={userId:sessionStorageUtil.getItem(sessionStorageUtil.MCE_USER_ID),insId:command.insId,insName:command.insName,depId:command.depId}
-            loginUtil.changeIns(selectIns)
-            let params={insId:command.insId}
-            standardAsync(this, 'changeLoginIns', params, res => {
-                  let param={};
-                  param.router=this.$router;
-                  param.functionList=res.body.functionList;
-                  param.funCodeList=res.body.funCodeList;
-                  this.$store.dispatch('changeIns', param);
-                })
-
-            },
-            logout() {
-
-                const loading = this.$loading({
-                    lock: true,
-                    text: '退出登录中...',
-                    spinner: 'el-icon-loading',
-                    background: 'rgba(0, 0, 0, 0.7)'
-                });
-
-                standardAsync(this, 'logout', {}, res => {
-                    loginUtil.logout();
-                    loading.close();
-                    this.$router.push("/login");
-                })
-
-            }
+          
         },
     }
 
 </script>
 
-
+<style>
+    .app-header .el-input input{
+        background:#EC7700;
+        border: none;
+        color:#FFF;
+        font-size: 18px;
+         font-weight: bold;
+    }
+</style>
 <style lang="scss"
        scoped>
+   
     .app-header {
         background: #EC7700;
         color: #fff;

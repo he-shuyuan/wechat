@@ -4,6 +4,7 @@
 package com.ower.dsyz.admin.service;
 
 import com.ower.dsyz.admin.manual.dto.AdminInstitutionDTO;
+import com.ower.dsyz.admin.manual.dto.UserLoginInsInfo;
 
 /**
  * <pre>
@@ -28,4 +29,13 @@ public interface IAdminInsDepService {
      * @param addInstitutionDTO void
      */
     void addInsAndDep(AdminInstitutionDTO addInstitutionDTO);
+
+    
+    /**
+     * 获取用户机构信息
+     * @param userId
+     * @param busTypeId
+     * @return
+     */
+	UserLoginInsInfo queryUserInsInfoByUserId(String userId, String busTypeId);
 }

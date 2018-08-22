@@ -98,6 +98,12 @@ function processReponse(that, method, paramObj, callback, response, errorMsg, er
         if (response.data.head.errorCode === '0') {
             // 回调
             callback.bind(that)(response.data)
+        }else if(response.data.head.errorCode === '001001'){
+            Message.error({ message: response.data.head.errorMsg })
+            setTimeout(()=>{
+                that.$router.push('/login')
+            },1000)
+            
         } else {
             if (errorMsg) {
                 // 显示自定义错误

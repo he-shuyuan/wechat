@@ -2,6 +2,10 @@ import sessionStorageUtil from '@/utils/sessionStorageUtil'
 
 export default{
 
+/**
+ * 随机32位
+ * @return {[type]} [description]
+ */
  getUUID:function() {
     return (
        _guidGenerator() +

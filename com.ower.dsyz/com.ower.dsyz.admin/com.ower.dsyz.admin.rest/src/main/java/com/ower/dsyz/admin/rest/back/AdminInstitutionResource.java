@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.ower.dsyz.admin.auto.model.AdminInstitution;
 import com.ower.dsyz.admin.manual.dto.AdminInstitutionDTO;
+import com.ower.dsyz.admin.manual.dto.UserLoginInsInfo;
 import com.ower.dsyz.admin.service.IAdminInsDepService;
 import com.ower.dsyz.admin.service.IAdminInstitutionService;
 import com.ower.dsyz.common.core.annotation.EnableValid;
@@ -70,5 +71,17 @@ public class AdminInstitutionResource {
     public CustomResponse<AdminInstitution> queryAdminInstitutionById(@RequestBody CustomRequestParam param){
         ParamCheckUtil.checkEmpty(param.getString("insId"));
         return CustomResponse.success(adminInstitutionService.queryAdminInstitutionById(param.getString("insId")));
+    }
+    
+    
+    /**
+     * 获取用户的机构信息
+     * @return
+     */
+    @RequestMapping("queryUserInsInfoByUserId")
+    public CustomResponse<UserLoginInsInfo> queryUserInsInfoByUserId(@RequestBody CustomRequestParam param){
+    	  ParamCheckUtil.checkEmpty(param.getString("userId"),"用户id不能为空");
+    	  ParamCheckUtil.checkEmpty(param.getString("busTypeId"),"产品线id不能为空");
+    	  return CustomResponse.success(adminInsDepService.queryUserInsInfoByUserId(param.getString("userId"),param.getString("busTypeId")));
     }
 }

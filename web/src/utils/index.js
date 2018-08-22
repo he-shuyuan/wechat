@@ -8,9 +8,6 @@ import { Slider } from './slider'
 import localStorageUtil from './localStorageUtil'
 import sessionStorageUtil from './sessionStorageUtil'
 import nav from './nav'
-import getPlatformType from './getPlatformType'
-import loginUtil from './loginUtil'
-import { areaDataHandler } from './handler'
 
 // 统一输出utils下的工具
 export default {
@@ -24,9 +21,6 @@ export default {
     lStore: localStorageUtil, // 重命名localStorageUtil
     sStore: sessionStorageUtil, // 重命名sessionStorageUtil
     nav,
-    getPlatformType,
-    loginUtil,
-    areaDataHandler
 }
 
 

@@ -28,24 +28,22 @@ function getLocalIP() {
 }
 
 var proxyTable =
-    process.env.CUR_ENV === 'development'
-        ? {
-              '/gateway/cms': {
-                  target: 'http://10.10.0.206:8989',
-                  changeOrigin: true,
-                  pathRewrite: {
-                      '^/gateway/cms': '/cms',
-                  },
-              },
-              '/gateway': {
-                  target: 'http://127.0.0.1:8989',
-                  changeOrigin: true,
-                  pathRewrite: {
-                      '^/gateway': '',
-                  },
-              },
-          }
-        : {}
+    process.env.CUR_ENV === 'development' ? {
+        '/gateway/cms': {
+            target: 'http://10.10.0.206:8989',
+            changeOrigin: true,
+            pathRewrite: {
+                '^/gateway/cms': '/cms',
+            },
+        },
+        '/gateway': {
+            target: 'http://127.0.0.1:8989',
+            changeOrigin: true,
+            pathRewrite: {
+                '^/gateway': '',
+            },
+        },
+    } : {}
 
 var rootDir = 'machine'
 
@@ -101,13 +99,11 @@ module.exports = {
         assetsSubDirectory: 'static',
 
         // you can set by youself according to actual condition
-        assetsPublicPath:
-            process.env.NODE_ENV === 'production' ||
+        assetsPublicPath: process.env.NODE_ENV === 'production' ||
             process.env.NODE_ENV === 'test' ||
             process.env.NODE_ENV === 'preproduction' ||
-            process.env.NODE_ENV === 'dev'
-                ? '/' + rootDir + '/'
-                : '/',
+            process.env.NODE_ENV === 'dev' ?
+            '/' + rootDir + '/' : '/',
 
         /**
          * Source Maps

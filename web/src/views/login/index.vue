@@ -49,9 +49,8 @@
   import { isvalidPhone } from '@/utils/validate'
   import { standardAsync, customAsync } from '@/api/async'
   import config from '@/api/config'
-  import loginUtil from "@/utils/loginUtil"
   import sessionStorageUtil from "@/utils/sessionStorageUtil"
-
+  import localStorageUtil from "@/utils/localStorageUtil"
    
   export default {
     name: 'login',
@@ -98,7 +97,17 @@
             this.loading = true
             let params={account:this.loginForm.phone,password:this.loginForm.password,type:"pass"}
               standardAsync(this,'login',params,res=>{
-                sessionStorageUtil.setToken(res.body.token)
+                 sessionStorageUtil.setToken(res.body.token);
+                 sessionStorageUtil.setUserInfo(res.body);
+                 standardAsync(this,'queryUserInsInfoByUserId',{userId:res.body.userId,busTypeId:'1'},res2=>{
+                       if(!res2.body.depList || res2.body.depList.length == 0){
+                            this.$message('该用户没有部门');
+                            return;
+                       }
+                       sessionStorageUtil.setDepList(res2.body.depList);
+                       this.initFirstInsId(res2.body.depList);
+                       this.$router.push('manage/companyManage');
+                 });
               });
              this.loading = false;
           } else {
@@ -106,7 +115,24 @@
             return false
           }
         })
-      }
+      },
+      /**
+       * 初始化第一个insId
+       * @param  {[type]} list [description]
+       * @return {[type]}      [description]
+       */
+      initFirstInsId:function(list){
+         let insId = localStorageUtil.getInsId();
+         if(insId){
+            for(let ob in list){
+                if(insId == ob.insId){
+                   sessionStorageUtil.setInsId(ob.insId);
+                   return;
+                }
+             }
+         }
+           sessionStorageUtil.setInsId(list[0].insId);
+      },
     }
   }
 </script>

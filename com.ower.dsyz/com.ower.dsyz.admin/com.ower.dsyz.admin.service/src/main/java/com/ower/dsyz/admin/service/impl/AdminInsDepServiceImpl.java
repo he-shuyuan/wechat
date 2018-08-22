@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.ower.dsyz.admin.manual.constant.AdminConstant;
+import com.ower.dsyz.admin.manual.dao.AdminDepUserExtMapper;
 import com.ower.dsyz.admin.manual.dto.AdminDepartmentDTO;
 import com.ower.dsyz.admin.manual.dto.AdminInstitutionDTO;
+import com.ower.dsyz.admin.manual.dto.UserLoginInsInfo;
 import com.ower.dsyz.admin.service.IAdminDepartmentService;
 import com.ower.dsyz.admin.service.IAdminInsDepService;
 import com.ower.dsyz.admin.service.IAdminInstitutionService;
@@ -37,6 +39,9 @@ public class AdminInsDepServiceImpl implements IAdminInsDepService {
     @Autowired
     IAdminInstitutionService adminInstitutionService;
     
+    @Autowired
+    AdminDepUserExtMapper adminDepUserExtMapper;
+    
     @Override
     @Transactional
     public void addInsAndDep(AdminInstitutionDTO adminInstitution) {
@@ -51,5 +56,14 @@ public class AdminInsDepServiceImpl implements IAdminInsDepService {
         adminDepartment.setBusTypeId(adminInstitution.getBusTypeId());
         adminDepartmentService.addDepartment(adminDepartment);
     }
+
+	@Override
+	public UserLoginInsInfo queryUserInsInfoByUserId(String userId, String busTypeId) {
+		UserLoginInsInfo userInsInfo = new UserLoginInsInfo();
+		userInsInfo.setDepList(adminDepUserExtMapper.queryAdminUserInsInfoList(userId, busTypeId));
+		userInsInfo.setUserId(userId);
+		userInsInfo.setBusTypeId(busTypeId);
+		return userInsInfo;
+	}
 
 }
