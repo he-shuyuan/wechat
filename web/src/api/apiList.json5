@@ -35,4 +35,5 @@
   recyleAdminInsRole:'/admin/back/adminInsRoleService/recyleAdminInsRole',
   login:'/admin/back/adminUserLoginService/login',
   queryUserInsInfoByUserId:'admin/back/adminInstitutionService/queryUserInsInfoByUserId',
+  queryUserRoleFunctionList:'admin/back/adminRoleFunctionService/queryUserRoleFunctionList',
 }

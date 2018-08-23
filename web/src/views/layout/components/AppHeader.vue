@@ -66,7 +66,7 @@
             }
         },
         created() {
-            
+            console.log(this.state.insId)
         },
         mounted() {
 

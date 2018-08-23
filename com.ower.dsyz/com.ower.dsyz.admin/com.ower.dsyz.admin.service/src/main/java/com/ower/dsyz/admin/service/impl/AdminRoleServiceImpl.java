@@ -86,4 +86,9 @@ public class AdminRoleServiceImpl implements IAdminRoleService {
         return list.get(0);
     }
 
+	@Override
+	public List<AdminRole> queryAdminRoleList(String userId, String insId) {
+		return adminRoleExtMapper.queryAdminRoleListByUserIdAndInsId(userId,insId);
+	}
+
 }

@@ -4,6 +4,9 @@
 package com.ower.dsyz.admin.manual.dao;
 
 import java.util.List;
+import java.util.Map;
+
+import com.ower.dsyz.admin.manual.dto.AdminFunctionExtDTO;
 import com.ower.dsyz.admin.manual.dto.AdminRoleFunDTO;
 
 /**
@@ -37,4 +40,11 @@ public interface AdminRoleFunExtMapper {
      * @return int
      */
     int delAdminRoleFunDTOList(String roleId);
+
+    /**
+     * 
+     * @param map
+     * @return
+     */
+	List<AdminFunctionExtDTO> queryFunctionByRoleList(Map<String, Object> map);
 }

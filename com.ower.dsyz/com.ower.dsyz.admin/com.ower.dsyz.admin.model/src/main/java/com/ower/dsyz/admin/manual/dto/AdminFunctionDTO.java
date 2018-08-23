@@ -6,6 +6,9 @@ package com.ower.dsyz.admin.manual.dto;
 import java.io.Serializable;
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 /**
  * <pre>
  * TODO。
@@ -20,7 +23,7 @@ import org.hibernate.validator.constraints.NotBlank;
  *    修改后版本:     修改人：  修改日期:     修改内容:
  *          </pre>
  */
-
+@JsonInclude(Include.NON_EMPTY)
 public class AdminFunctionDTO implements Serializable{
     /**
      * 

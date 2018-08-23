@@ -4,6 +4,10 @@
 package com.ower.dsyz.admin.manual.dao;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
+import com.ower.dsyz.admin.auto.model.AdminRole;
 import com.ower.dsyz.admin.manual.dto.AdminRoleDTO;
 import com.ower.dsyz.common.core.page.PageQueryResult;
 import com.ower.dsyz.common.core.page.PageRequestParam;
@@ -39,4 +43,12 @@ public interface AdminRoleExtMapper {
      * @return PageQueryResult<AdminFunctionDTO>
      */
     PageQueryResult<AdminRoleDTO> pageQueryAdminRoleDTOList(PageRequestParam param);
+
+    /**
+     * 根据userId和insId查询角色列表
+     * @param userId
+     * @param insId
+     * @return
+     */
+	List<AdminRole> queryAdminRoleListByUserIdAndInsId(@Param("userId") String userId,@Param("insId") String insId);
 }

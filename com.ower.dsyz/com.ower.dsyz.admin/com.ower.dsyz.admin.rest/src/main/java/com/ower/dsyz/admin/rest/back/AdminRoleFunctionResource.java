@@ -8,9 +8,13 @@ import javax.annotation.Resource;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.ower.dsyz.admin.manual.dto.AdminRoleExtDTO;
 import com.ower.dsyz.admin.manual.dto.AdminRoleFunDTO;
 import com.ower.dsyz.admin.manual.dto.AdminRoleFunListDTO;
+import com.ower.dsyz.admin.manual.dto.UserLoginFunInfo;
 import com.ower.dsyz.admin.service.IAdminRoleFunctionService;
+import com.ower.dsyz.common.core.request.CustomLoginUserId;
 import com.ower.dsyz.common.core.response.CustomResponse;
 
 /**
@@ -55,5 +59,17 @@ public class AdminRoleFunctionResource {
     @RequestMapping("addAuthFunctionList")
     public CustomResponse<Integer> addAuthFunctionList(@RequestBody  AdminRoleFunListDTO adminRoleFunListDTO) {
         return CustomResponse.success(adminRoleFunctionService.addAuthFunctionList(adminRoleFunListDTO));
+    }
+    
+    /**
+     * 查询用户角色
+     * @param adminRoleExtDTO
+     * @param customLoginUser
+     * @return
+     */
+    @RequestMapping("queryUserRoleFunctionList")
+    public CustomResponse<UserLoginFunInfo> queryUserRoleFunctionList(@RequestBody AdminRoleExtDTO adminRoleExtDTO,CustomLoginUserId customLoginUser){
+    	adminRoleExtDTO.setUserId(customLoginUser.getUserId());
+    	return CustomResponse.success(adminRoleFunctionService.queryUserRoleFunctionList(adminRoleExtDTO));
     }
 }

@@ -4,8 +4,11 @@
 package com.ower.dsyz.admin.service;
 
 import java.util.List;
+
+import com.ower.dsyz.admin.manual.dto.AdminRoleExtDTO;
 import com.ower.dsyz.admin.manual.dto.AdminRoleFunDTO;
 import com.ower.dsyz.admin.manual.dto.AdminRoleFunListDTO;
+import com.ower.dsyz.admin.manual.dto.UserLoginFunInfo;
 
 /**
  * <pre>
@@ -37,4 +40,12 @@ public interface IAdminRoleFunctionService {
      * @return int
      */
     int addAuthFunctionList(AdminRoleFunListDTO adminRoleFunListDTO);
+
+    
+    /**
+     * 菜单列表
+     * @param adminRoleExtDTO
+     * @return
+     */
+    UserLoginFunInfo queryUserRoleFunctionList(AdminRoleExtDTO adminRoleExtDTO);
 }

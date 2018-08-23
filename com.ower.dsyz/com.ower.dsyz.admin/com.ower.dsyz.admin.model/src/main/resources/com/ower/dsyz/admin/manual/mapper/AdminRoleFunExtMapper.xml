@@ -6,14 +6,18 @@
 		select
 		t.`name` as functionName,
 		t.bus_type_id as busTypeId,
-		t.parent_id as parentId,
+		t.parent_id
+		as parentId,
 		t.function_id as functionId,
 		t.code as code,
-		if((select count(*) from t_admin_function t1 where t1.parent_id =
+		if((select
+		count(*) from t_admin_function t1 where t1.parent_id =
 		t.function_id)>0,false,true) as leaf,
-		if(t.function_id in (select t2.function_id from t_admin_role_fun t2 where
+		if(t.function_id in (select
+		t2.function_id from t_admin_role_fun t2 where
 		t2.role_id=#{roleId,jdbcType=VARCHAR}),true,false) as hasSelected
-		from t_admin_function t
+		from
+		t_admin_function t
 		where 1=1
 		<if test="busTypeId !=null and busTypeId !=''">
 			and t.bus_type_id=#{busTypeId,jdbcType=VARCHAR}
@@ -28,8 +32,27 @@
 			and t.function_id=#{functionId,jdbcType=VARCHAR}
 		</if>
 	</select>
-	
+
 	<delete id="delAdminRoleFunDTOList" parameterType="java.lang.String">
-	 DELETE from t_admin_role_fun where role_id = #{roleId,jdbcType=VARCHAR}
+		DELETE from t_admin_role_fun where role_id = #{roleId,jdbcType=VARCHAR}
 	</delete>
+
+	<select id="queryFunctionByRoleList" parameterType="java.util.Map"
+		resultType="com.ower.dsyz.admin.manual.dto.AdminFunctionExtDTO">
+		select DISTINCT
+		t.`name` as functionName,
+		t.bus_type_id as busTypeId,
+		t.parent_id as parentId,
+		t.function_id as functionId,
+		t.code as code
+		from t_admin_function t LEFT JOIN t_admin_role_fun t1
+		on t1.function_id = t1.function_id
+		where t.bus_type_id = #{busTypeId,jdbcType=VARCHAR}
+		and t1.role_id in
+		<foreach collection="list" item="item" open="(" separator=","
+			close=")">
+			#{item.roleId}
+		</foreach>
+		and t.parent_id = #{parentId,jdbcType=VARCHAR}
+	</select>
 </mapper>

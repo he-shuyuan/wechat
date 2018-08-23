@@ -47,6 +47,10 @@ public interface AdminConstant {
          */
         public static final String DEFAULT_PARENT_TOP_CODE = "HEAD"; 
         
+        /**
+         * 部门菜单父级id
+         */
+        public static final String DEFAULT_PARENT_TOP_ID= "1"; 
     }
     
     

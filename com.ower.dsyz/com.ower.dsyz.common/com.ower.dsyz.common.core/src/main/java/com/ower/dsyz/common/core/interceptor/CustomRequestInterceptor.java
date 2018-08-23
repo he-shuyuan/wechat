@@ -172,13 +172,13 @@ public class CustomRequestInterceptor {
 			Class<?>[] classList = signature.getMethod().getParameterTypes();
 			int i = 0;
 			for (Class<?> clazz : classList) {
-				i++;
 				if (CustomLoginUserId.class.equals(clazz)) {
 					CustomLoginUserId customLoginUserId = new CustomLoginUserId();
 					customLoginUserId.setUserId(request.getHeader(USER_ID));
 					args[i] = customLoginUserId;
 					break;
 				}
+				i++;
 			}
 		}
 

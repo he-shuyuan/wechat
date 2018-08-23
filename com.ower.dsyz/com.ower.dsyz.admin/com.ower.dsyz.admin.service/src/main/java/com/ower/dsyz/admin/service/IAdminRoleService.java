@@ -4,6 +4,8 @@
 package com.ower.dsyz.admin.service;
 
 import java.util.List;
+
+import com.ower.dsyz.admin.auto.model.AdminRole;
 import com.ower.dsyz.admin.manual.dto.AdminRoleDTO;
 import com.ower.dsyz.common.core.page.PageQueryResult;
 import com.ower.dsyz.common.core.page.PageRequestParam;
@@ -68,4 +70,12 @@ public interface IAdminRoleService {
      * @return AdminRoleDTO
      */
     AdminRoleDTO queryAdminRoleById(String id);
+    
+    
+    /**
+     * 根据用户id和部门id查询用户角色列表
+     * @param adminRoleExtDTO
+     * @return
+     */
+    List<AdminRole> queryAdminRoleList(String userId,String insId);
 }

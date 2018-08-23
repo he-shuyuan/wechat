@@ -106,6 +106,10 @@
                        }
                        sessionStorageUtil.setDepList(res2.body.depList);
                        this.initFirstInsId(res2.body.depList);
+
+                       standardAsync(this,'queryUserRoleFunctionList',{insId:'1',busTypeId:'1'},res3=>{
+
+                       });
                        this.$router.push('manage/companyManage');
                  });
               });
