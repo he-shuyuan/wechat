@@ -14,20 +14,6 @@
                :value="item.insId">
          </el-option>
         </el-select>
-<!-- 
-         <el-dropdown v-if="insName"
-                     trigger="click"
-                     style="color: #fff;font-size: 16px;cursor: pointer;"
-                     @command="handleCommand"
-                     >
-            <span class="el-dropdown-link">
-                {{insName?insName:''}}
-                <i class="el-icon-caret-bottom el-icon--right"></i>
-            </span>
-            <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item :command="item" v-for="(item,index) in insInfo" :key="index">{{item.insName}}</el-dropdown-item>
-            </el-dropdown-menu>
-        </el-dropdown> -->
         <el-dropdown class="avatar-container"
                      trigger="click">
             <div class="avatar-wrapper">
@@ -39,7 +25,7 @@
             <el-dropdown-menu class="user-dropdown"
                               slot="dropdown">
                 <el-dropdown-item>
-                    <span @click="logout"
+                    <span @click="logout()"
                           style="display:block;">退出登录</span>
                 </el-dropdown-item>
             </el-dropdown-menu>
@@ -65,15 +51,37 @@
                 sStore:sessionStorageUtil,
             }
         },
+        watch:{
+           'state.insId':function(nv){
+              this.insIdChange();
+           }
+        },
         created() {
-            console.log(this.state.insId)
+           this.insIdChange();
         },
         mounted() {
 
         },
         methods: {
-          
+          /**
+           * 切换企业
+           * @return {[type]} [description]
+           */
+          insIdChange:function(){
+            sessionStorageUtil.setInsId(this.state.insId);
+            standardAsync(this,'queryUserRoleFunctionList',{insId:this.state.insId,busTypeId:'1'},res=>{
+                  
+            });
         },
+        /**
+         * 退出登录
+         * @return {[type]} [description]
+         */
+        logout:function(){
+           sessionStorageUtil.removeAll();
+           this.$router.replace('/login');
+        }
+    }
     }
 
 </script>

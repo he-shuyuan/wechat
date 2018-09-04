@@ -59,5 +59,6 @@
 		<module>com.ower.dsyz.wechat</module>
         <module>com.ower.dsyz.admin</module>
 		<module>com.ower.dsyz.netty</module>
+        <module>com.ower.dsyz.logCenter</module>
   </modules>
 </project>

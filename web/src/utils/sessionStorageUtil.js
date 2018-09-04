@@ -3,6 +3,25 @@ let user_info_key = 'user_info_key'
 let user_depList_key = 'user_depList_key'
 let user_insId_key = 'user_insId_key'
 export default {
+  /**
+     * 获取Item
+     * @return {[type]} [description]
+     */
+    getItem:function(key){
+      let param = window.sessionStorage.getItem(key);
+      if(param){
+        return JSON.parse(param)
+      }else{
+        return {};
+      }
+    },
+    /**
+     * 设置
+     * @return {[type]} [description]
+     */
+    setItem:function(key,param){
+       window.sessionStorage.setItem(key,JSON.stringify(param));
+    },
     /**
      * 获取token
      * @return {[type]} [description]
@@ -71,4 +90,11 @@ export default {
        window.sessionStorage.setItem(user_insId_key,insId);
        window.localStorage.setItem(user_insId_key, insId);
     },
+    /**
+     * 清空session
+     * @return {[type]} [description]
+     */
+    removeAll:function(){
+       window.sessionStorage.clear();
+    }
 }

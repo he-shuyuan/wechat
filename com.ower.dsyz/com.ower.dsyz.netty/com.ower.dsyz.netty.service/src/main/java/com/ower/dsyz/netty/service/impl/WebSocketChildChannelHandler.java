@@ -27,9 +27,9 @@ public class WebSocketChildChannelHandler extends ChannelInitializer<SocketChann
     @Override
     protected void initChannel(SocketChannel ch) throws Exception {
         // TODO Auto-generated method stub
-        ch.pipeline().addLast("http-codec", new HttpServerCodec());
+       /* ch.pipeline().addLast("http-codec", new HttpServerCodec());
         ch.pipeline().addLast("aggregator", new HttpObjectAggregator(65536));
-        ch.pipeline().addLast("http-chunked", new ChunkedWriteHandler());
+        ch.pipeline().addLast("http-chunked", new ChunkedWriteHandler());*/
         ch.pipeline().addLast("handler",webSocketServerHandler);
     }
 

@@ -43,8 +43,7 @@ public class WebSocketServerHandler extends BaseWebSocketServerHandler{
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         // TODO Auto-generated method stub
         System.err.println(ctx.hashCode()+"连接");
-        Thread.sleep(3*1000);
-        push(ctx, "连接成功");
+       // push(ctx, "连接成功");
     }
 
     /**
@@ -74,7 +73,7 @@ public class WebSocketServerHandler extends BaseWebSocketServerHandler{
     }
 
 
-    @Override
+   // @Override
     protected void channelRead0(ChannelHandlerContext ctx, Object msg)
             throws Exception {
         // TODO Auto-generated method stub
@@ -183,7 +182,7 @@ public class WebSocketServerHandler extends BaseWebSocketServerHandler{
         
         if(handshaker == null){
             //不支持
-            WebSocketServerHandshakerFactory.sendUnsupportedVersionResponse(ctx.channel());
+            WebSocketServerHandshakerFactory.sendUnsupportedWebSocketVersionResponse(ctx.channel());
         }else{
             
             handshaker.handshake(ctx.channel(), req);
@@ -227,7 +226,24 @@ public class WebSocketServerHandler extends BaseWebSocketServerHandler{
          cause.printStackTrace();
          ctx.close();
     }
-    
+
+	@Override
+	protected void messageReceived(ChannelHandlerContext ctx, Object msg) throws Exception {
+  // TODO Auto-generated method stub
+        
+		  System.err.println(msg);
+        //http：//xxxx
+     /*   if(msg instanceof FullHttpRequest){
+            
+            handleHttpRequest(ctx,(FullHttpRequest)msg);
+        }else if(msg instanceof WebSocketFrame){
+        //ws://xxxx    
+            handlerWebSocketFrame(ctx,(WebSocketFrame)msg);
+        }*/
+        
+		
+	}
+
     
     
 }
