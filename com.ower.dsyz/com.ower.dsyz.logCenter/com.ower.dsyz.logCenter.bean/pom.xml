@@ -7,22 +7,22 @@
     <artifactId>com.ower.dsyz.logCenter</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>com.ower.dsyz.logCenter.rest</artifactId>
-  <name>com.ower.dsyz.logCenter.rest</name>
+  <artifactId>com.ower.dsyz.logCenter.bean</artifactId>
+  <name>com.ower.dsyz.logCenter.bean</name>
   <url>http://maven.apache.org</url>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <dependencies>
+  	<dependency>
+			<groupId>tree</groupId>
+			<artifactId>com.ower.dsyz.common.core</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>tree</groupId>
-       <artifactId>com.ower.dsyz.logCenter.server</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
     </dependency>
   </dependencies>
 </project>

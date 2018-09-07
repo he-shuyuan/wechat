@@ -1,13 +1,14 @@
-package com.ower.dsyz.logCenter.client;
+package com.ower.dsyz.logCenter.server;
 
 import org.springframework.stereotype.Service;
 
 import com.ower.dsyz.logCenter.bean.NettyRestMessage;
+import com.ower.dsyz.logCenter.util.NettyExchangeUtil;
 
 import io.netty.channel.ChannelHandlerContext;
 
 @Service
-public class MessageClientHandler extends AbstractClientHandler{
+public class MessageServerHandler extends AbstractServerHandler{
 
 	@Override
 	void messageHandle(ChannelHandlerContext ctx,NettyRestMessage<Object> message) {
@@ -18,20 +19,29 @@ public class MessageClientHandler extends AbstractClientHandler{
 		case LOGOUT://退出
 			break;
 		case MESS://消息
+			this.saveLogInfo(message);
 			break;
 	    default:break;
 		}
-		
 	}
 
 	/**
-	 * 记录channel信息
+	 * 保存channel状态
 	 * @param ctx
 	 * @param message
 	 */
 	private void saveLoginState(ChannelHandlerContext ctx, NettyRestMessage<Object> message) {
-		ChannelHelper.setCtx(ctx);
-		ChannelHelper.setHead(message.getHead());
+	     ChannelHelper.addAppChannel(message.getHead().getAppName(), ctx);
+	     message.getHead().setAppToken("001");
+		 NettyExchangeUtil.fireChannelSend(ctx, message);
 	}
 
+	/**
+	 * 记录日志信息
+	 * @param message
+	 */
+	private void saveLogInfo(NettyRestMessage<Object> message) {
+		System.err.println(message);
+		
+	}
 }

@@ -1,4 +1,8 @@
-package com.ower.dsyz.logCenter.service;
+package com.ower.dsyz.logCenter.server;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -11,13 +15,22 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 /**
  * 处理数据
  */
+@Service
 public class NettyServer {
 	
-    private int port;
+	@Value("${log.center.netty.port:9999}")
+    private String port;
     
-    public NettyServer(int port) {
+	@Autowired
+	MessageServerHandler messageServerHandler;
+	
+    public NettyServer() {
+    }
+    
+    public NettyServer(String port) {
         this.port = port;
     }
+    
     public void run() throws Exception {
         /***
          * NioEventLoopGroup 是用来处理I/O操作的多线程事件循环器，
@@ -60,7 +73,7 @@ public class NettyServer {
             b = b.childHandler(new ChannelInitializer<SocketChannel>() { // (4)
                 @Override
                 public void initChannel(SocketChannel ch) throws Exception {
-                   ch.pipeline().addLast(new MessageServerHandler());
+                   ch.pipeline().addLast(messageServerHandler);
                 }
             });
             /***
@@ -79,7 +92,7 @@ public class NettyServer {
             /***
              * 绑定端口并启动去接收进来的连接
              */
-            ChannelFuture f = b.bind(port).sync();
+            ChannelFuture f = b.bind(Integer.valueOf(port)).sync();
             /**
              * 这里会一直等待，直到socket被关闭
              */
@@ -93,7 +106,7 @@ public class NettyServer {
         }
     }
     public static void main(String[] args) throws Exception {
-        int port = 9999;
+        String port = "9999";
 
         new NettyServer(port).run();
         //通过cmd窗口的telnet 127.0.0.1 8000运行

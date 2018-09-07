@@ -1,4 +1,4 @@
-package com.ower.dsyz.logCenter.service;
+package com.ower.dsyz.logCenter.server;
 import com.ower.dsyz.logCenter.bean.NettyRestMessage;
 import com.ower.dsyz.logCenter.util.NettyExchangeUtil;
 
@@ -18,14 +18,15 @@ public abstract class AbstractServerHandler extends ChannelInboundHandlerAdapter
        // 释放资源，这行很关键  
         result.release();  
         NettyRestMessage<Object> message = NettyExchangeUtil.fireChannelRead(resultStr);
-        this.messageHandle(message);
-        NettyExchangeUtil.fireChannelSend(ctx, message);
+        this.messageHandle(ctx,message);
+        //NettyExchangeUtil.fireChannelSend(ctx, message);
     }  
   
     @Override  
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {  
         // 当出现异常就关闭连接  
-        cause.printStackTrace();  
+        cause.printStackTrace(); 
+        ChannelHelper.removeChannel(ctx);
         ctx.close();  
     }  
   
@@ -38,5 +39,5 @@ public abstract class AbstractServerHandler extends ChannelInboundHandlerAdapter
      * 消息处理
      * @param message
      */
-    abstract void messageHandle(NettyRestMessage<Object> message);
+    abstract void messageHandle(ChannelHandlerContext ctx,NettyRestMessage<Object> message);
 }  

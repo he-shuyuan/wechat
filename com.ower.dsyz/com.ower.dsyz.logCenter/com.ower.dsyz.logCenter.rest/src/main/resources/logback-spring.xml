@@ -9,21 +9,15 @@
 	<springProperty scope="context" name="devLogLevel" source="dev.logging.level"/>
 	<appender name="fileLog"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<File>${log.rootPath}/adminServer/adminServer.log</File>
+		<File>${log.rootPath}/logCenterServer/logCenterServer.log</File>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${log.rootPath}/adminServer/adminServer.%d{yyyy-MM-dd}.log
+			<fileNamePattern>${log.rootPath}/logCenterServer/logCenterServer.%d{yyyy-MM-dd}.log
 			</fileNamePattern>
 			<maxHistory>365</maxHistory>
 		</rollingPolicy>
 		<encoder charset="UTF-8">
 			<pattern>${PATTERN}</pattern>
 		</encoder>
-	</appender>
-	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-		<encoder>
-			<pattern>${pattern}</pattern>
-		</encoder>
-		<filter class="com.ower.dsyz.logCenter.client.filter.LogFilter"></filter>
 	</appender>
 	<!-- 测试环境+开发环境. 多个使用逗号隔开. -->
 	<springProfile name="test,dev,pr">
@@ -37,14 +31,13 @@
 		<root>
 			<level value="INFO" /><!-- logback建议只使用FATAL ,ERROR ,WARN ,INFO 
 				,DEBUG这五个级别。 -->
-			<!-- <appender-ref ref="fileLog" value="${devLogLevel}" /> -->
-			<appender-ref ref="STDOUT" value="${devLogLevel}" />
+			<appender-ref ref="fileLog" value="${devLogLevel}" />
 		</root>
 	</springProfile>
 	
 	<!-- 生产环境. -->
 	<springProfile name="pro,px">
-		<logger name="com.foresee.mobile" level="${proLogLevel}" />
+		<logger name="com.ower.dsyz" level="${proLogLevel}" />
 		<logger name="com.ibatis" level="${proLogLevel}" />
 		<logger name="java.sql" level="${proLogLevel}" />
 		<logger name="com.getsentry.raven" level="INFO" />
