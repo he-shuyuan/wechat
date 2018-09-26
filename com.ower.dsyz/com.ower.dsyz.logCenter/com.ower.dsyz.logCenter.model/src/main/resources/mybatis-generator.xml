@@ -33,7 +33,7 @@
 
 
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://localhost:3306/logCenter" userId="root"
+			connectionURL="jdbc:mysql://localhost:3306/log" userId="root"
 			password="root"><!-- 123456 -->
 		</jdbcConnection>
 
@@ -58,11 +58,11 @@
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
-		<table schema="" tableName="t_admin_ins_role" domainObjectName="AdminInsRole"
+		<table schema="" tableName="t_log_auth" domainObjectName="LogAuth"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false"></table> 
-		<table schema="" tableName="t_admin_user_role" domainObjectName="AdminUserRole"
+		<table schema="" tableName="t_log_detail" domainObjectName="LogDetail"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false"></table>

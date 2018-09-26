@@ -26,5 +26,6 @@
     <module>com.ower.dsyz.logCenter.model</module>
     <module>com.ower.dsyz.logCenter.client</module>
     <module>com.ower.dsyz.logCenter.rest</module>
+    <module>com.ower.dsyz.logCenter.service</module>
   </modules>
 </project>

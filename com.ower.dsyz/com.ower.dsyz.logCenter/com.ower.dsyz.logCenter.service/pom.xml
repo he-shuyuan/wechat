@@ -7,7 +7,7 @@
     <artifactId>com.ower.dsyz.logCenter</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>com.ower.dsyz.logCenter.server</artifactId>
+  <artifactId>com.ower.dsyz.logCenter.service</artifactId>
   <name>com.ower.dsyz.logCenter.service</name>
   <url>http://maven.apache.org</url>
   <properties>
@@ -15,13 +15,8 @@
   </properties>
   <dependencies>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <scope>test</scope>
-    </dependency>
-     <dependency>
-      <groupId>tree</groupId>
-       <artifactId>com.ower.dsyz.logCenter.service</artifactId>
+       <groupId>tree</groupId>
+       <artifactId>com.ower.dsyz.logCenter.model</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </dependency>
   </dependencies>
