@@ -106,7 +106,7 @@
                        }
                        sessionStorageUtil.setDepList(res2.body.depList);
                        this.initFirstInsId(res2.body.depList);
-                       this.$router.push('manage/companyManage');
+                       this.$router.push('/default');
                  });
               });
              this.loading = false;

@@ -5,7 +5,7 @@ package com.ower.dsyz.logCenter.bean;
  * @author Administrator
  *
  */
-public class LoggerMessage{
+public class LoggerMessageBody{
 
 	/**
 	 * 日志体
@@ -28,7 +28,7 @@ public class LoggerMessage{
      */
     private String level;
 
-    public LoggerMessage(String body, String timestamp, String threadName, String className, String level) {
+    public LoggerMessageBody(String body, String timestamp, String threadName, String className, String level) {
         this.body = body;
         this.timestamp = timestamp;
         this.threadName = threadName;
@@ -36,7 +36,7 @@ public class LoggerMessage{
         this.level = level;
     }
 
-    public LoggerMessage() {
+    public LoggerMessageBody() {
     }
 
 	public String getBody() {

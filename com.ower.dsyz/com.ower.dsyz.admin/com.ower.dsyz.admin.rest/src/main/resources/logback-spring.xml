@@ -18,13 +18,9 @@
 		<encoder charset="UTF-8">
 			<pattern>${PATTERN}</pattern>
 		</encoder>
+		<filter class="com.ower.dsyz.logCenter.client.filter.LogFilter"></filter> 
 	</appender>
-	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-		<encoder>
-			<pattern>${pattern}</pattern>
-		</encoder>
-		<filter class="com.ower.dsyz.logCenter.client.filter.LogFilter"></filter>
-	</appender>
+	
 	<!-- 测试环境+开发环境. 多个使用逗号隔开. -->
 	<springProfile name="test,dev,pr">
 		<logger name="com.ower.dsyz" level="${devLogLevel}" />
@@ -37,8 +33,7 @@
 		<root>
 			<level value="INFO" /><!-- logback建议只使用FATAL ,ERROR ,WARN ,INFO 
 				,DEBUG这五个级别。 -->
-			<!-- <appender-ref ref="fileLog" value="${devLogLevel}" /> -->
-			<appender-ref ref="STDOUT" value="${devLogLevel}" />
+			 <appender-ref ref="fileLog" value="${devLogLevel}" />
 		</root>
 	</springProfile>
 	

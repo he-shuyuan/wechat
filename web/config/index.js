@@ -36,11 +36,11 @@ var proxyTable =
                 '^/gateway/cms': '/cms',
             },
         },
-        '/gateway': {
-            target: 'http://127.0.0.1:8989',
+        '/gateway/admin': {
+            target: 'http://127.0.0.1:8250',
             changeOrigin: true,
             pathRewrite: {
-                '^/gateway': '',
+                '^/gateway/admin': '',
             },
         },
     } : {}

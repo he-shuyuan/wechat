@@ -2,9 +2,8 @@ package com.ower.dsyz.logCenter.bean;
 
 import java.io.Serializable;
 
-import com.ower.dsyz.logCenter.enums.NettyMessageType;
 
-public class NettyRestHead implements Serializable{
+public class LoggerRestHead implements Serializable{
 	/**
 	 * 
 	 */
@@ -19,10 +18,6 @@ public class NettyRestHead implements Serializable{
 	 */
 	private String appToken;
 	
-	/**
-	 * 消息类型
-	 */
-	private NettyMessageType type;
 	
 	/**
 	 * 消息体类型
@@ -46,16 +41,6 @@ public class NettyRestHead implements Serializable{
 		this.appToken = appToken;
 	}
 
-	public NettyMessageType getType() {
-		return type;
-	}
-
-	public void setType(NettyMessageType type) {
-		this.type = type;
-	}
-
-
-
 	public Class<?> getBodyType() {
 		return bodyType;
 	}
@@ -71,7 +56,7 @@ public class NettyRestHead implements Serializable{
 
 	@Override
 	public String toString() {
-		return "NettyRestHead [appName=" + appName + ", appToken=" + appToken + ", type=" + type + ", bodyType="
+		return "LoggerRestHead [appName=" + appName + ", appToken=" + appToken + ", bodyType="
 				+ bodyType + "]";
 	}
 	

@@ -24,7 +24,7 @@
 			<artifactId>com.ower.dsyz.admin.service</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-		     <dependency>
+	<dependency>
       <groupId>tree</groupId>
        <artifactId>com.ower.dsyz.logCenter.client</artifactId>
         <version>0.0.1-SNAPSHOT</version>

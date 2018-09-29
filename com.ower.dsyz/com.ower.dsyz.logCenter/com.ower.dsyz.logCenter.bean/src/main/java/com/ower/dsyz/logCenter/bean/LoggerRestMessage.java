@@ -2,7 +2,7 @@ package com.ower.dsyz.logCenter.bean;
 
 import java.io.Serializable;
 
-public class NettyRestMessage<T> implements Serializable{
+public class LoggerRestMessage<T> implements Serializable{
 
 	/**
 	 * 
@@ -12,8 +12,7 @@ public class NettyRestMessage<T> implements Serializable{
 	/**
 	 * 消息头部
 	 */
-	private NettyRestHead head;
-	
+	private LoggerRestHead head;
 	
 	/**
 	 * 消息体
@@ -21,12 +20,12 @@ public class NettyRestMessage<T> implements Serializable{
 	private T body;
 
 
-	public NettyRestHead getHead() {
+	public LoggerRestHead getHead() {
 		return head;
 	}
 
 
-	public void setHead(NettyRestHead head) {
+	public void setHead(LoggerRestHead head) {
 		this.head = head;
 	}
 
@@ -43,7 +42,7 @@ public class NettyRestMessage<T> implements Serializable{
 
 	@Override
 	public String toString() {
-		return "NettyRestMessage [head=" + head + ", body=" + body + "]";
+		return "LoggerRestMessage [head=" + head + ", body=" + body + "]";
 	}
 	
 	

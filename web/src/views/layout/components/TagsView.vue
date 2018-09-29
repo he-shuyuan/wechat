@@ -69,10 +69,12 @@
                         return this.$route
                     }
                }*/
-                return  this.$route
+               if(this.$route.meta.show)
+                  return  this.$route
             },
             isActive(route) {
-                return route.path === this.$route.path || route.name === this.$route.name
+                return route.path === this.$route.path || route.name === this.$route.name 
+                || this.childRouteActive(route)
             },
             addViewTags() {
                 const route = this.generateRoute()
@@ -99,7 +101,7 @@
                         if (latestView) {
                             this.$router.push(latestView.path)
                         } else {
-                            this.$router.push('/')
+                            this.$router.push('/default')
                         }
                     }
                 })
@@ -112,7 +114,7 @@
             },
             closeAllTags() {
                 this.$store.dispatch('delAllViews')
-                this.$router.push('/')
+                this.$router.push('/default')
             },
             openMenu(tag, e) {
                 this.visible = true
@@ -122,6 +124,13 @@
             },
             closeMenu() {
                 this.visible = false
+            },
+            /**
+             * 子路由活动
+             * @return {[type]} [description]
+             */
+            childRouteActive:function(route){
+             return this.$route.matched.some(record => record.meta.show && record.name == route.name)
             }
         }
     }

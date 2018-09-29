@@ -3,13 +3,11 @@ package com.ower.dsyz.logCenter.client.filter;
 import java.text.DateFormat;
 import java.util.Date;
 
-import com.ower.dsyz.logCenter.bean.LoggerMessage;
-import com.ower.dsyz.logCenter.bean.NettyRestHead;
-import com.ower.dsyz.logCenter.bean.NettyRestMessage;
-import com.ower.dsyz.logCenter.client.ChannelHelper;
-import com.ower.dsyz.logCenter.enums.NettyMessageType;
-import com.ower.dsyz.logCenter.util.NettyExchangeUtil;
-
+import com.ower.dsyz.common.core.util.SpringContextUtil;
+import com.ower.dsyz.logCenter.bean.LoggerMessageBody;
+import com.ower.dsyz.logCenter.bean.LoggerRestHead;
+import com.ower.dsyz.logCenter.bean.LoggerRestMessage;
+import com.ower.dsyz.logCenter.client.util.LogSendHandler;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.classic.spi.StackTraceElementProxy;
 import ch.qos.logback.core.filter.Filter;
@@ -21,10 +19,12 @@ import ch.qos.logback.core.spi.FilterReply;
  */
 public class LogFilter extends Filter<ILoggingEvent>{
 
+	
+	private LogSendHandler logSendHandler;
+	
 	@Override
 	public FilterReply decide(ILoggingEvent event) {
-		
-		LoggerMessage loggerMessage = new LoggerMessage(
+		LoggerMessageBody loggerMessage = new LoggerMessageBody(
 				event.getMessage()
                 , DateFormat.getDateTimeInstance().format(new Date(event.getTimeStamp())),
                 event.getThreadName(),
@@ -36,13 +36,13 @@ public class LogFilter extends Filter<ILoggingEvent>{
 			errorMsg += this.resourceFix(event.getThrowableProxy().getStackTraceElementProxyArray());
 			loggerMessage.setBody(loggerMessage.getBody()+errorMsg);
 		}
-		NettyRestMessage<Object> message = new NettyRestMessage<>();
-		NettyRestHead head = ChannelHelper.getHead();
-		head.setType(NettyMessageType.MESS);
-		head.setBodyType(LoggerMessage.class);
+		LoggerRestMessage<Object> message = new LoggerRestMessage<>();
+		LoggerRestHead head = new LoggerRestHead();
+		head.setAppName("name");
+		head.setBodyType(LoggerMessageBody.class);
 		message.setBody(loggerMessage);
 		message.setHead(head);
-		NettyExchangeUtil.fireChannelSend(ChannelHelper.getCtx(), message);
+		getLogService().save(message);
         return FilterReply.ACCEPT;
 	}
     
@@ -62,5 +62,12 @@ public class LogFilter extends Filter<ILoggingEvent>{
 			}
 		}
 		return errorMsg;
+	}
+	
+	private synchronized LogSendHandler getLogService(){
+		if(logSendHandler == null){
+		     logSendHandler =  (LogSendHandler) SpringContextUtil.getBeansByClass(LogSendHandler.class).get(0);
+		}
+		return logSendHandler;
 	}
 }  

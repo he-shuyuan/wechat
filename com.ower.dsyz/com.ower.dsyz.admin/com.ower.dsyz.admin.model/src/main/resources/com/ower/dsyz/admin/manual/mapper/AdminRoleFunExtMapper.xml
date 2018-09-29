@@ -40,11 +40,13 @@
 	<select id="queryFunctionByRoleList" parameterType="java.util.Map"
 		resultType="com.ower.dsyz.admin.manual.dto.AdminFunctionExtDTO">
 		select DISTINCT
-		t.`name` as functionName,
+		t.`name` as name,
 		t.bus_type_id as busTypeId,
 		t.parent_id as parentId,
 		t.function_id as functionId,
-		t.code as code
+		t.code as code,
+		t.function_type as functionType,
+		t.url as url
 		from t_admin_function t LEFT JOIN t_admin_role_fun t1
 		on t1.function_id = t1.function_id
 		where t.bus_type_id = #{busTypeId,jdbcType=VARCHAR}
@@ -54,5 +56,6 @@
 			#{item.roleId}
 		</foreach>
 		and t.parent_id = #{parentId,jdbcType=VARCHAR}
+		order by t.sort_no
 	</select>
 </mapper>

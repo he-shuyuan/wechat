@@ -30,7 +30,19 @@ export const constantRouterMap = [
             import ('@/views/401'), hidden: true },
     { path: '*', redirect: '/404', hidden: true },
     { path: '/websocket', component: () =>  import ('@/views/websocket/index')},
-
+    {   path: '/default',   
+        component: Layout,
+        redirect: 'noredirect',
+        children: [
+            {
+                path: '',
+                name: 'default',
+                component: () =>  import ('@/views/default/index'),
+                meta: { title: '主页',requiresAuth:true ,auth:true},
+              
+            },
+        ],
+  },
     {
         path: '/',
         redirect: '/login'
@@ -47,7 +59,7 @@ export const constantRouterMap = [
                 path: 'companyManage',
                 name: 'companyManage',
                 component: () => import('@/views/manage/company/companyManage'),
-                meta: { title: '公司管理',requiresAuth:true ,auth:true},
+                meta: { title: '公司管理',requiresAuth:true ,auth:true,show:true},
                 children:[
                     {
                         path: 'addorModifyCompany',
@@ -70,7 +82,7 @@ export const constantRouterMap = [
             name: 'roleManage',
             component: () =>
                 import ('@/views/sysManage/role/index'),
-            meta: { title: '角色管理', requiresAuth: true, auth: true },
+            meta: { title: '角色管理', requiresAuth: true, auth: true ,show:true},
             children: [{
                 path: 'detail',
                 name: 'roleDetail',
@@ -102,7 +114,7 @@ export const constantRouterMap = [
             name: 'functionManage',
             component: () =>
                 import ('@/views/sysManage/function/index'),
-            meta: { title: '菜单管理', requiresAuth: true, auth: true },
+            meta: { title: '菜单管理', requiresAuth: true, auth: true ,show:true},
             children: [
 
             ]
@@ -111,7 +123,7 @@ export const constantRouterMap = [
             name: 'userManage',
             component: () =>
                 import ('@/views/sysManage/dep/index'),
-            meta: { title: '部门管理', requiresAuth: true, auth: true },
+            meta: { title: '部门管理', requiresAuth: true, auth: true,show:true },
             children: [{
                 path: 'depDetail',
                 name: 'depDetail',
