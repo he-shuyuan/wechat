@@ -12,19 +12,19 @@ public class AdminFunctionExtDTO extends AdminFunctionDTO{
 	/**
 	 * 子菜单列表
 	 */
-	List<AdminFunctionExtDTO> childrens;
+	List<AdminFunctionExtDTO> children;
 
-	public List<AdminFunctionExtDTO> getChildrens() {
-		return childrens;
+	public List<AdminFunctionExtDTO> getChildren() {
+		return children;
 	}
 
-	public void setChildrens(List<AdminFunctionExtDTO> childrens) {
-		this.childrens = childrens;
+	public void setChildren(List<AdminFunctionExtDTO> children) {
+		this.children = children;
 	}
 
 	@Override
 	public String toString() {
-		return "AdminFunctionExtDTO [childrens=" + childrens + "]";
+		return "AdminFunctionExtDTO [children=" + children + "]";
 	}
 	
 	

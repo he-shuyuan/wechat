@@ -70,9 +70,9 @@
           insIdChange:function(){
             sessionStorageUtil.setInsId(this.state.insId);
             standardAsync(this,'queryUserRoleFunctionList',{insId:this.state.insId,busTypeId:'1'},res=>{
-                 
+               this.$store.dispatch('changeIns', {route:this.$router,menu:res.body.menuList})
             },null,null,error=>{
-              console.log(error)
+               this.$store.dispatch('changeIns', {route:this.$router,menu:[]})
             });
         },
         /**

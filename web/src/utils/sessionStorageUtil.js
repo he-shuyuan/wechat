@@ -2,6 +2,7 @@ let token_session_key = 'user_token_session_key'
 let user_info_key = 'user_info_key'
 let user_depList_key = 'user_depList_key'
 let user_insId_key = 'user_insId_key'
+let role_menu_list_key = 'role_menu_list_key'
 export default {
   /**
      * 获取Item
@@ -89,6 +90,25 @@ export default {
     setInsId:function(insId){
        window.sessionStorage.setItem(user_insId_key,insId);
        window.localStorage.setItem(user_insId_key, insId);
+    },
+    /**
+     * 设置菜单
+     * @param {[type]} menuList [description]
+     */
+    setMenuList:function(menuList){
+       window.sessionStorage.setItem(role_menu_list_key,JSON.stringify(menuList));
+    },
+    /**
+     * 获取菜单
+     * @return {[type]} [description]
+     */
+    getMenuList:function(){
+       let list = window.sessionStorage.getItem(role_menu_list_key);
+       if(list){
+        return JSON.parse(list);
+      }else{
+        return [];
+      }
     },
     /**
      * 清空session

@@ -1,7 +1,7 @@
 <template>
     <div class="menu-wrapper">
         <template v-for="item in routes">
-            <router-link v-if="!item.childFunction"
+            <router-link v-if="!item.children"
                          :to="item.url"
                          :key="item.name">
                 <el-menu-item :index="item.url"
@@ -25,11 +25,11 @@
                           slot="title">{{item.name}}</span>
                 </template>
 
-                <template v-for="child in item.childFunction">
+                <template v-for="child in item.children">
                     <sidebar-item-auth :is-nest="true"
                                   class="nest-menu"
                                   v-if="false"
-                                  :routes="child.childFunction"
+                                  :routes="child.children"
                                   :key="child.path"></sidebar-item-auth>
 
                     <router-link v-else

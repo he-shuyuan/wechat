@@ -28,8 +28,8 @@ export default {
     getBreadcrumb() {
       let matched = this.$route.matched.filter(item => item.name)
       const first = matched[0]
-      if (first && first.name !== 'dashboard') {
-        matched = [{ path: '/', meta: { title: '控制面板' }}].concat(matched)
+      if (first && first.name !== 'default') {
+        matched = [{ path: '/default', meta: { title: '主页' }}].concat(matched)
       }
       this.levelList = matched
     }

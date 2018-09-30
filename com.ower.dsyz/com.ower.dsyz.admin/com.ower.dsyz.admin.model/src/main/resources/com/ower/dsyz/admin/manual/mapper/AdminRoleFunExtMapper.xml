@@ -45,6 +45,7 @@
 		t.parent_id as parentId,
 		t.function_id as functionId,
 		t.code as code,
+		t.image_url as imageUrl,
 		t.function_type as functionType,
 		t.url as url
 		from t_admin_function t LEFT JOIN t_admin_role_fun t1

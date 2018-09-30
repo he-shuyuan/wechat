@@ -108,7 +108,7 @@ public class AdminRoleFunctionServiceImpl implements IAdminRoleFunctionService {
 		List<AdminFunctionExtDTO> adminFunctionExtDTOList = adminRoleFunExtMapper.queryFunctionByRoleList(map);
 		for(AdminFunctionExtDTO temp:adminFunctionExtDTOList){
 			map.put("parentId", temp.getFunctionId());
-			temp.setChildrens(recurrenceQueryFun(map));
+			temp.setChildren(recurrenceQueryFun(map));
 		}
 		return adminFunctionExtDTOList;
 	}
