@@ -53,12 +53,10 @@
 	<url>http://maven.apache.org</url>
 	<modules>
 		<module>com.ower.dsyz.common</module>
-		<module>com.ower.dsyz.blockChain</module>
 		<module>com.ower.dsyz.eureka</module>
 		<module>com.ower.dsyz.gateway</module>
 		<module>com.ower.dsyz.wechat</module>
         <module>com.ower.dsyz.admin</module>
-		<module>com.ower.dsyz.netty</module>
         <module>com.ower.dsyz.logCenter</module>
   </modules>
 </project>

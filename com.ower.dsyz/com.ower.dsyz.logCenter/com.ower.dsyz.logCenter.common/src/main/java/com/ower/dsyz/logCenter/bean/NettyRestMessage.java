@@ -2,7 +2,7 @@ package com.ower.dsyz.logCenter.bean;
 
 import java.io.Serializable;
 
-public class LoggerRestMessage<T> implements Serializable{
+public class NettyRestMessage<T> implements Serializable{
 
 	/**
 	 * 
@@ -42,8 +42,9 @@ public class LoggerRestMessage<T> implements Serializable{
 
 	@Override
 	public String toString() {
-		return "LoggerRestMessage [head=" + head + ", body=" + body + "]";
+		return "NettyRestMessage [head=" + head + ", body=" + body + "]";
 	}
 	
 	
 }
+

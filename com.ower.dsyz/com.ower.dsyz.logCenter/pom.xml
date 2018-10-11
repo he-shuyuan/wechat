@@ -21,7 +21,7 @@
   </dependencies>
   <packaging>pom</packaging>
   <modules>
-    <module>com.ower.dsyz.logCenter.bean</module>
+    <module>com.ower.dsyz.logCenter.common</module>
     <module>com.ower.dsyz.logCenter.server</module>
     <module>com.ower.dsyz.logCenter.model</module>
     <module>com.ower.dsyz.logCenter.client</module>

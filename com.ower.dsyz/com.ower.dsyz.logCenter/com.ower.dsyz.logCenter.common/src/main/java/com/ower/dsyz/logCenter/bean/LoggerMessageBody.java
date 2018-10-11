@@ -1,12 +1,18 @@
 package com.ower.dsyz.logCenter.bean;
 
+import java.io.Serializable;
+
 /**
  * 日志记录
  * @author Administrator
  *
  */
-public class LoggerMessageBody{
+public class LoggerMessageBody implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/**
 	 * 日志体
 	 */

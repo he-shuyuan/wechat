@@ -2,8 +2,10 @@ package com.ower.dsyz.logCenter.bean;
 
 import java.io.Serializable;
 
+import com.ower.dsyz.logCenter.constant.NettyMessageType;
 
-public class LoggerRestHead implements Serializable{
+
+public class NettyRestHead implements Serializable{
 	/**
 	 * 
 	 */
@@ -18,6 +20,15 @@ public class LoggerRestHead implements Serializable{
 	 */
 	private String appToken;
 	
+	/**
+	 * ip
+	 */
+	private String ip;
+	
+	/**
+	 * 消息类型
+	 */
+	private NettyMessageType  type;
 	
 	/**
 	 * 消息体类型
@@ -50,15 +61,33 @@ public class LoggerRestHead implements Serializable{
 	}
 
 
+	public String getIp() {
+		return ip;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+
+	public NettyMessageType getType() {
+		return type;
+	}
+
+	public void setType(NettyMessageType type) {
+		this.type = type;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
 	@Override
 	public String toString() {
-		return "LoggerRestHead [appName=" + appName + ", appToken=" + appToken + ", bodyType="
-				+ bodyType + "]";
+		return "NettyRestHead [appName=" + appName + ", appToken=" + appToken + ", ip=" + ip + ", type=" + type
+				+ ", bodyType=" + bodyType + "]";
 	}
+
+	
 	
 	
 }

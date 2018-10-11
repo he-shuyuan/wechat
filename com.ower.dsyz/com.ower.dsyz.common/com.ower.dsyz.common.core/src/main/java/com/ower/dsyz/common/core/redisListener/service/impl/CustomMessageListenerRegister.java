@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.listener.PatternTopic;
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.data.redis.listener.Topic;
-import org.springframework.stereotype.Component;
 import com.ower.dsyz.common.core.redisListener.service.ICustomMessageListener;
 import com.ower.dsyz.common.core.redisListener.service.ICustomMessageListererRegister;
 

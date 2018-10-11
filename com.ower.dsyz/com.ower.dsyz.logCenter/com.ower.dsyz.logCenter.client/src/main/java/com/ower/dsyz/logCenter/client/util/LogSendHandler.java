@@ -26,9 +26,6 @@ public class LogSendHandler {
 	
 	
 	public void save(LoggerRestMessage<?> message){
-		if(failCount >5){
-			return;
-		}
 		LogSendThreadPoolUtil.poolExecutor.execute(new Runnable() {
 			@Override
 			public void run() {

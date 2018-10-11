@@ -7,7 +7,7 @@
     <artifactId>com.ower.dsyz.logCenter</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>com.ower.dsyz.logCenter.bean</artifactId>
+  <artifactId>com.ower.dsyz.logCenter.common</artifactId>
   <name>com.ower.dsyz.logCenter.bean</name>
   <url>http://maven.apache.org</url>
   <properties>
