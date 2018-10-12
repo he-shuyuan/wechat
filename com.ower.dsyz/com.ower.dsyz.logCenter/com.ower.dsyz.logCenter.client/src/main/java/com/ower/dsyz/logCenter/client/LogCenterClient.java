@@ -3,14 +3,9 @@ package com.ower.dsyz.logCenter.client;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-
 import com.ower.dsyz.logCenter.commonpent.coder.ByteToNettyRestMessageDecoder;
 import com.ower.dsyz.logCenter.commonpent.coder.NettyRestMessageToByteEncoder;
 import com.ower.dsyz.logCenter.constant.NettyConstant;
-
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -22,21 +17,41 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.DelimiterBasedFrameDecoder;
-@Service
+
 public class LogCenterClient {
+	/**
+	 * 单例
+	 */
+	private static LogCenterClient instance;
 	
-	@Autowired
-	ClientHandler clientHandler;
-	
-	@Value("${log.center.port:9998}")
-	private int port;
-	
-	@Value("${log.center.host:127.0.0.1}")
-	private String host;
-	
+	/**
+	 * 重连时间
+	 */
+	private long reConnectTime = 2L;
+    /**
+     * 错误重连次数
+     */
 	private int num=0;
 	
 	private Logger log = LoggerFactory.getLogger(this.getClass());
+	
+	private ClientHandler clientHandler;
+	
+	private LogCenterClient(String appName,long reConnectTime){
+		this.reConnectTime = reConnectTime;
+		this.clientHandler = new ClientHandler(appName,reConnectTime);
+	}
+	
+	public synchronized static LogCenterClient getInstance(String appName,long reConnectTime){
+		if(instance == null){
+			instance = new LogCenterClient(appName,reConnectTime);
+		}
+		return instance;
+	}
+	
+	public synchronized static LogCenterClient getInstance(){
+		return instance;
+	}
 	/**
 	 * 连接服务器
 	 * @param reConnectTime 单位 s
@@ -44,8 +59,7 @@ public class LogCenterClient {
 	 * @param host
 	 * @throws Exception
 	 */
-	public void connect(Long reConnectTime){
-		log.debug("【第{}次尝试连接服务器】",++num);
+	public synchronized void  connect(String host,int port){
 		// 配置客户端NIO线程组
 		EventLoopGroup group = new NioEventLoopGroup();
 		try {
@@ -62,7 +76,7 @@ public class LogCenterClient {
 		}catch(Exception ex){
 		}finally {
 			group.shutdownGracefully();
-			reConnect(reConnectTime);
+			reConnect(host,port);
 		}
  
 	}
@@ -72,13 +86,16 @@ public class LogCenterClient {
 	 * 重连
 	 * @param reConnetTime
 	 */
-	private void reConnect(Long reConnetTime){
+	private synchronized void  reConnect(String host,int port){
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
 				try {
-					Thread.sleep(reConnetTime*1000);
-					LogCenterClient.this.connect(reConnetTime*2);
+					log.debug("【连接服务器错误，第{}次重连在({}s)后开始】",++num,reConnectTime);
+					Thread.sleep(reConnectTime*1000);
+					reConnectTime *=2;
+					log.debug("【连接服务器错误，第{}次开始尝试重连】",num);
+					LogCenterClient.this.connect(host,port);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -107,6 +124,9 @@ public class LogCenterClient {
 		}
  
 	}
- 
+     public void resetStatus(long reConnectTime){
+    	 this.num = 0;
+    	 this.reConnectTime = reConnectTime;
+     }
 }
 

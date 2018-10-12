@@ -1,4 +1,4 @@
-package com.ower.dsyz.logCenter.client;
+package com.ower.dsyz.logCenter.client.service;
 
 import com.ower.dsyz.logCenter.bean.NettyRestMessage;
 

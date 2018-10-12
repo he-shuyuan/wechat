@@ -18,9 +18,21 @@
 		<encoder charset="UTF-8">
 			<pattern>${PATTERN}</pattern>
 		</encoder>
-		<filter class="com.ower.dsyz.logCenter.client.filter.LogFilter"></filter> 
+	<!-- 	 <filter class="com.ower.dsyz.logCenter.client.filter.LogFilter"></filter> -->
 	</appender>
-	
+	<appender name="myAppender"
+		class="com.ower.dsyz.logCenter.client.appender.MyAppender">
+		<host>127.0.0.1</host>
+		<port>9998</port>
+		<appName>admin</appName>
+		<reConnectTime>2</reConnectTime>
+		<intercept class="com.ower.dsyz.logCenter.client.filter.LogIntercept">
+		    <filter>
+		    com=debug,
+		    com.ower=ERROR
+		    </filter>
+		</intercept>
+	</appender>
 	<!-- 测试环境+开发环境. 多个使用逗号隔开. -->
 	<springProfile name="test,dev,pr">
 		<logger name="com.ower.dsyz" level="${devLogLevel}" />
@@ -33,7 +45,7 @@
 		<root>
 			<level value="INFO" /><!-- logback建议只使用FATAL ,ERROR ,WARN ,INFO 
 				,DEBUG这五个级别。 -->
-			 <appender-ref ref="fileLog" value="${devLogLevel}" />
+			<appender-ref ref="myAppender" value="ERROR" /> 
 		</root>
 	</springProfile>
 	

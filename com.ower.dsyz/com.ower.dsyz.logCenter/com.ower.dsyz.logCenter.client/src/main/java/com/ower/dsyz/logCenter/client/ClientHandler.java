@@ -1,35 +1,41 @@
 package com.ower.dsyz.logCenter.client;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
 import com.ower.dsyz.logCenter.bean.NettyRestHead;
 import com.ower.dsyz.logCenter.bean.NettyRestMessage;
+import com.ower.dsyz.logCenter.client.service.ILogClientService;
+import com.ower.dsyz.logCenter.client.service.impl.LogClientServiceImpl;
 import com.ower.dsyz.logCenter.constant.NettyMessageType;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.ChannelHandler.Sharable;
 
 
-@Service
 @Sharable
 public class ClientHandler extends ChannelInboundHandlerAdapter  {
-	
-	
+
 	private Logger log = LoggerFactory.getLogger(this.getClass());
-	
-	@Value("${spring.application.name}")
+	/**
+	 * 应用名
+	 */
 	private String appName;
 	
-	@Autowired
-	ILogClientService logClientService;
+    /**
+     * 重连时间时间
+     */
+	private long reConnectTime;
+	
+	private ILogClientService logClientService = new LogClientServiceImpl();
 	
 	@Override
     public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
       
     }
-
+	public ClientHandler(String appName,long reConnectTime){
+		super();
+		this.appName = appName;
+		this.reConnectTime = reConnectTime;
+	}
     @Override
     public void channelUnregistered(ChannelHandlerContext ctx) throws Exception {
   
@@ -50,6 +56,7 @@ public class ClientHandler extends ChannelInboundHandlerAdapter  {
         msg.getHead().setType(NettyMessageType.LOGIN);
         ctx.write(msg);
         ctx.flush();
+        LogCenterClient.getInstance().resetStatus(reConnectTime);
     }
 
     // 接收server端的消息，并打印出来
