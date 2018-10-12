@@ -16,7 +16,7 @@ import ch.qos.logback.classic.spi.StackTraceElementProxy;
 import ch.qos.logback.core.AppenderBase;
 import io.netty.channel.ChannelHandlerContext;
 
-public class MyAppender extends AppenderBase<ILoggingEvent> {
+public class NettyAppender extends AppenderBase<ILoggingEvent> {
 
 	/**
 	 * 服务器ip
@@ -77,7 +77,7 @@ public class MyAppender extends AppenderBase<ILoggingEvent> {
 		LogSendThreadPoolUtil.poolExecutor.execute(new Runnable() {
 			@Override
 			public void run() {
-				MyAppender.this.sycLogToLoggerCenter(event);
+				NettyAppender.this.sycLogToLoggerCenter(event);
 			}
 		});
 	}
@@ -162,6 +162,8 @@ public class MyAppender extends AppenderBase<ILoggingEvent> {
 	}
 
 	private Boolean isIntercept(String level, String className) {
+		if(this.intercept ==null)
+			return false;
 		Set<String> set = this.intercept.getFilter().keySet();
 		OrderArrayList keys = new OrderArrayList();
 		//选择最优匹配(key值最长)

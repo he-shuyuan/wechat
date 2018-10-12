@@ -21,16 +21,16 @@
 	<!-- 	 <filter class="com.ower.dsyz.logCenter.client.filter.LogFilter"></filter> -->
 	</appender>
 	<appender name="myAppender"
-		class="com.ower.dsyz.logCenter.client.appender.MyAppender">
+		class="com.ower.dsyz.logCenter.client.appender.NettyAppender">
 		<host>127.0.0.1</host>
 		<port>9998</port>
 		<appName>admin</appName>
 		<reConnectTime>2</reConnectTime>
 		<intercept class="com.ower.dsyz.logCenter.client.filter.LogIntercept">
-		    <filter>
+		    <!-- <filter>
 		    com=debug,
 		    com.ower=ERROR
-		    </filter>
+		    </filter> -->
 		</intercept>
 	</appender>
 	<!-- 测试环境+开发环境. 多个使用逗号隔开. -->

@@ -1,14 +1,11 @@
 package com.ower.dsyz.logCenter.client.util;
 
 import com.ower.dsyz.logCenter.bean.NettyRestHead;
-import com.ower.dsyz.logCenter.client.appender.MyAppender;
 import com.ower.dsyz.logCenter.constant.NettyMessageType;
 
 import io.netty.channel.ChannelHandlerContext;
 
 public class LogChannelStore {
-
-	private MyAppender myAppender;
 	/**
 	 * 单例
 	 */
@@ -47,14 +44,6 @@ public class LogChannelStore {
 			authHead.setType(NettyMessageType.MESS);
 		}
 		this.authHead = authHead;
-	}
-
-	public MyAppender getMyAppender() {
-		return myAppender;
-	}
-
-	public void setMyAppender(MyAppender myAppender) {
-		this.myAppender = myAppender;
 	}
 
 }
