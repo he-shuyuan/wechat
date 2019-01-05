@@ -34,7 +34,7 @@
 
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
 			connectionURL="jdbc:mysql://localhost:3306/gateway" userId="root"
-			password="foresee"><!-- 123456 -->
+			password="root"><!-- 123456 -->
 		</jdbcConnection>
 
 		<javaTypeResolver>
@@ -66,13 +66,13 @@
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false"></table>-->
-		<table schema="" tableName="t_gateway_auth_url" domainObjectName="GatewayAuthUrl"
+		<table schema="" tableName="bdatag_cloud_word_style" domainObjectName="CloudWordStyle"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false"></table> 
-		<table schema="" tableName="t_gateway_excute_type" domainObjectName="GatewayExcuteType"
+<!-- 		<table schema="" tableName="t_gateway_excute_type" domainObjectName="GatewayExcuteType"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
-			selectByExampleQueryId="false"></table>
+			selectByExampleQueryId="false"></table> -->
 		</context>
     </generatorConfiguration>  

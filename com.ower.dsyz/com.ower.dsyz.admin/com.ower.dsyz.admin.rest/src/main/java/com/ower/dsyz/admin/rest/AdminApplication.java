@@ -16,6 +16,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 @SpringBootApplication(scanBasePackages = { "com.ower.dsyz" })
 public class AdminApplication implements CommandLineRunner
 {
+	
     public static void main( String[] args ) 
     {
         SpringApplication application=new SpringApplication(AdminApplication.class);
@@ -25,6 +26,7 @@ public class AdminApplication implements CommandLineRunner
 	@Override
 	public void run(String... arg0) throws Exception {
 		/*LogChannelStore.getInstance().getMyAppender().connect();*/
+		
 	}
 
 }

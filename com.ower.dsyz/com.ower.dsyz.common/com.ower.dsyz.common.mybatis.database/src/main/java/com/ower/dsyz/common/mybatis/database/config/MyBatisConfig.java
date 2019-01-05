@@ -4,7 +4,12 @@
 package com.ower.dsyz.common.mybatis.database.config;
 
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
+
+import javax.sql.DataSource;
+
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -13,7 +18,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -23,6 +27,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.github.pagehelper.PageHelper;
+import com.ower.dsyz.common.mybatis.database.datasuorce.DynamicDataSource;
 import com.ower.dsyz.common.mybatis.database.page.CustomSqlSessionTemplate;
 
 /**
@@ -42,51 +47,27 @@ import com.ower.dsyz.common.mybatis.database.page.CustomSqlSessionTemplate;
  */
 @Configuration
 @EnableTransactionManagement
-@EnableConfigurationProperties({DruidDBConfig.class})
+//@EnableConfigurationProperties({DruidDBConfig.class})
 @MapperScan(basePackages={"com.ower.dsyz.*.*.dao"}, sqlSessionTemplateRef="customSqlSessionTemplate")
 public class MyBatisConfig{
     
     private Logger log = LoggerFactory.getLogger(this.getClass());
     
     @Autowired
-    private DruidDBConfig druidDBConfig;
+    private DbConfigManager dbConfigManager;
     
 
-    @Bean(name="customDataDource",destroyMethod = "close")   
-    public DruidDataSource dataSource() {
-        DruidDataSource datasource = new DruidDataSource();
-
-        datasource.setUrl(druidDBConfig.getUrl());
-        datasource.setUsername(druidDBConfig.getUsername());
-        datasource.setPassword(druidDBConfig.getPassword());
-        datasource.setDriverClassName(druidDBConfig.getDriverClassName());
-
-        //configuration
-        datasource.setInitialSize(druidDBConfig.getInitialSize());
-        datasource.setMinIdle(druidDBConfig.getMinIdle());
-        datasource.setMaxActive(druidDBConfig.getMaxActive());
-        datasource.setMaxWait(druidDBConfig.getMaxWait());
-        datasource.setTimeBetweenEvictionRunsMillis(druidDBConfig.getTimeBetweenEvictionRunsMillis());
-        datasource.setMinEvictableIdleTimeMillis(druidDBConfig.getMinEvictableIdleTimeMillis());
-        datasource.setValidationQuery(druidDBConfig.getValidationQuery());
-        datasource.setTestWhileIdle(druidDBConfig.isTestWhileIdle());
-        datasource.setTestOnBorrow(druidDBConfig.isTestOnBorrow());
-        datasource.setTestOnReturn(druidDBConfig.isTestOnReturn());
-        datasource.setPoolPreparedStatements(druidDBConfig.isPoolPreparedStatements());
-        datasource.setMaxPoolPreparedStatementPerConnectionSize(druidDBConfig.getMaxPoolPreparedStatementPerConnectionSize());
-        try {
-            datasource.setFilters(druidDBConfig.getFilters());
-        } catch (SQLException e) {
-            log.error("druid configuration initialization filter", e);
-        }
-        datasource.setConnectionProperties(druidDBConfig.getConnectionProperties());
-        datasource.setUseGlobalDataSourceStat(druidDBConfig.isUseGlobalDataSourceStat());
-        return datasource;
+    @Bean(name="customDataDource")   
+    public DynamicDataSource dataSource() {
+    	DynamicDataSource dbs = new DynamicDataSource();
+    	this.setDateSource(dbs);
+    	return dbs;
+      
     }
     
     @Bean(name = "sqlSessionFactory")
     public SqlSessionFactory sqlSessionFactoryBean(@Autowired @Qualifier(value="customDataDource")
-            DruidDataSource dataSource) {
+    DynamicDataSource dataSource) {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(dataSource);
         bean.setTypeAliasesPackage("com.ower.dsyz.*.*");
@@ -122,9 +103,56 @@ public class MyBatisConfig{
     
     @Bean
     public PlatformTransactionManager TransactionManager(@Autowired @Qualifier(value="customDataDource")
-            DruidDataSource dataSource) {
+    DynamicDataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);
     }
     
-    
+    /**
+     * 设置数据源
+     * @param dbs
+     */
+    private void setDateSource(DynamicDataSource dbs){
+    	Map<Object,Object> map = new HashMap<>();
+    	for(String key :dbConfigManager.getConfigMap().keySet()){
+    		try{
+    		   map.put(key, this.getDatasource(dbConfigManager.getConfigMap().get(key)));
+    		}catch(Exception ex){
+    			log.warn("{}..数据源配置出错，原因：{}",key,ex);
+    		}
+    	}
+    	dbs.setTargetDataSources(map);
+    }
+    /**
+     * 获取数据源
+     * @return
+     */
+    private DataSource getDatasource(AbstractDBConfig druidDBConfig){
+    	  DruidDataSource datasource = new DruidDataSource();
+          datasource.setUrl(druidDBConfig.getUrl());
+          datasource.setUsername(druidDBConfig.getUsername());
+          datasource.setPassword(druidDBConfig.getPassword());
+          datasource.setDriverClassName(druidDBConfig.getDriverClassName());
+
+          //configuration
+          datasource.setInitialSize(druidDBConfig.getInitialSize());
+          datasource.setMinIdle(druidDBConfig.getMinIdle());
+          datasource.setMaxActive(druidDBConfig.getMaxActive());
+          datasource.setMaxWait(druidDBConfig.getMaxWait());
+          datasource.setTimeBetweenEvictionRunsMillis(druidDBConfig.getTimeBetweenEvictionRunsMillis());
+          datasource.setMinEvictableIdleTimeMillis(druidDBConfig.getMinEvictableIdleTimeMillis());
+          datasource.setValidationQuery(druidDBConfig.getValidationQuery());
+          datasource.setTestWhileIdle(druidDBConfig.isTestWhileIdle());
+          datasource.setTestOnBorrow(druidDBConfig.isTestOnBorrow());
+          datasource.setTestOnReturn(druidDBConfig.isTestOnReturn());
+          datasource.setPoolPreparedStatements(druidDBConfig.isPoolPreparedStatements());
+          datasource.setMaxPoolPreparedStatementPerConnectionSize(druidDBConfig.getMaxPoolPreparedStatementPerConnectionSize());
+          try {
+              datasource.setFilters(druidDBConfig.getFilters());
+          } catch (SQLException e) {
+              log.error("druid configuration initialization filter", e);
+          }
+          datasource.setConnectionProperties(druidDBConfig.getConnectionProperties());
+          datasource.setUseGlobalDataSourceStat(druidDBConfig.isUseGlobalDataSourceStat());
+          return datasource;
+    }
 }

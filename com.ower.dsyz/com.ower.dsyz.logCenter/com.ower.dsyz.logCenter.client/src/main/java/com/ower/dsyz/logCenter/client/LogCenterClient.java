@@ -95,6 +95,9 @@ public class LogCenterClient {
 					Thread.sleep(reConnectTime*1000);
 					reConnectTime *=2;
 					log.debug("【连接服务器错误，第{}次开始尝试重连】",num);
+					if(num>=12){
+						reConnectTime/=(long) Math.pow(2*1.0, num*1.0);
+					}
 					LogCenterClient.this.connect(host,port);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
