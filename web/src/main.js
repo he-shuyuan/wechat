@@ -19,7 +19,7 @@ import mcComponents from '@/components/mainTpl/mcComponents' // machine 组件 {
 Vue.use(mcComponents)
 Vue.use(ElementUI, { locale })
 Vue.config.productionTip = false
-
+console.log('路由类',router);
 new Vue({
   el: '#app',
   router,

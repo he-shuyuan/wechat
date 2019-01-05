@@ -153,7 +153,8 @@ export const constantRouterMap = [
     },
 ]
 const router = new Router({
-    // mode: 'history', //后端支持可开
+    //mode: 'history', //后端支持可开
+    //base:'/abcd',
     scrollBehavior: () => ({ y: 0 }),
     routes: constantRouterMap,
 })

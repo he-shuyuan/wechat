@@ -99,11 +99,12 @@ module.exports = {
         assetsSubDirectory: 'static',
 
         // you can set by youself according to actual condition
-        assetsPublicPath: process.env.NODE_ENV === 'production' ||
-            process.env.NODE_ENV === 'test' ||
-            process.env.NODE_ENV === 'preproduction' ||
-            process.env.NODE_ENV === 'dev' ?
-            '/' + rootDir + '/' : '/',
+        // assetsPublicPath: process.env.NODE_ENV === 'production' ||
+        //     process.env.NODE_ENV === 'test' ||
+        //     process.env.NODE_ENV === 'preproduction' ||
+        //     process.env.NODE_ENV === 'dev' ?
+        //     '/' + rootDir + '/' : '/',
+        assetsPublicPath:'',
 
         /**
          * Source Maps
