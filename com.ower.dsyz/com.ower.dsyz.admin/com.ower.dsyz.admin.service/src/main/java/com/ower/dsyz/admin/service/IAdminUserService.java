@@ -6,8 +6,8 @@ package com.ower.dsyz.admin.service;
 import java.util.List;
 import com.ower.dsyz.admin.manual.dto.AdminUserDTO;
 import com.ower.dsyz.admin.manual.dto.AdminUserDepDTO;
-import com.ower.dsyz.common.core.page.PageQueryResult;
-import com.ower.dsyz.common.core.page.PageRequestParam;
+import com.ower.dsyz.common.mybatis.database.page.PageQueryResult;
+import com.ower.dsyz.common.mybatis.database.page.PageRequestParam;
 
 /**
  * <pre>

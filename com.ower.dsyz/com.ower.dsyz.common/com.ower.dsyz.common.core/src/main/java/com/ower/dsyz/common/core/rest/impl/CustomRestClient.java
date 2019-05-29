@@ -21,7 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
-import com.ower.dsyz.common.core.holder.CustomLoginUserIdHolder;
+import com.ower.dsyz.common.core.holder.CurrentThreadHolder;
 import com.ower.dsyz.common.core.holder.CustomUrlParamHolder;
 import com.ower.dsyz.common.core.response.CustomResponse;
 import com.ower.dsyz.common.core.rest.ICustomRestClient;
@@ -66,8 +66,8 @@ public class CustomRestClient implements ICustomRestClient {
 		header.add("Content-Type", contentType);
 		header.add("Accept", contentType);
 		header.add("Accept-Charset", "UTF-8");
-		if (StringUtils.isNotBlank(CustomLoginUserIdHolder.get())) {
-			header.add("userId", CustomLoginUserIdHolder.get());
+		if (StringUtils.isNotBlank(CurrentThreadHolder.getUserId())) {
+			header.add("userId", CurrentThreadHolder.getUserId());
 		}
 		if (extHeader != null && !extHeader.isEmpty()) {
 			this.mergeHeader(extHeader, header);

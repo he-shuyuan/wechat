@@ -15,7 +15,7 @@ import com.ower.dsyz.admin.manual.dto.AdminFunctionDTO;
 import com.ower.dsyz.admin.service.IAdminFunctionService;
 import com.ower.dsyz.common.core.annotation.EnableValid;
 import com.ower.dsyz.common.core.response.CustomResponse;
-import com.ower.dsyz.common.core.util.ParamCheckUtil;
+import com.ower.dsyz.common.core.valid.util.ParamCheckUtil;
 
 
 /**

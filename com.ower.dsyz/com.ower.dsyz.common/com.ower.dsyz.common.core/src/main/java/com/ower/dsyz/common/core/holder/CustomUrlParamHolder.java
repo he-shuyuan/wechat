@@ -4,11 +4,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-
 import com.ower.dsyz.common.core.constant.ErrorCodeConstants;
 import com.ower.dsyz.common.core.constant.UrlParamType;
-import com.ower.dsyz.common.core.exception.CustomRunTimeException;
+import com.ower.dsyz.common.core.exception.BusinessException;
 
+/**
+ * url参数收集
+ * @author heshuyuan
+ *
+ */
 public class CustomUrlParamHolder {
 	private static ThreadLocal<Map<String, String>> urlParam = new ThreadLocal<>();
 
@@ -27,7 +31,7 @@ public class CustomUrlParamHolder {
 		  if(StringUtils.isNotBlank(value)){
 			  get().put(urlParamType.getName(), value);
 		  }else if(checkEmpty){
-			  throw new CustomRunTimeException(ErrorCodeConstants.PARAM_ERROR,urlParamType.getMess());
+			  throw new BusinessException(ErrorCodeConstants.PARAM_ERROR,urlParamType.getMess());
 		  }
 		
 	}

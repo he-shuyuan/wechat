@@ -22,11 +22,11 @@ import com.ower.dsyz.admin.manual.dto.AdminUserDTO;
 import com.ower.dsyz.admin.manual.dto.AdminUserDepDTO;
 import com.ower.dsyz.admin.service.IAdminDepUserService;
 import com.ower.dsyz.admin.service.IAdminUserService;
-import com.ower.dsyz.common.core.exception.CustomRunTimeException;
-import com.ower.dsyz.common.core.page.PageQueryResult;
-import com.ower.dsyz.common.core.page.PageRequestParam;
+import com.ower.dsyz.common.core.exception.BusinessException;
 import com.ower.dsyz.common.core.util.HashUtil;
 import com.ower.dsyz.common.core.util.IDUtil;
+import com.ower.dsyz.common.mybatis.database.page.PageQueryResult;
+import com.ower.dsyz.common.mybatis.database.page.PageRequestParam;
 
 /**
  * <pre>
@@ -132,7 +132,7 @@ public class AdminUserServiceImpl implements IAdminUserService {
             adminUserDTO.setLoginName(adminUserDepDTO.getLoginName());
             List<AdminUserDTO> list = adminUserExtMapper.queryAdminUserDTOList(adminUserDTO);
             if ((!list.isEmpty() && !update) || (update && list.get(0).getUserId().equals(adminUserDepDTO.getUserId()))) {
-                throw new CustomRunTimeException("登录名已存在");
+                throw new BusinessException("登录名已存在");
             }
         }
         //手机号
@@ -141,7 +141,7 @@ public class AdminUserServiceImpl implements IAdminUserService {
             adminUserDTO.setPhone(adminUserDepDTO.getPhone());
             List<AdminUserDTO> list = adminUserExtMapper.queryAdminUserDTOList(adminUserDTO);
             if ((!list.isEmpty() && !update) || (update && list.get(0).getUserId().equals(adminUserDepDTO.getUserId()))) {
-                throw new CustomRunTimeException("电话号码已存在");
+                throw new BusinessException("电话号码已存在");
             }
         }
     }

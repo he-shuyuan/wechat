@@ -9,9 +9,8 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import org.springframework.stereotype.Service;
-
 import com.ower.dsyz.common.core.constant.ErrorCodeConstants;
-import com.ower.dsyz.common.core.exception.CustomRunTimeException;
+import com.ower.dsyz.common.core.exception.BusinessException;
 import com.ower.dsyz.common.core.valid.service.ICustomValidService;
 
 /**
@@ -46,7 +45,7 @@ public class CustomValidServiceImpl implements ICustomValidService {
         int errSize = violations.size();
         if (errSize > 0) {
             for (ConstraintViolation<T> violation : violations) {
-               throw new CustomRunTimeException(ErrorCodeConstants.PARAM_ERROR, violation.getMessage());
+               throw new BusinessException(ErrorCodeConstants.PARAM_ERROR, violation.getMessage());
             }
         }
       

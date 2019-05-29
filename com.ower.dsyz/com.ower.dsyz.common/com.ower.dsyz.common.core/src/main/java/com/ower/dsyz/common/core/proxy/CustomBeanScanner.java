@@ -1,4 +1,4 @@
-package com.bda.chongqing.core.proxy;
+package com.ower.dsyz.common.core.proxy;
 
 import java.util.List;
 import java.util.Set;
@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
  * @author heshuyuan
  *
  */
-@Component
+//@Component
 public class CustomBeanScanner implements BeanDefinitionRegistryPostProcessor  {
     /**
      * 扫描位置

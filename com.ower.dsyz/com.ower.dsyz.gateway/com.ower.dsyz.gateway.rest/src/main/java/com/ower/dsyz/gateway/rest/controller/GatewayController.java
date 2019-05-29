@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import com.ower.dsyz.common.core.request.CustomRequestParam;
+
+import com.ower.dsyz.common.base.bean.CustomRequestParam;
 import com.ower.dsyz.gateway.manual.dto.GatewayRequest;
 import com.ower.dsyz.gateway.service.IGatewayRequestFactory;
 

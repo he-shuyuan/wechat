@@ -5,7 +5,7 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-import com.ower.dsyz.common.core.holder.DataSourceRouteHolder;
+import com.ower.dsyz.common.mybatis.database.holder.DataSourceRouteHolder;
 
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

@@ -1,4 +1,4 @@
-package com.bda.chongqing.core.proxy.request;
+package com.ower.dsyz.common.core.proxy.request;
 
 public class RemoteRequestHolder {
 

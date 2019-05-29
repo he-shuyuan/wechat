@@ -2,7 +2,7 @@ package com.ower.dsyz.gateway.manual.dto;
 
 import java.io.Serializable;
 
-import com.ower.dsyz.common.core.request.CustomRequestParam;
+import com.ower.dsyz.common.base.bean.CustomRequestParam;
 
 public class GatewayRequest implements Serializable{
 	/**

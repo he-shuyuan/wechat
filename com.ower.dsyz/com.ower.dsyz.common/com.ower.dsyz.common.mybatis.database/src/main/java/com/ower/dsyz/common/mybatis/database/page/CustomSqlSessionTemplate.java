@@ -14,8 +14,6 @@ import org.springframework.dao.support.PersistenceExceptionTranslator;
 import org.springframework.util.Assert;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.ower.dsyz.common.core.page.PageQueryResult;
-import com.ower.dsyz.common.core.page.PageRequestParam;
 
 /**
  * <pre>

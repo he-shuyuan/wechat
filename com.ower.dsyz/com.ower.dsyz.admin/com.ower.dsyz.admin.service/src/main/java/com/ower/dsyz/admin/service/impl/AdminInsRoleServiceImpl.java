@@ -11,9 +11,9 @@ import com.ower.dsyz.admin.manual.dao.AdminInsRoleExtMapper;
 import com.ower.dsyz.admin.manual.dto.AdminInsRoleDTO;
 import com.ower.dsyz.admin.manual.dto.AdminInsRoleDistDTO;
 import com.ower.dsyz.admin.service.IAdminInsRoleService;
-import com.ower.dsyz.common.core.page.PageQueryResult;
-import com.ower.dsyz.common.core.page.PageRequestParam;
 import com.ower.dsyz.common.core.util.IDUtil;
+import com.ower.dsyz.common.mybatis.database.page.PageQueryResult;
+import com.ower.dsyz.common.mybatis.database.page.PageRequestParam;
 
 
 /**

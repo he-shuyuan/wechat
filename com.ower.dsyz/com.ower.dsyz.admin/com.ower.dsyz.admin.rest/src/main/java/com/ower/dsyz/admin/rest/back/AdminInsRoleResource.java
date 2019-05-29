@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ower.dsyz.admin.manual.dto.AdminInsRoleDTO;
 import com.ower.dsyz.admin.manual.dto.AdminInsRoleDistDTO;
 import com.ower.dsyz.common.core.annotation.EnableValid;
-import com.ower.dsyz.common.core.page.PageQueryResult;
-import com.ower.dsyz.common.core.page.PageRequestParam;
 import com.ower.dsyz.common.core.response.CustomResponse;
+import com.ower.dsyz.common.mybatis.database.page.PageQueryResult;
+import com.ower.dsyz.common.mybatis.database.page.PageRequestParam;
 import com.ower.dsyz.admin.service.IAdminInsRoleService;
 
 @RestController

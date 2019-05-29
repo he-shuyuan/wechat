@@ -9,22 +9,18 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import com.ower.dsyz.common.core.annotation.EnableValid;
 import com.ower.dsyz.common.core.annotation.NotInAspect;
 import com.ower.dsyz.common.core.constant.ErrorCodeConstants;
 import com.ower.dsyz.common.core.constant.UrlParamType;
-import com.ower.dsyz.common.core.exception.CustomRunTimeException;
-import com.ower.dsyz.common.core.holder.CustomLoginUserIdHolder;
+import com.ower.dsyz.common.core.exception.BusinessException;
 import com.ower.dsyz.common.core.holder.CustomRequestContextHolder;
 import com.ower.dsyz.common.core.holder.CustomUrlParamHolder;
 import com.ower.dsyz.common.core.model.ResultMsg;
@@ -49,9 +45,10 @@ import com.ower.dsyz.common.core.valid.service.ICustomValidService;
  *    修改后版本:     修改人：  修改日期:     修改内容:
  *          </pre>
  */
-@Aspect
-@Component
-@Order(999999)
+@Deprecated
+//@Aspect
+//@Component
+//@Order(999999)
 public class CustomRequestInterceptor {
 
 	private static final String USER_ID = "userId";
@@ -115,9 +112,9 @@ public class CustomRequestInterceptor {
 			} catch (Throwable e) {
 				String errorCode = ErrorCodeConstants.DEFAULT_ERROR;
 				Object errorMsg = ERROR_MSG;
-				if (e instanceof CustomRunTimeException) {
-					errorCode = ((CustomRunTimeException) e).getErrorCode();
-					errorMsg = ((CustomRunTimeException) e).getMessage();
+				if (e instanceof BusinessException) {
+					errorCode = ((BusinessException) e).getErrorCode();
+					errorMsg = ((BusinessException) e).getMessage();
 				} else {
 					logger.error("{}", e);
 					errorMsg = e.toString();
@@ -148,8 +145,8 @@ public class CustomRequestInterceptor {
 			return customResponse;
 		} finally {
 			if (customResponse != null) {
-				customResponse.getHead().setThreadId(Thread.currentThread().getName());
-				customResponse.getHead().setRequestTimeStamp(beginTime + "");
+			//	customResponse.getHead().setThreadId(Thread.currentThread().getName());
+				//customResponse.getHead().setRequestTimeStamp(beginTime + "");
 				customResponse.getHead().setRequestId(StringUtils.isNotBlank(requestId) ? requestId : IDUtil.getUUID());
 				customResponse.getHead().setResponseTime((System.currentTimeMillis() - beginTime) + "");
 				logger.info("Request end({}): {}, URL: {}, result: {}",
@@ -168,7 +165,7 @@ public class CustomRequestInterceptor {
 	 */
 	private void setCustomLoginUserId(Object[] args, HttpServletRequest request, MethodSignature signature) {
 		if (request != null && StringUtils.isNotBlank(request.getHeader(USER_ID))) {
-		    CustomLoginUserIdHolder.set(request.getHeader(USER_ID));
+		 //   CustomLoginUserIdHolder.set(request.getHeader(USER_ID));
 			Class<?>[] classList = signature.getMethod().getParameterTypes();
 			int i = 0;
 			for (Class<?> clazz : classList) {

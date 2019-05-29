@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.ower.dsyz.admin.manual.dto.AdminRoleDTO;
 import com.ower.dsyz.admin.service.IAdminRoleService;
-import com.ower.dsyz.common.core.page.PageQueryResult;
-import com.ower.dsyz.common.core.page.PageRequestParam;
 import com.ower.dsyz.common.core.response.CustomResponse;
-import com.ower.dsyz.common.core.util.ParamCheckUtil;
+import com.ower.dsyz.common.core.valid.util.ParamCheckUtil;
+import com.ower.dsyz.common.mybatis.database.page.PageQueryResult;
+import com.ower.dsyz.common.mybatis.database.page.PageRequestParam;
 
 /**
  * <pre>

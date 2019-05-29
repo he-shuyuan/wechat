@@ -15,10 +15,16 @@ public interface ErrorCodeConstants {
 	/**
 	 * 参数异常
 	 */
-	public static final String PARAM_ERROR = "400";
+	public static final String PARAM_ERROR = "1400";
 
 	/**
 	 * 权限异常
 	 */
-	public static final String AUTH_ERROR = "401";
+	public static final String AUTH_ERROR = "1401";
+	
+	
+	/**
+	 * 接口请求异常
+	 */
+	public static final String INTER_ERROR = "1501";
 }

@@ -2,7 +2,8 @@ package com.ower.dsyz.gateway.service.impl;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.ower.dsyz.common.core.exception.CustomRunTimeException;
+
+import com.ower.dsyz.common.core.exception.BusinessException;
 import com.ower.dsyz.common.core.redis.IRedisService;
 import com.ower.dsyz.common.core.response.CustomResponse;
 import com.ower.dsyz.common.core.util.HashUtil;
@@ -38,10 +39,10 @@ public abstract class AbstractGatewayLevelService implements IGatewayLevelServic
 	 */
 	private void checkRequestId(String requestId) {
 	    if(StringUtils.isBlank(requestId)){
-	        throw new CustomRunTimeException("001405","requestId不能为空");
+	        throw new BusinessException("001405","requestId不能为空");
 	    }
 	    if(requestId.length()!=32){
-            throw new CustomRunTimeException("001405","requestId应为32位");
+            throw new BusinessException("001405","requestId应为32位");
         }
 	}
 
@@ -62,7 +63,7 @@ public abstract class AbstractGatewayLevelService implements IGatewayLevelServic
     public String checkToken(String token){
         String userId = redisService.getString(TOKEN_PRIFIXED+token);
         if(StringUtils.isBlank(userId)){
-            throw new CustomRunTimeException("001001", "用户未登录或登录已超时");
+            throw new BusinessException("001001", "用户未登录或登录已超时");
         }
         this.redisService.expire(TOKEN_PRIFIXED+token, 30*60L);
         return userId;

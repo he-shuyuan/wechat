@@ -1,4 +1,4 @@
-package com.bda.chongqing.core.proxy;
+package com.ower.dsyz.common.core.proxy;
 
 /**
  * 虚拟的代理服务

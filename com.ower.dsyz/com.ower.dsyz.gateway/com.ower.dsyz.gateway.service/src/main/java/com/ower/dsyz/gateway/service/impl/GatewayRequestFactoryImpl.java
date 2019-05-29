@@ -9,8 +9,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ower.dsyz.common.core.exception.CustomRunTimeException;
-import com.ower.dsyz.common.core.util.SpringContextUtil;
+
+import com.ower.dsyz.common.base.util.SpringContextUtil;
+import com.ower.dsyz.common.core.exception.BusinessException;
 import com.ower.dsyz.gateway.manual.dto.GatewayAuthUrlDTO;
 import com.ower.dsyz.gateway.manual.dto.GatewayRequest;
 import com.ower.dsyz.gateway.service.IGatewayAuthUrlService;
@@ -60,15 +61,15 @@ public class GatewayRequestFactoryImpl implements IGatewayRequestFactory {
                return (IGatewayLevelService) springContextUtil.getContext().getBean(Class.forName(result.get(0).getClassName()));
             } catch (BeansException e) {
                 e.printStackTrace();
-                throw new CustomRunTimeException("007404","找不到对应的bean");
+                throw new BusinessException("007404","找不到对应的bean");
             } catch (ClassNotFoundException e) { 
                 e.printStackTrace();
-                throw new CustomRunTimeException("007404","找不到对应的Class");
+                throw new BusinessException("007404","找不到对应的Class");
             } 
         }
         IGatewayLevelService impl = this.getGatewayLevelService().get(request.getServiceLevel());
         if(impl==null){
-            throw new CustomRunTimeException("007404","找不到对应的bean,非法级别["+request.getServiceLevel()+"]");
+            throw new BusinessException("007404","找不到对应的bean,非法级别["+request.getServiceLevel()+"]");
         }
         return impl;
         

@@ -1,4 +1,4 @@
-package com.bda.chongqing.core.proxy;
+package com.ower.dsyz.common.core.proxy;
 import java.io.IOException;
 import java.util.LinkedHashSet;
 import java.util.Set;

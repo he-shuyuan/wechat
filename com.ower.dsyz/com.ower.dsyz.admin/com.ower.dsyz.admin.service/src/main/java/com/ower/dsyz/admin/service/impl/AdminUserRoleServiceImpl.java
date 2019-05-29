@@ -10,9 +10,9 @@ import com.ower.dsyz.admin.manual.dao.AdminUserRoleExtMapper;
 import com.ower.dsyz.admin.manual.dto.AdminUserRoleDTO;
 import com.ower.dsyz.admin.manual.dto.AdminUserRoleDistDTO;
 import com.ower.dsyz.admin.service.IAdminUserRoleService;
-import com.ower.dsyz.common.core.page.PageQueryResult;
-import com.ower.dsyz.common.core.page.PageRequestParam;
 import com.ower.dsyz.common.core.util.IDUtil;
+import com.ower.dsyz.common.mybatis.database.page.PageQueryResult;
+import com.ower.dsyz.common.mybatis.database.page.PageRequestParam;
 
 @Service
 public class AdminUserRoleServiceImpl implements IAdminUserRoleService {

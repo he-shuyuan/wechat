@@ -12,9 +12,10 @@ import com.ower.dsyz.admin.manual.dto.AdminDepUserDTO;
 import com.ower.dsyz.admin.manual.dto.AdminUserDepDTO;
 import com.ower.dsyz.admin.service.IAdminDepUserService;
 import com.ower.dsyz.admin.service.IAdminUserService;
-import com.ower.dsyz.common.core.page.PageQueryResult;
-import com.ower.dsyz.common.core.page.PageRequestParam;
+import com.ower.dsyz.common.core.annotation.NotInAspect;
 import com.ower.dsyz.common.core.response.CustomResponse;
+import com.ower.dsyz.common.mybatis.database.page.PageQueryResult;
+import com.ower.dsyz.common.mybatis.database.page.PageRequestParam;
 
 /**
  * <pre>
@@ -31,7 +32,7 @@ import com.ower.dsyz.common.core.response.CustomResponse;
  *          </pre>
  */
 @RestController
-@RequestMapping("/back/adminUserService/")
+@RequestMapping("/back/adminUserService")
 public class AdminUserResource {
 
     @Resource
@@ -60,9 +61,10 @@ public class AdminUserResource {
      * @param adminUserDepDTO
      * @return CustomResponse<AdminUserDepDTO>
      */
+   // @NotInAspect
     @RequestMapping("queryUserDepInfo")
-    public CustomResponse<AdminUserDepDTO> queryUserDepInfo(@RequestBody AdminUserDepDTO adminUserDepDTO){
-       return CustomResponse.success(adminUserService.queryUserDepInfo(adminUserDepDTO));
+    public AdminUserDepDTO queryUserDepInfo(@RequestBody AdminUserDepDTO adminUserDepDTO){
+       return new AdminUserDepDTO();
     }
     
     /**

@@ -12,7 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.ower.dsyz.common.core.holder.CustomLoginUserIdHolder;
+import com.ower.dsyz.common.core.holder.CurrentThreadHolder;
 
 @Aspect
 @Component
@@ -92,6 +92,6 @@ public class DaoInterceptor {
      * @return
      */
     private String getUserId(){
-    	return StringUtils.isNotBlank(CustomLoginUserIdHolder.get())?CustomLoginUserIdHolder.get():"not login or not need login";
+    	return StringUtils.isNotBlank(CurrentThreadHolder.getUserId())?CurrentThreadHolder.getUserId():"not login or not need login";
     }
 }

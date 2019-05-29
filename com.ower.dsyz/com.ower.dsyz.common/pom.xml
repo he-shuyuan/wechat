@@ -22,6 +22,7 @@
     <module>com.ower.dsyz.common.mybatis.database</module>
     <module>com.ower.dsyz.common.core</module>
     <module>com.ower.dsyz.common.vfs</module>
+    <module>com.ower.dsyz.common.base</module>
   </modules>
 	<url>http://maven.apache.org</url>
 </project>

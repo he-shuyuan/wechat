@@ -3,6 +3,7 @@
  */
 package com.ower.dsyz.common.core.response;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.ower.dsyz.common.core.constant.ErrorCodeConstants;
 
 /**
@@ -19,7 +20,7 @@ import com.ower.dsyz.common.core.constant.ErrorCodeConstants;
  *    修改后版本:     修改人：  修改日期:     修改内容:
  *          </pre>
  */
-
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CustomResponseHead {
 
 	/**
@@ -32,11 +33,6 @@ public class CustomResponseHead {
     private Object errorMsg;
     
     /**
-     * 处理线程
-     */
-    private String threadId;
-    
-    /**
      * 请求id
      */
     private String requestId;
@@ -44,12 +40,7 @@ public class CustomResponseHead {
     /**
      * 响应时间
      */
-    private String responseTime;
-    
-    /**
-     * 请求时间戳
-     */
-    private String requestTimeStamp;
+    private String responseTime = System.currentTimeMillis()+"";
     
     
     public CustomResponseHead(){
@@ -84,15 +75,6 @@ public class CustomResponseHead {
         this.errorMsg = errorMsg;
     }
 
-    
-    public String getThreadId() {
-        return threadId;
-    }
-
-    
-    public void setThreadId(String threadId) {
-        this.threadId = threadId;
-    }
 
     
     public String getResponseTime() {
@@ -113,23 +95,17 @@ public class CustomResponseHead {
 		this.requestId = requestId;
 	}
 
-	public String getRequestTimeStamp() {
-		return requestTimeStamp;
-	}
 
 	public Boolean success(){
 	    return "0".equals(this.errorCode);
 	}
-	
-	public void setRequestTimeStamp(String requestTimeStamp) {
-		this.requestTimeStamp = requestTimeStamp;
-	}
+
 
 	@Override
 	public String toString() {
-		return "CustomResponseHead [errorCode=" + errorCode + ", errorMsg=" + errorMsg + ", threadId=" + threadId
-				+ ", requestId=" + requestId + ", responseTime=" + responseTime + ", requestTimeStamp="
-				+ requestTimeStamp + "]";
+		return "CustomResponseHead [errorCode=" + errorCode + ", errorMsg=" + errorMsg 
+				+ ", requestId=" + requestId + ", responseTime=" + responseTime +
+				"]";
 	}
 
 	

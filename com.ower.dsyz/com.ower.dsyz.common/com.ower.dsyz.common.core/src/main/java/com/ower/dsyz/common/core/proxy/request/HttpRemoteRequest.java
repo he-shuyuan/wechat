@@ -1,4 +1,4 @@
-package com.bda.chongqing.core.proxy.request;
+package com.ower.dsyz.common.core.proxy.request;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,11 +9,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
-
 import org.apache.commons.lang.StringUtils;
-
-import com.alibaba.fastjson.JSON;
-
+import com.ower.dsyz.common.core.util.Jackson;
 public class HttpRemoteRequest extends AbstractRemoteRequest {
 
 	@SuppressWarnings("unchecked")
@@ -38,7 +35,7 @@ public class HttpRemoteRequest extends AbstractRemoteRequest {
 				param = param.substring(0, param.length()-1);
 			}
 		}else if(paramMap != null){
-			param = JSON.toJSONString(paramMap);
+			param =Jackson.toJson(paramMap);
 		}
 		try {
 			URL url = new URL(httpUrl);

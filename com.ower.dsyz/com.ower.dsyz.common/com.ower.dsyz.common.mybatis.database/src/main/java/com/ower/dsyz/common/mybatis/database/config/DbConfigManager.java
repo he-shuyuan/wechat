@@ -6,8 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import com.ower.dsyz.common.core.util.SpringContextUtil;
+import com.ower.dsyz.common.base.util.SpringContextUtil;
 import com.ower.dsyz.common.mybatis.database.annotation.DataSource;
 /**
  * 配置管理工具
@@ -26,9 +25,7 @@ public class DbConfigManager implements InitializingBean {
 	public void afterPropertiesSet() throws Exception {
 				Map<String, Object> map =  context.getContext().getBeansWithAnnotation(DataSource.class);
 				for(Object dbc:map.values()){	
-					/*configMap.put(Class.forName(dbc.getClass().getName().split("\\$\\$")[0]).getAnnotation(DataSource.class).name(),(AbstractDBConfig) dbc);*/
 					configMap.put(dbc.getClass().getAnnotation(DataSource.class).name(),(AbstractDBConfig) dbc);
-			
 				}
 				System.err.println("数据源列表"+configMap);
 		

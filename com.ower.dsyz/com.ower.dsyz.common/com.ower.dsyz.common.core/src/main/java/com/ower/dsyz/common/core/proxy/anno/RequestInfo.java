@@ -1,4 +1,4 @@
-package com.bda.chongqing.core.proxy.anno;
+package com.ower.dsyz.common.core.proxy.anno;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

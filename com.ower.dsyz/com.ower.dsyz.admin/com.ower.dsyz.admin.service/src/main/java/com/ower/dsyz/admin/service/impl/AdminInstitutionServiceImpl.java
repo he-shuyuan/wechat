@@ -11,10 +11,10 @@ import com.ower.dsyz.admin.auto.model.AdminInstitution;
 import com.ower.dsyz.admin.manual.dao.AdminInstitutionExtMapper;
 import com.ower.dsyz.admin.manual.dto.AdminInstitutionDTO;
 import com.ower.dsyz.admin.service.IAdminInstitutionService;
-import com.ower.dsyz.common.core.exception.CustomRunTimeException;
-import com.ower.dsyz.common.core.page.PageQueryResult;
-import com.ower.dsyz.common.core.page.PageRequestParam;
+import com.ower.dsyz.common.core.exception.BusinessException;
 import com.ower.dsyz.common.core.util.IDUtil;
+import com.ower.dsyz.common.mybatis.database.page.PageQueryResult;
+import com.ower.dsyz.common.mybatis.database.page.PageRequestParam;
 
 @Service
 public class AdminInstitutionServiceImpl implements IAdminInstitutionService{
@@ -49,7 +49,7 @@ public class AdminInstitutionServiceImpl implements IAdminInstitutionService{
     @Override
     public int delInstitution(AdminInstitution addInstitution) {
         if(StringUtils.isNotBlank(addInstitution.getInsId())){
-            throw new CustomRunTimeException("id不能为空");
+            throw new BusinessException("id不能为空");
         }
         return adminInstitutionMapper.deleteByPrimaryKey(addInstitution.getInsId());
     }
@@ -83,7 +83,7 @@ public class AdminInstitutionServiceImpl implements IAdminInstitutionService{
             if(!list.isEmpty() 
                && !(StringUtils.isNotBlank(adminInstitutionDTO.getInsId()) 
                        && list.get(0).getInsId().equals(adminInstitutionDTO.getInsId()))){
-                throw new CustomRunTimeException("机构名称已存在");
+                throw new BusinessException("机构名称已存在");
             }
         }
         //机构信任新编码
@@ -94,7 +94,7 @@ public class AdminInstitutionServiceImpl implements IAdminInstitutionService{
             if(!list.isEmpty() 
                && !(StringUtils.isNotBlank(adminInstitutionDTO.getInsId()) 
                        && list.get(0).getInsId().equals(adminInstitutionDTO.getInsId()))){
-                throw new CustomRunTimeException("机构信用编码已存在");
+                throw new BusinessException("机构信用编码已存在");
             }
         }
     }

@@ -2,6 +2,8 @@ package com.ower.dsyz.common.core.holder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.context.annotation.Description;
 import org.springframework.core.NamedThreadLocal;
 
 import com.ower.dsyz.common.core.request.CustomRequestAttributes;
@@ -20,6 +22,7 @@ import com.ower.dsyz.common.core.request.CustomRequestAttributes;
  *    修改后版本:     修改人：  修改日期:     修改内容:
  *          </pre>
  */
+@Deprecated
 public class CustomRequestContextHolder
 {
   private static final ThreadLocal<CustomRequestAttributes> requestAttributesHolder = new NamedThreadLocal<>("custom request attributes");

@@ -9,8 +9,8 @@ import org.apache.ibatis.annotations.Param;
 
 import com.ower.dsyz.admin.auto.model.AdminRole;
 import com.ower.dsyz.admin.manual.dto.AdminRoleDTO;
-import com.ower.dsyz.common.core.page.PageQueryResult;
-import com.ower.dsyz.common.core.page.PageRequestParam;
+import com.ower.dsyz.common.mybatis.database.page.PageQueryResult;
+import com.ower.dsyz.common.mybatis.database.page.PageRequestParam;
 
 /**
  * <pre>

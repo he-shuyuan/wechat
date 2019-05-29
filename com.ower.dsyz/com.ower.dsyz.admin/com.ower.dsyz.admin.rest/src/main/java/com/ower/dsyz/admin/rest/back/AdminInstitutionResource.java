@@ -10,12 +10,13 @@ import com.ower.dsyz.admin.manual.dto.AdminInstitutionDTO;
 import com.ower.dsyz.admin.manual.dto.UserLoginInsInfo;
 import com.ower.dsyz.admin.service.IAdminInsDepService;
 import com.ower.dsyz.admin.service.IAdminInstitutionService;
+import com.ower.dsyz.common.base.bean.CustomRequestParam;
 import com.ower.dsyz.common.core.annotation.EnableValid;
-import com.ower.dsyz.common.core.page.PageQueryResult;
-import com.ower.dsyz.common.core.page.PageRequestParam;
-import com.ower.dsyz.common.core.request.CustomRequestParam;
 import com.ower.dsyz.common.core.response.CustomResponse;
-import com.ower.dsyz.common.core.util.ParamCheckUtil;
+import com.ower.dsyz.common.core.valid.util.ParamCheckUtil;
+import com.ower.dsyz.common.mybatis.database.page.PageQueryResult;
+import com.ower.dsyz.common.mybatis.database.page.PageRequestParam;
+
 
 @RestController
 @RequestMapping("/back/adminInstitutionService/")

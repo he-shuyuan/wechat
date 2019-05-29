@@ -23,9 +23,9 @@ import com.ower.dsyz.admin.manual.dto.AdminRoleFunListDTO;
 import com.ower.dsyz.admin.manual.dto.UserLoginFunInfo;
 import com.ower.dsyz.admin.service.IAdminRoleFunctionService;
 import com.ower.dsyz.admin.service.IAdminRoleService;
-import com.ower.dsyz.common.core.exception.CustomRunTimeException;
+import com.ower.dsyz.common.core.exception.BusinessException;
 import com.ower.dsyz.common.core.util.IDUtil;
-import com.ower.dsyz.common.core.util.ParamCheckUtil;
+import com.ower.dsyz.common.core.valid.util.ParamCheckUtil;
 
 
 /**
@@ -88,7 +88,7 @@ public class AdminRoleFunctionServiceImpl implements IAdminRoleFunctionService {
 		UserLoginFunInfo info = new UserLoginFunInfo();
 		List<AdminRole> list = adminRoleService.queryAdminRoleList(adminRoleExtDTO.getUserId(),adminRoleExtDTO.getInsId());
 		if(list.isEmpty()){
-			throw new CustomRunTimeException("用户没有角色");
+			throw new BusinessException("用户没有角色");
 		}
 		info.setRoleList(list);
 		Map<String,Object> map = new HashMap<>();

@@ -1,4 +1,4 @@
-package com.bda.chongqing.core.proxy;
+package com.ower.dsyz.common.core.proxy;
 import java.util.HashMap;
 import java.util.Map;
 import org.aopalliance.intercept.MethodInterceptor;
@@ -7,11 +7,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.beans.factory.FactoryBean;
-import com.alibaba.fastjson.JSON;
-import com.bda.chongqing.core.proxy.anno.RequestInfo;
-import com.bda.chongqing.core.proxy.request.HttpResp;
-import com.bda.chongqing.core.proxy.request.RemoteRequestHolder;
-import com.bda.chongqing.core.proxy.util.JSONUtil;
+import com.ower.dsyz.common.core.constant.ErrorCodeConstants;
+import com.ower.dsyz.common.core.exception.BusinessException;
+import com.ower.dsyz.common.core.proxy.anno.RequestInfo;
+import com.ower.dsyz.common.core.proxy.request.RemoteRequestHolder;
+import com.ower.dsyz.common.core.response.CustomResponse;
+import com.ower.dsyz.common.core.util.Jackson;
 
 /**
  * 远程调用代理类
@@ -80,11 +81,16 @@ public  class RemoteProxyBean  implements MethodInterceptor,FactoryBean<Object> 
  	    if(obj == null){
  	    	  return  invocation.getMethod().getReturnType().newInstance();
  	    }else{
- 	    	HttpResp httpResp = JSON.parseObject(obj.toString(), HttpResp.class);
+ 	    	@SuppressWarnings("rawtypes")
+			CustomResponse httpResp = Jackson.fromJson(obj.toString(), CustomResponse.class);
+ 	    	if(httpResp.isSuccess()){
  	    	if(invocation.getMethod().getReturnType().isArray()){
- 	    		return JSON.parseArray(httpResp.getData(), (Class<?>)(invocation.getMethod().getReturnType().getGenericInterfaces()[0]));
+ 	    		return Jackson.fromJsonArray(httpResp.getBody().toString(), (Class<?>)(invocation.getMethod().getReturnType().getGenericInterfaces()[0]));
  	    	}else{
- 	    		return JSON.parseObject(httpResp.getData(), invocation.getMethod().getReturnType());
+ 	    		return Jackson.fromJson(httpResp.getBody().toString(), invocation.getMethod().getReturnType());
+ 	    	}}
+ 	    	else{
+ 	    		throw new BusinessException(ErrorCodeConstants.INTER_ERROR, "接口["+requestInfo.value()+"]请求异常");
  	    	}
  	    }
 	}
@@ -94,7 +100,7 @@ public  class RemoteProxyBean  implements MethodInterceptor,FactoryBean<Object> 
 		Map<String,Object> map = new HashMap<String,Object>();
 		for(Object param:params){
 			try{
-			  map.putAll(JSONUtil.ObjectToMap(param));
+			  map.putAll(Jackson.beanToMap(param));
 			}catch(Exception ex){
 				log.error("参数错误,{},{}",param,ex);
 			}

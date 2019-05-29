@@ -16,9 +16,9 @@ import com.ower.dsyz.admin.manual.dto.AdminDepTreeDTO;
 import com.ower.dsyz.admin.manual.dto.AdminDepartmentDTO;
 import com.ower.dsyz.admin.manual.dto.DepPath;
 import com.ower.dsyz.admin.service.IAdminDepartmentService;
-import com.ower.dsyz.common.core.exception.CustomRunTimeException;
+import com.ower.dsyz.common.core.exception.BusinessException;
 import com.ower.dsyz.common.core.util.IDUtil;
-import com.ower.dsyz.common.core.util.ParamCheckUtil;
+import com.ower.dsyz.common.core.valid.util.ParamCheckUtil;
 
 
 /**
@@ -129,7 +129,7 @@ public class AdminDepartmentServiceImpl implements IAdminDepartmentService {
         ParamCheckUtil.checkEmpty(adminDepartmentDTO.getDepId());
         List<AdminDepartmentDTO> list = this.queryDepartmentList(adminDepartmentDTO);
         if(list.isEmpty()){
-            throw new CustomRunTimeException("非法部门id");
+            throw new BusinessException("非法部门id");
         }
         return list.get(0);
     }

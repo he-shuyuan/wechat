@@ -2,8 +2,9 @@ package com.ower.dsyz.admin.manual.dao;
 
 import com.ower.dsyz.admin.manual.dto.AdminUserRoleDTO;
 import com.ower.dsyz.admin.manual.dto.AdminUserRoleDistDTO;
-import com.ower.dsyz.common.core.page.PageQueryResult;
-import com.ower.dsyz.common.core.page.PageRequestParam;
+import com.ower.dsyz.common.mybatis.database.page.PageQueryResult;
+import com.ower.dsyz.common.mybatis.database.page.PageRequestParam;
+
 
 public interface AdminUserRoleExtMapper {
   

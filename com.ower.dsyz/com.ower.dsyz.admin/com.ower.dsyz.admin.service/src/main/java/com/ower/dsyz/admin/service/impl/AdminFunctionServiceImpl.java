@@ -12,11 +12,11 @@ import com.ower.dsyz.admin.auto.model.AdminFunction;
 import com.ower.dsyz.admin.manual.dao.AdminFunctionExtMapper;
 import com.ower.dsyz.admin.manual.dto.AdminFunctionDTO;
 import com.ower.dsyz.admin.service.IAdminFunctionService;
-import com.ower.dsyz.common.core.exception.CustomRunTimeException;
-import com.ower.dsyz.common.core.page.PageQueryResult;
-import com.ower.dsyz.common.core.page.PageRequestParam;
+import com.ower.dsyz.common.core.exception.BusinessException;
 import com.ower.dsyz.common.core.util.IDUtil;
-import com.ower.dsyz.common.core.util.ParamCheckUtil;
+import com.ower.dsyz.common.core.valid.util.ParamCheckUtil;
+import com.ower.dsyz.common.mybatis.database.page.PageQueryResult;
+import com.ower.dsyz.common.mybatis.database.page.PageRequestParam;
 
 
 /**
@@ -57,7 +57,7 @@ public class AdminFunctionServiceImpl implements IAdminFunctionService {
     public AdminFunctionDTO queryAdminFunctionById(AdminFunctionDTO adminFunctionDTO) {
         List<AdminFunctionDTO> list = adminFunctionExtMapper.queryAdminFunctionList(adminFunctionDTO);
         if(list.isEmpty()){
-            throw new CustomRunTimeException("1","找不到相应的数据");
+            throw new BusinessException("1","找不到相应的数据");
         }
         return list.get(0);
     }

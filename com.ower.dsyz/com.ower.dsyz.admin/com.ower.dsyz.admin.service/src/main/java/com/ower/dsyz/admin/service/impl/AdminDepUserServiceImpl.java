@@ -13,7 +13,7 @@ import com.ower.dsyz.admin.manual.dao.AdminDepUserExtMapper;
 import com.ower.dsyz.admin.manual.dto.AdminDepUserDTO;
 import com.ower.dsyz.admin.service.IAdminDepUserService;
 import com.ower.dsyz.common.core.util.IDUtil;
-import com.ower.dsyz.common.core.util.ParamCheckUtil;
+import com.ower.dsyz.common.core.valid.util.ParamCheckUtil;
 
 
 /**

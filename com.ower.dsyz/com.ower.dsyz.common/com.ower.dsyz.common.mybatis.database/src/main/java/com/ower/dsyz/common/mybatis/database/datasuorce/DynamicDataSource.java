@@ -1,8 +1,7 @@
 package com.ower.dsyz.common.mybatis.database.datasuorce;
 
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
-import com.ower.dsyz.common.core.holder.DataSourceRouteHolder;
-
+import com.ower.dsyz.common.mybatis.database.holder.DataSourceRouteHolder;
 
 public class DynamicDataSource extends AbstractRoutingDataSource {
     
