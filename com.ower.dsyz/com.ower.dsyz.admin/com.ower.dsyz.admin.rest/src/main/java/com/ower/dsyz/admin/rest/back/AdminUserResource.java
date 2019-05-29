@@ -12,7 +12,6 @@ import com.ower.dsyz.admin.manual.dto.AdminDepUserDTO;
 import com.ower.dsyz.admin.manual.dto.AdminUserDepDTO;
 import com.ower.dsyz.admin.service.IAdminDepUserService;
 import com.ower.dsyz.admin.service.IAdminUserService;
-import com.ower.dsyz.common.core.annotation.NotInAspect;
 import com.ower.dsyz.common.core.response.CustomResponse;
 import com.ower.dsyz.common.mybatis.database.page.PageQueryResult;
 import com.ower.dsyz.common.mybatis.database.page.PageRequestParam;
@@ -64,7 +63,7 @@ public class AdminUserResource {
    // @NotInAspect
     @RequestMapping("queryUserDepInfo")
     public AdminUserDepDTO queryUserDepInfo(@RequestBody AdminUserDepDTO adminUserDepDTO){
-       return new AdminUserDepDTO();
+    	 return adminUserService.queryUserDepInfo(adminUserDepDTO);
     }
     
     /**

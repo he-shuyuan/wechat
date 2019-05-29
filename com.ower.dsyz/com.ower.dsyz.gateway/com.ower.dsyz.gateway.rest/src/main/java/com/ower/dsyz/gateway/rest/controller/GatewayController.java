@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ower.dsyz.common.base.bean.CustomRequestParam;
+import com.ower.dsyz.common.core.holder.CurrentThreadHolder;
 import com.ower.dsyz.gateway.manual.dto.GatewayRequest;
 import com.ower.dsyz.gateway.service.IGatewayRequestFactory;
 
@@ -61,7 +62,8 @@ public class GatewayController {
         gatewayRequest.setToken(token);
         gatewayRequest.setUrl(url);
         gatewayRequest.setRealIp(request.getRemoteHost());
-
+    	CurrentThreadHolder.setAppId(appId);
+    	CurrentThreadHolder.setRequestId(requestId);
         return gatewayRequestFactory.createRequestHandle(gatewayRequest).handleRequestLevel(gatewayRequest);
     }
 
@@ -87,7 +89,8 @@ public class GatewayController {
         gatewayRequest.setToken(token);//登录标志
         gatewayRequest.setUrl(url);//url
         gatewayRequest.setRealIp(request.getRemoteHost());
-        
+    	CurrentThreadHolder.setAppId(appId);
+    	CurrentThreadHolder.setRequestId(requestId);
         return gatewayRequestFactory.createRequestHandle(gatewayRequest).handleRequestLevel(gatewayRequest);
     }
 

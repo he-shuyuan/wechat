@@ -6,10 +6,7 @@ package com.ower.dsyz.common.core.rest.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-
 import javax.annotation.Resource;
-
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -73,7 +70,7 @@ public class CustomRestClient implements ICustomRestClient {
 			this.mergeHeader(extHeader, header);
 		}
 		HttpEntity<String> httpEnty = new HttpEntity<String>(requestJson, header);
-		log.info("\n【内部请求】=》url=>>>{}\n" + "【内部请求】=》header=>>>{}\n" + "【内部请求】=》param=>>>{}\n", url, header, data);
+		log.info("\n【内部请求】=》url=>>>{}\n" + "【内部请求】=》header=>>>{}\n" + "【内部请求】=》param=>>>{}", url, header, data);
 		ResponseEntity<CustomResponse> res = restTemplate.exchange(url, HttpMethod.POST, httpEnty, CustomResponse.class,
 				CustomUrlParamHolder.get());
 		if (res.getStatusCodeValue() == 200) {
@@ -141,17 +138,22 @@ public class CustomRestClient implements ICustomRestClient {
 			}
 		}
 		sb.append(url);
-		if(!CustomUrlParamHolder.get().isEmpty()){
-			for (Entry<String, String> entry : CustomUrlParamHolder.get().entrySet()) {  
-               if(sb.indexOf("?") == -1){
-            	   sb.append("?");
-               }else{
-            	   sb.append("&");
-               }
-               sb.append(entry.getKey());
-               sb.append("=");
-               sb.append(entry.getValue());
-			}  
+		
+		if(StringUtils.isNotBlank(CurrentThreadHolder.getAppId())){
+			if(sb.indexOf("?") == -1){
+         	   sb.append("?");
+            }else{
+         	   sb.append("&");
+            }
+			sb.append("appId=").append(CurrentThreadHolder.getAppId());
+		}
+	    if(StringUtils.isNotBlank(CurrentThreadHolder.getRequestId())){
+	    	if(sb.indexOf("?") == -1){
+         	   sb.append("?");
+            }else{
+         	   sb.append("&");
+            }
+	    	sb.append("requestId=").append(CurrentThreadHolder.getRequestId());
 		}
 		return sb.toString();
 	}

@@ -1,4 +1,5 @@
 package com.ower.dsyz.common.core.advice;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -11,6 +12,7 @@ import com.ower.dsyz.common.core.response.CustomResponse;
 @ControllerAdvice("com.ower")
 public class ExceptionAdvice {
 	
+	private static final String DEFAULT_ERROR_MSG = "系统繁忙";
 	/**
 	 * 系统未知异常
 	 * @param e
@@ -19,7 +21,10 @@ public class ExceptionAdvice {
 	@ResponseBody
 	@ExceptionHandler(value = { Exception.class })
 	public Object exceptionHandler(Exception e) {	
-		return CustomResponse.error("未知错误");
+		if(StringUtils.isNotBlank(e.getMessage())){
+			return CustomResponse.error(e.getMessage());
+		}
+		return CustomResponse.error(DEFAULT_ERROR_MSG);
 	}
 	
 	/**

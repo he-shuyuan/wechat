@@ -29,7 +29,7 @@
 		<logger name="java.sql.PreparedStatement" level="${devLogLevel}" />
 		<!-- 根logger的设置 -->
 		<root>
-			<level value="INFO" /><!-- logback建议只使用FATAL ,ERROR ,WARN ,INFO 
+			<level value="error" /><!-- logback建议只使用FATAL ,ERROR ,WARN ,INFO 
 				,DEBUG这五个级别。 -->
 			<appender-ref ref="fileLog" value="${devLogLevel}" />
 		</root>
@@ -37,7 +37,7 @@
 	
 	<!-- 生产环境. -->
 	<springProfile name="pro,px">
-		<logger name="com.ower.dsyz" level="${proLogLevel}" />
+		<logger name="com.ower.dsyz" level="${devLogLevel}" />
 		<logger name="com.ibatis" level="${proLogLevel}" />
 		<logger name="java.sql" level="${proLogLevel}" />
 		<logger name="com.getsentry.raven" level="INFO" />
@@ -47,7 +47,7 @@
 		<logger name="java.sql.PreparedStatement" level="${proLogLevel}" />
 		<!-- 根logger的设置 -->
 		<root>
-			<level value="INFO" /><!-- logback建议只使用FATAL ,ERROR ,WARN 
+			<level value="error" /><!-- logback建议只使用FATAL ,ERROR ,WARN 
 				,INFO ,DEBUG这五个级别。 -->
 			<appender-ref ref="fileLog" value="${proLogLevel}" />
 			<appender-ref ref="Sentry" value="${proLogLevel}" />
