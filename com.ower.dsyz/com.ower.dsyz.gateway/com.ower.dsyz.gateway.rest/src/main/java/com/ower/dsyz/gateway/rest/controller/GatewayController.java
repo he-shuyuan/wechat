@@ -2,6 +2,8 @@
  * Copyright(c) Foresee Science & Technology Ltd.
  */
 package com.ower.dsyz.gateway.rest.controller;
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ower.dsyz.common.base.bean.CustomRequestParam;
 import com.ower.dsyz.common.core.holder.CurrentThreadHolder;
@@ -34,7 +37,7 @@ import com.ower.dsyz.gateway.service.IGatewayRequestFactory;
  */
 
 @RestController
-@RequestMapping({ "/" })
+@RequestMapping("/")
 public class GatewayController {
 
     @Resource
@@ -46,8 +49,8 @@ public class GatewayController {
     public Object doPost(HttpServletRequest request, HttpServletResponse response, @PathVariable("appName") String appName,
             @PathVariable("serviceLevel") String serviceLevel, @PathVariable("serviceName") String serviceName,
             @PathVariable("serviceMethod") String serviceMethod, @RequestParam(value = "token", required = false) String token,
-            @RequestParam(value = "appId", required = false) String appId,
-            @RequestParam(value = "requestId", required = false) String requestId,
+            @RequestParam(value = "appId") String appId,
+            @RequestParam(value = "requestId") String requestId,
             @RequestParam(value = "sign", required = false) String sign, @RequestBody CustomRequestParam param) {
         GatewayRequest gatewayRequest = new GatewayRequest();
         String url = request.getRequestURI().substring(1);
@@ -72,8 +75,8 @@ public class GatewayController {
     public Object doPost(HttpServletRequest request, HttpServletResponse response, @PathVariable("appName") String appName,
             @PathVariable("serviceLevel") String serviceLevel, @PathVariable("serviceName") String serviceName,
             @PathVariable("serviceMethod") String serviceMethod, @PathVariable("extMenthod") String extMenthod,
-            @RequestParam(value = "token", required = false) String token, @RequestParam(value = "appId", required = false) String appId,
-            @RequestParam(value = "requestId", required = false) String requestId,
+            @RequestParam(value = "token", required = false) String token, @RequestParam(value = "appId") String appId,
+            @RequestParam(value = "requestId") String requestId,
             @RequestParam(value = "sign", required = false) String sign, @RequestBody CustomRequestParam param) {
         GatewayRequest gatewayRequest = new GatewayRequest();
         String url = request.getRequestURI().substring(1);
@@ -94,4 +97,23 @@ public class GatewayController {
         return gatewayRequestFactory.createRequestHandle(gatewayRequest).handleRequestLevel(gatewayRequest);
     }
 
+    
+    
+    
+    
+    @RequestMapping(value = "/{storage}/upload" , method = { RequestMethod.POST })
+    @ResponseBody
+	public  Object upload(@PathVariable("storage") String storage,@RequestParam(value = "token") String token,
+            @RequestParam(value = "appId") String appId,
+            @RequestParam(value = "requestId") String requestId,
+            @RequestParam("file") List<MultipartFile> file){
+    	GatewayRequest gatewayRequest = new GatewayRequest();
+        gatewayRequest.setAppId(appId);//区分微服务
+        gatewayRequest.setAppName(storage);//微服务名称
+        gatewayRequest.setRequestId(requestId);//请求标识
+        gatewayRequest.setToken(token);//登录标志
+        gatewayRequest.setServiceLevel("upload");
+        gatewayRequest.setFiles(file);
+        return gatewayRequestFactory.createRequestHandle(gatewayRequest).handleRequestLevel(gatewayRequest);
+	}
 }

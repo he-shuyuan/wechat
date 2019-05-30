@@ -1,6 +1,9 @@
 package com.ower.dsyz.gateway.manual.dto;
 
 import java.io.Serializable;
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ower.dsyz.common.base.bean.CustomRequestParam;
 
@@ -21,7 +24,8 @@ public class GatewayRequest implements Serializable{
 	private String sign;
 	private String realIp;
 	private CustomRequestParam param;
-
+    private List<MultipartFile> files;
+    
 	public String getAppName() {
 		return appName;
 	}
@@ -120,7 +124,15 @@ public class GatewayRequest implements Serializable{
         this.realIp = realIp;
     }
 
-    @Override
+    public List<MultipartFile> getFiles() {
+		return files;
+	}
+
+	public void setFiles(List<MultipartFile> files) {
+		this.files = files;
+	}
+
+	@Override
     public String toString() {
         return "GatewayRequest [appName=" + appName + ", serviceLevel=" + serviceLevel + ", serviceName=" + serviceName
                 + ", serviceMethod=" + serviceMethod + ", extMenthod=" + extMenthod + ", url=" + url + ", token=" + token + ", appId="

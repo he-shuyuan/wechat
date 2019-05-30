@@ -9,7 +9,7 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.RequestBodyAdvice;
 
-@ControllerAdvice("com.bda.anlyz.core")
+//@ControllerAdvice("com.bda.anlyz.core")
 public class CustomRequestBodyAdvice implements RequestBodyAdvice{
 
 	public boolean supports(MethodParameter methodParameter, Type targetType,

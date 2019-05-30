@@ -2,6 +2,7 @@ package com.ower.dsyz.common.core.advice;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,6 +26,17 @@ public class ExceptionAdvice {
 			return CustomResponse.error(e.getMessage());
 		}
 		return CustomResponse.error(DEFAULT_ERROR_MSG);
+	}
+	
+	/**
+	 * 参数异常
+	 * @param e
+	 * @return
+	 */
+	@ResponseBody
+	@ExceptionHandler(value = { MissingServletRequestParameterException.class })
+	public Object missingServletRequestParameterHandler(MissingServletRequestParameterException e) {	
+		return CustomResponse.error(e.getParameterName()+"不能为空");
 	}
 	
 	/**

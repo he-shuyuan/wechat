@@ -1,8 +1,9 @@
 package com.ower.dsyz.gateway.service.impl;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import com.ower.dsyz.common.core.exception.BusinessException;
 import com.ower.dsyz.common.core.redis.IRedisService;
 import com.ower.dsyz.common.core.response.CustomResponse;
@@ -17,6 +18,7 @@ import com.ower.dsyz.gateway.service.IGatewayLevelService;
  */
 public abstract class AbstractGatewayLevelService implements IGatewayLevelService{
     
+	protected static final Logger logger = LoggerFactory.getLogger(AbstractGatewayLevelService.class);
     /**
      * token key
      */

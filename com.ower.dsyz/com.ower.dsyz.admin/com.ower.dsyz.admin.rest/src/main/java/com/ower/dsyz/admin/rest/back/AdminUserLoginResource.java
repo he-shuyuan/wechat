@@ -4,8 +4,6 @@
 package com.ower.dsyz.admin.rest.back;
 
 import javax.annotation.Resource;
-import javax.validation.Valid;
-
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ower.dsyz.admin.manual.dto.AdminUserDTO;
 import com.ower.dsyz.admin.manual.dto.UserLoginResuest;
 import com.ower.dsyz.admin.service.IAdminUserLoginService;
-import com.ower.dsyz.common.core.annotation.EnableValid;
 import com.ower.dsyz.common.core.response.CustomResponse;
 
 /**

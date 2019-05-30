@@ -41,6 +41,7 @@ public class GatewayRequestFactoryImpl implements IGatewayRequestFactory {
               gatewayLevelService.put("back", springContextUtil.getContext().getBean(GatewayWebServiceImpl.class));
               gatewayLevelService.put("front", springContextUtil.getContext().getBean(GatewayWebServiceImpl.class));
               gatewayLevelService.put("outer", springContextUtil.getContext().getBean(GatewayOuterServiceImpl.class));
+              gatewayLevelService.put("upload", springContextUtil.getContext().getBean(GatewayFileUploadServiceImpl.class));
         }
         return gatewayLevelService;
     }
@@ -55,7 +56,7 @@ public class GatewayRequestFactoryImpl implements IGatewayRequestFactory {
         if(StringUtils.isNotBlank(request.getExtMenthod())){
            list.add(list.get(list.size()-1)+"/"+request.getExtMenthod());
         }
-        List<GatewayAuthUrlDTO> result = gatewayAuthUrlService.queryGatewayAuthUrlDTOList(list);
+       List<GatewayAuthUrlDTO> result = gatewayAuthUrlService.queryGatewayAuthUrlDTOList(list);
         if(!result.isEmpty()){
             try {
                return (IGatewayLevelService) springContextUtil.getContext().getBean(Class.forName(result.get(0).getClassName()));
