@@ -2,8 +2,6 @@ package com.ower.dsyz.common.core.holder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.context.annotation.Description;
 import org.springframework.core.NamedThreadLocal;
 
 import com.ower.dsyz.common.core.request.CustomRequestAttributes;

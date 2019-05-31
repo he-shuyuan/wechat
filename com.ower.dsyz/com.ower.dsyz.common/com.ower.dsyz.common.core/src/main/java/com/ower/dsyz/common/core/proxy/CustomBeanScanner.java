@@ -1,5 +1,6 @@
 package com.ower.dsyz.common.core.proxy;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -19,12 +20,16 @@ import org.springframework.stereotype.Component;
  * @author heshuyuan
  *
  */
-//@Component
+@Component
 public class CustomBeanScanner implements BeanDefinitionRegistryPostProcessor  {
     /**
      * 扫描位置
      */
-	private List<String> basePackages;
+	@SuppressWarnings("serial")
+	private List<String> basePackages = new ArrayList<String>(){{
+		add("com.ower.dsyz.*.api");
+		}
+	};
 	
 	private static final Logger log = LoggerFactory.getLogger(CustomBeanScanner.class);
 	
