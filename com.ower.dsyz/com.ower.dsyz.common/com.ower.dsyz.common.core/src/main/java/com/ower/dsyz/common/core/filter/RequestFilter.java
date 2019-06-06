@@ -14,11 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.amazonaws.util.json.Jackson;
 import com.ower.dsyz.common.core.constant.ErrorCodeConstants;
 import com.ower.dsyz.common.core.holder.CurrentThreadHolder;
 import com.ower.dsyz.common.core.response.CustomResponse;
+import com.ower.dsyz.common.core.util.Jackson;
 
 
 @WebFilter(filterName = "requestFilter",urlPatterns = {"/*"})
@@ -39,7 +38,7 @@ public class RequestFilter implements Filter {
 		CurrentThreadHolder.setRequestId(requestId);
 		CurrentThreadHolder.setUserId(userId);
 		if(StringUtils.isBlank(requestId)){
-			String resp = Jackson.toJsonString(CustomResponse.error(ErrorCodeConstants.PARAM_ERROR, "requestId不能为空"));
+			String resp = Jackson.toJson((CustomResponse.error(ErrorCodeConstants.PARAM_ERROR, "requestId不能为空")));
 			response.setContentType("application/json; charset=utf-8");
 			response.getWriter().write(resp);
 			response.getWriter().flush();

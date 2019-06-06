@@ -30,7 +30,7 @@ public class CustomResponseHead {
     /**
      * 错误消息
      */
-    private Object errorMsg;
+    private String errorMsg;
     
     /**
      * 请求id
@@ -66,12 +66,12 @@ public class CustomResponseHead {
     }
 
     
-    public Object getErrorMsg() {
+    public String getErrorMsg() {
         return errorMsg;
     }
 
     
-    public void setErrorMsg(Object errorMsg) {
+    public void setErrorMsg(String errorMsg) {
         this.errorMsg = errorMsg;
     }
 

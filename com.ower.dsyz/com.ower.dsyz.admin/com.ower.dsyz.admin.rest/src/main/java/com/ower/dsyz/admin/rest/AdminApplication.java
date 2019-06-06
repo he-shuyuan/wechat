@@ -2,15 +2,15 @@ package com.ower.dsyz.admin.rest;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+/*import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;*/
 
 
 /**
  * Hello world!
  *
  */
-@EnableEurekaClient
+//@EnableEurekaClient
 //@EnableDiscoveryClient(autoRegister=false)//禁用客户端
 @SpringBootApplication(scanBasePackages = { "com.ower.dsyz" })
 @ServletComponentScan("com.ower.dsyz")

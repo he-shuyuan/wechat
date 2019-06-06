@@ -51,7 +51,7 @@ public class CustomResponse<T> {
         return new CustomResponse<T>(null, head);
     }
 
-    public static <T> CustomResponse<T> error(String errorCode, Object msg) {
+    public static <T> CustomResponse<T> error(String errorCode, String msg) {
         CustomResponseHead head = new CustomResponseHead(false);
         head.setErrorCode(errorCode);
         head.setErrorMsg(msg);

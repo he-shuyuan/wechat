@@ -4,6 +4,7 @@
 package com.ower.dsyz.common.base.bean;
 
 import java.util.HashMap;
+
 import org.apache.commons.lang.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

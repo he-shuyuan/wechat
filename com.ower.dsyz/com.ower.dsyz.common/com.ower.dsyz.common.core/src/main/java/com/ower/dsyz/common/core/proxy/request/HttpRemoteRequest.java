@@ -9,7 +9,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
-import org.apache.commons.lang.StringUtils;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.ower.dsyz.common.core.util.Jackson;
 public class HttpRemoteRequest extends AbstractRemoteRequest {
 

@@ -26,10 +26,8 @@ public class CustomBeanScanner implements BeanDefinitionRegistryPostProcessor  {
      * 扫描位置
      */
 	@SuppressWarnings("serial")
-	private List<String> basePackages = new ArrayList<String>(){{
-		add("com.ower.dsyz.*.api");
-		}
-	};
+	private List<String> basePackages = null;
+
 	
 	private static final Logger log = LoggerFactory.getLogger(CustomBeanScanner.class);
 	
@@ -38,7 +36,7 @@ public class CustomBeanScanner implements BeanDefinitionRegistryPostProcessor  {
 
 	public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
 		CustomClassPathScanner scanner = new CustomClassPathScanner(registry);
-		String[] packages = {"*"};
+		String[] packages = {"com.ower.dsyz.*.api"};
 		if(getBasePackages()!=null && !getBasePackages().isEmpty()){
 			packages = (String[]) getBasePackages().toArray();
 		}

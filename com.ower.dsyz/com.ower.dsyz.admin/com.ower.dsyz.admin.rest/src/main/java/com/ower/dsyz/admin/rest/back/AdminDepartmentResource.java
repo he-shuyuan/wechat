@@ -5,7 +5,8 @@ package com.ower.dsyz.admin.rest.back;
 
 import java.util.List;
 import javax.annotation.Resource;
-import org.apache.commons.lang.StringUtils;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,10 +45,11 @@ public class AdminDepartmentResource {
      */
     @RequestMapping("queryAdminDepTreeDTOList")
     public CustomResponse<List<AdminDepTreeDTO>> queryAdminDepTreeDTOList(@RequestBody AdminDepTreeDTO adminDepTreeDTO){
-        if(StringUtils.isNotBlank(adminDepTreeDTO.getParentDepId())){
+        /*if(StringUtils.isNotBlank(adminDepTreeDTO.getParentDepId())){
             adminDepTreeDTO.setDepId(null);
         }
-       return  CustomResponse.success(adminDepartmentService.queryDepTreeList(adminDepTreeDTO));
+       return  CustomResponse.success(adminDepartmentService.queryDepTreeList(adminDepTreeDTO));*/
+    	return CustomResponse.success(null);
     }
     
     

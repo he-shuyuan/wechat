@@ -15,13 +15,16 @@ import java.net.URLConnection;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.io.IOUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.ower.dsyz.common.core.interceptor.ApiMonitorInterceptor;
 
 public abstract class HttpInvokerUtil {
 
-    private static final Logger logger = Logger.getLogger(HttpInvokerUtil.class);
-
+    private static final Logger logger = LoggerFactory.getLogger(HttpInvokerUtil.class);
 
     public static String post(String httpUrl, String requestData, String contentType) throws Exception {
         return post(httpUrl, requestData, "UTF-8", contentType);
@@ -32,7 +35,7 @@ public abstract class HttpInvokerUtil {
         try {
             url = new URL(httpUrl);
         } catch (MalformedURLException e) {
-            logger.error(e);
+            logger.error("{}",e);
             throw new Exception("访问地址错误！", e);
         }
         URLConnection conn = url.openConnection();
@@ -170,7 +173,7 @@ public abstract class HttpInvokerUtil {
             try {
                 url = new URL(httpUrl);
             } catch (MalformedURLException e) {
-                logger.error(e);
+                logger.error("{}",e);
                 throw new Exception("访问地址错误！", e);
             }
             URLConnection conn = url.openConnection();
@@ -205,7 +208,7 @@ public abstract class HttpInvokerUtil {
                 }
             }
         } catch (Exception e) {
-            logger.error(e);
+            logger.error("{}",e);
             logger.info("httpUrl=" + httpUrl);
         }
     }
@@ -275,7 +278,7 @@ public abstract class HttpInvokerUtil {
             }
             return result;
         } catch (Exception e) {
-            logger.error(e);
+            logger.error("{}",e);
         }
         return null;
     }

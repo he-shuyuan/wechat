@@ -6,7 +6,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.commons.lang.StringUtils;
+
+import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Pointcut;
@@ -111,7 +112,7 @@ public class CustomRequestInterceptor {
 
 			} catch (Throwable e) {
 				String errorCode = ErrorCodeConstants.DEFAULT_ERROR;
-				Object errorMsg = ERROR_MSG;
+				String errorMsg = ERROR_MSG;
 				if (e instanceof BusinessException) {
 					errorCode = ((BusinessException) e).getErrorCode();
 					errorMsg = ((BusinessException) e).getMessage();

@@ -4,6 +4,7 @@
 package com.ower.dsyz.admin.manual.dto;
 
 import java.io.Serializable;
+
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
